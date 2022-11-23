@@ -10,8 +10,17 @@ function UserSignupForm() {
     const handleSubmit = async event => {
         event.preventDefault();
 
-        const res = await fetch('http://localhost:5005/signup');
-        
+        const res = await fetch('http://localhost:5005/user/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({username, email, password}),
+        })
+
+        const parsed = await res.json();
+        console.log(parsed);
+
      };
 
     return (
@@ -22,7 +31,6 @@ function UserSignupForm() {
                         type="text"
                         value={username}
                         onChange={event => setUsername(event.target.value)}
-                        required
                     />
                 </label>
                 <label> Email:
@@ -30,7 +38,6 @@ function UserSignupForm() {
                         type="text"
                         value={email}
                         onChange={event => setEmail(event.target.value)}
-                        required
                     />
                 </label>
                 <label> Password:
@@ -38,9 +45,9 @@ function UserSignupForm() {
                         type="password"
                         value={password}
                         onChange={event => setPassword(event.target.value)}
-                        required
                     />
                 </label>
+                <button type='submit'>Sign up</button>
             </form>
         </div>
     )
