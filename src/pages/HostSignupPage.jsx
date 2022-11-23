@@ -1,12 +1,23 @@
+import { useState } from 'react'
+
 function HostSignupPage() {
     const [barName, setBarName] = useState('')
     const [address, setAddress] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault();
 
+        const response = await fetch('http://localhost:5005/host/signup', {
+            method: 'POST', 
+            headers: {
+                'Content-type': 'application/json', 
+            },
+            body: JSON.stringify({barName, address, email, password})
+        })
+        const parsed = await response.json()
+        console.log(parsed)
     }
   return (
     <>
