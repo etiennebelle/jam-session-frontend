@@ -5,13 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { HostAuthProviderWrapper } from './contexts/host-auth.context';
+import { UserAuthProviderWrapper } from './contexts/user-auth.context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <HostAuthProviderWrapper>
-        <App />
+        <UserAuthProviderWrapper>
+          <App />
+        </UserAuthProviderWrapper>
       </HostAuthProviderWrapper>
     </BrowserRouter>
   </React.StrictMode>

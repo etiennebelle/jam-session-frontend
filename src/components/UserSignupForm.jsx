@@ -1,11 +1,13 @@
 import React from 'react'
 import { useState } from 'react';
+import { Links, useNavigate } from 'react-router-dom';
 
 function UserSignupForm() {
-
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
+    const [errorMessage, setErrorMessage] = useState(undefined);
 
     const handleSubmit = async event => {
         event.preventDefault();

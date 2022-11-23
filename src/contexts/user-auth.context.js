@@ -3,7 +3,7 @@ import { useEffect, useState, createContext } from 'react';
 const API_URL = 'http://localhost:5005';
 const AuthContext = createContext();
 
-function userAuthProviderWrapper(props) {
+function UserAuthProviderWrapper(props) {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
@@ -16,4 +16,4 @@ function userAuthProviderWrapper(props) {
     )
 }
 
-export { userAuthProviderWrapper, AuthContext };
+export { UserAuthProviderWrapper, AuthContext };
