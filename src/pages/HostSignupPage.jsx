@@ -10,7 +10,7 @@ function HostSignupPage() {
         event.preventDefault();
 
         const response = await fetch('http://localhost:5005/host/signup', {
-            method: 'POST', 
+            method: 'POST',
             headers: {
                 'Content-type': 'application/json', 
             },
@@ -48,7 +48,8 @@ function HostSignupPage() {
                 type="text" 
                 value={password} 
                 onChange={event => setPassword(event.target.value)} 
-                required/>
+                required
+                />
             </label>
             <button type="submit">Signup</button>
         </form>
