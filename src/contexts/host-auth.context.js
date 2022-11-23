@@ -24,11 +24,17 @@ function HostAuthProviderWrapper(props) {
         console.log(parsed)
         setIsLoggedIn(true);
         setIsLoading(false)
+        setHost(parsed)
+        //// I don't think the above setHost works + payload undefined
+      } else {
+        setIsLoggedIn(true);
+        setIsLoading(false);
+        setHost(null)
       }
     }
    
     return (
-      <HostAuthContext.Provider value={{ isLoggedIn, isLoading, host, storeToken, name}}>
+      <HostAuthContext.Provider value={{ isLoggedIn, isLoading, host, storeToken, authenticateHost}}>
         {props.children}
       </HostAuthContext.Provider>
     )
