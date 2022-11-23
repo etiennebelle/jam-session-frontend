@@ -1,53 +1,40 @@
-import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
+import {HostAuthContext} from '../contexts/host-auth.context';
 
-
-function HostSignupPage() {
-    const [barName, setBarName] = useState('')
-    const [address, setAddress] = useState('')
+function HostLoginPage() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [errorMessage, setErrorMessage] = useState(undefined);
 
     const navigate = useNavigate();
 
+    const { storeToken } = useContext(HostAuthContext); 
+
     const handleSubmit = async event => {
         try {
             event.preventDefault();
 
-            const response = await fetch('http://localhost:5005/host/signup', {
+            const response = await fetch('http://localhost:5005/host/login', {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json', 
                 },
-                body: JSON.stringify({barName, address, email, password})
+                body: JSON.stringify({email, password})
             })
             const parsed = await response.json()
-            console.log(parsed)
-            navigate('/host/login')
+            storeToken(parsed.authToken)
+            navigate('/host/profile')
         } catch (error) {
-            const errorDescription = error.message;
-            setErrorMessage(errorDescription);
+           const errorDescription = error.message;
+            setErrorMessage(errorDescription); 
         }
         
     }
+
   return (
     <>
         <form onSubmit={handleSubmit}>
-            <label>Bar Name: 
-                <input 
-                type="text" 
-                value={barName} 
-                onChange={event => setBarName(event.target.value)} 
-                required/>
-            </label>
-            <label>Address: 
-                <input 
-                type="text" 
-                value={address} 
-                onChange={event => setAddress(event.target.value)} 
-                required/>
-            </label>
             <label>Email: 
                 <input 
                 type="text" 
@@ -71,4 +58,4 @@ function HostSignupPage() {
   )
 }
 
-export default HostSignupPage
+export default HostLoginPage
