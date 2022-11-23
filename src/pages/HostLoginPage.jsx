@@ -9,7 +9,7 @@ function HostLoginPage() {
 
     const navigate = useNavigate();
 
-    const { storeToken } = useContext(HostAuthContext); 
+    const { storeToken, authenticateHost } = useContext(HostAuthContext); 
 
     const handleSubmit = async event => {
         try {
@@ -24,6 +24,7 @@ function HostLoginPage() {
             })
             const parsed = await response.json()
             storeToken(parsed.authToken)
+            authenticateHost()
             navigate('/host/profile')
         } catch (error) {
            const errorDescription = error.message;
