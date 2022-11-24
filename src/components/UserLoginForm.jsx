@@ -10,7 +10,7 @@ function UserLoginForm() {
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState()
 
-    const { storeToken, authenticateUser } = useContext(UserAuthContext);
+    const { storeToken, setIsLoggedIn } = useContext(UserAuthContext);
 
     const handleSubmit = async event => { 
         try {
@@ -23,13 +23,13 @@ function UserLoginForm() {
                 body: JSON.stringify({ email, password }),
             })
             const parsed = await res.json();
+            storeToken(parsed.authToken);
 
             if (res.status === 200) {
-                storeToken(parsed.authToken);
+                setIsLoggedIn(true);
                 navigate('/user/profile');
             } else {
                 setErrorMessage(parsed.message)
-                setEmail = '';
             }
 
         } catch (error) {

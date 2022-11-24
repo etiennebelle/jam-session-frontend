@@ -51,7 +51,8 @@ function UserAuthProviderWrapper(props) {
             user,
             storeToken,
             authenticateUser,
-            logOutUser
+            setIsLoggedIn,
+            logOutUser,
         }}>
             {props.children}
         </UserAuthContext.Provider>
