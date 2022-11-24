@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useNavigate } from "react-router-dom";
+
 
 function CreateJamSession() {
     const [date, setDate] = useState('')
@@ -6,10 +8,31 @@ function CreateJamSession() {
     const [capacity, setCapacity] = useState('')
     const [genre, setGenre] = useState('')
     const [description, setDescription] = useState('')
+    const [errorMessage, setErrorMessage] = useState(undefined);
 
-    const handleSubmit = event => {
-        event.preventDefault()
-        console.log('submit')
+    const navigate = useNavigate();
+
+    const handleSubmit = async event => {
+        try {
+            event.preventDefault()
+
+            const response = await fetch('http://localhost:5005/host/create-jam-session', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json', 
+                },
+                body: JSON.stringify({date, jamSessionName, capacity, genre, description})
+            })
+            const parsed = await response.json()
+            if (response.status === 201) {
+                navigate('/host/profile')
+              } else {
+                setErrorMessage(parsed.message)
+            }
+        } catch (error) {
+            const errorDescription = error.message;
+            setErrorMessage(errorDescription);
+        }
     }
 
 
