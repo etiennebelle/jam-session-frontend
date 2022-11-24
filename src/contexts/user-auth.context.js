@@ -1,6 +1,5 @@
 import { useEffect, useState, createContext } from 'react';
 
-const API_URL = 'http://localhost:5005';
 const UserAuthContext = createContext();
 
 function UserAuthProviderWrapper(props) {
@@ -21,10 +20,10 @@ function UserAuthProviderWrapper(props) {
                     Authorization: `Bearer ${storedToken}`,
                 }
             })
-            const user = await res.json()
+            const parsed = await res.json()
             setIsLoggedIn(true);
             setIsLoading(false);
-            setUser(user);
+            setUser(parsed);
         } else {
             setIsLoggedIn(false);
             setIsLoading(false);

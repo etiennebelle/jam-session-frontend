@@ -24,8 +24,7 @@ function UserLoginForm() {
             })
             const parsed = await res.json();
             storeToken(parsed.authToken);
-            authenticateUser();
-            // navigate('/user/profile');
+            navigate('/user/profile');
             
         } catch (error) {
             console.log(error);
