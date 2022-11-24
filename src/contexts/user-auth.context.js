@@ -1,7 +1,7 @@
 import { useEffect, useState, createContext } from 'react';
 
 const API_URL = 'http://localhost:5005';
-const AuthContext = createContext();
+const UserAuthContext = createContext();
 
 function UserAuthProviderWrapper(props) {
 
@@ -9,11 +9,15 @@ function UserAuthProviderWrapper(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [user, setUser] = useState(null);
 
+    const storeToken = (token) => {
+        localStorage.setItem('authToken', token);
+    }
+
     return (
-        <AuthContext.Provider value={{ isLoggedIn, isLoading, user }}>
+        <UserAuthContext.Provider value={{ isLoggedIn, isLoading, user, storeToken }}>
             {props.children}
-        </AuthContext.Provider>
+        </UserAuthContext.Provider>
     )
 }
 
-export { UserAuthProviderWrapper, AuthContext };
+export { UserAuthProviderWrapper, UserAuthContext };
