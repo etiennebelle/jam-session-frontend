@@ -8,7 +8,7 @@ function UserLoginForm() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState();
+    const [errorMessage, setErrorMessage] = useState()
 
     const { storeToken, authenticateUser } = useContext(UserAuthContext);
 
@@ -23,11 +23,19 @@ function UserLoginForm() {
                 body: JSON.stringify({ email, password }),
             })
             const parsed = await res.json();
-            storeToken(parsed.authToken);
-            navigate('/user/profile');
-            
+
+            if (res.status === 200) {
+                storeToken(parsed.authToken);
+                navigate('/user/profile');
+            } else {
+                setErrorMessage(parsed.message)
+                setEmail = '';
+            }
+
         } catch (error) {
             console.log(error);
+            const errorDescription = error.message;
+            setErrorMessage(errorDescription);
         }
     }
 
@@ -50,7 +58,7 @@ function UserLoginForm() {
                 </label>
                 <button type='submit'>Log in</button>
             </form>
-            { errorMessage && <p className="error-message">{errorMessage}</p> }
+            { errorMessage && <p>{errorMessage}</p> }
         </div>
     )
 }

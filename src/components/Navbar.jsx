@@ -2,10 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useContext } from "react";                      
 import { HostAuthContext } from '../contexts/host-auth.context';
+import { UserAuthContext } from '../contexts/user-auth.context';
 
 
 function Navbar() {
-    const { logoutHost } = useContext(HostAuthContext);  
+  const { logoutHost } = useContext(HostAuthContext);
+  const { logOutUser } = useContext(UserAuthContext);
 
   return (
     <>
@@ -19,6 +21,7 @@ function Navbar() {
         <Link to="/host/signup">Signup as a host</Link>
         <Link to="/host/login">Login as a host</Link>
         <button onClick={logoutHost}>Logout</button>
+        <button onClick={logOutUser}>Logout User</button>
     </div>
 
     </>
