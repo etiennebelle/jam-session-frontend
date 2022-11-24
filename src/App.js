@@ -6,6 +6,7 @@ import UserSignupPage from './pages/UserSignupPage';
 import UserLoginPage from './pages/UserLoginPage';
 import HostLoginPage from './pages/HostLoginPage';
 import HostProfilePage from './pages/HostProfilePage';
+import UserProfilePage from './pages/UserProfilePage';
 import Navbar from './components/Navbar';
 
 
