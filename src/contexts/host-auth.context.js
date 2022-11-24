@@ -32,15 +32,15 @@ function HostAuthProviderWrapper(props) {
       }
     }
 
-/*     const removeHostToken = () => {
+    const removeHostToken = () => {
       localStorage.removeItem("hostAuthToken");
-    } */
-/* 
+    }
+
     const logoutHost = () => {
       removeHostToken()
       authenticateHost()
     }
- */
+
 
     useEffect(() => {
       authenticateHost()
@@ -48,7 +48,7 @@ function HostAuthProviderWrapper(props) {
     
    
     return (
-      <HostAuthContext.Provider value={{ isLoggedIn, isLoading, host, storeToken, authenticateHost, /* logoutHost */}}>
+      <HostAuthContext.Provider value={{ isLoggedIn, isLoading, host, storeToken, authenticateHost, logoutHost}}>
         {props.children}
       </HostAuthContext.Provider>
     )

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import {HostAuthContext} from '../contexts/host-auth.context';
 
@@ -53,7 +53,9 @@ function HostLoginPage() {
             </label>
             <button type="submit">Signup</button>
         </form>
+        <p>Don't have a host account yet? <Link to="/host/signup">Signup</Link></p>
         { errorMessage && <p>{errorMessage}</p> }
+        
 
     </>
   )
