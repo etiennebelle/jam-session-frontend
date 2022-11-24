@@ -4,8 +4,7 @@ import { useState, useEffect, createContext } from "react";
 const HostAuthContext = createContext();
 
 function HostAuthProviderWrapper(props) {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isHostLoggedIn, setIsHostLoggedIn] = useState(false);
     const [host, setHost] = useState(null);
 
     const storeToken = (token) => {       
@@ -22,12 +21,10 @@ function HostAuthProviderWrapper(props) {
         })
         const parsed = await response.json()
         console.log('parsed', parsed)
-        setIsLoggedIn(true);
-        setIsLoading(false)
+        setIsHostLoggedIn(true);
         setHost(parsed)
       } else {
-        setIsLoggedIn(false);
-        setIsLoading(false);
+        setIsHostLoggedIn(false);
         setHost(null)
       }
     }
@@ -48,7 +45,7 @@ function HostAuthProviderWrapper(props) {
     
    
     return (
-      <HostAuthContext.Provider value={{ isLoggedIn, isLoading, host, storeToken, authenticateHost, logoutHost}}>
+      <HostAuthContext.Provider value={{ isHostLoggedIn, host, storeToken, authenticateHost, logoutHost, setIsHostLoggedIn}}>
         {props.children}
       </HostAuthContext.Provider>
     )

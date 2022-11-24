@@ -23,8 +23,11 @@ function HostSignupPage() {
                 body: JSON.stringify({barName, address, email, password})
             })
             const parsed = await response.json()
-            console.log(parsed)
-            navigate('/host/login')
+            if (response.status === 201) {
+                navigate('/host/login')
+              } else {
+                setErrorMessage(parsed.message)
+            }
         } catch (error) {
             const errorDescription = error.message;
             setErrorMessage(errorDescription);
