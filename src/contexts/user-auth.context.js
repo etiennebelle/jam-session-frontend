@@ -10,11 +10,50 @@ function UserAuthProviderWrapper(props) {
     const [user, setUser] = useState(null);
 
     const storeToken = (token) => {
-        localStorage.setItem('authToken', token);
+        localStorage.setItem('userAuthToken', token);
     }
 
+    const authenticateUser = async() => {
+        const storedToken = localStorage.getItem('userAuthToken');
+        if (storedToken) {
+            const res = await fetch('http://localhost:5005/user/verify', {
+                headers: {
+                    Authorization: `Bearer ${storedToken}`,
+                }
+            })
+            const user = await res.json()
+            setIsLoggedIn(true);
+            setIsLoading(false);
+            setUser(user);
+        } else {
+            setIsLoggedIn(false);
+            setIsLoading(false);
+            setUser(null);
+        }
+    } 
+
+    const removeToken = () => {
+        localStorage.removeItem('userAuthToken');
+    }
+
+    const logOutUser = () => {
+        removeToken();
+        authenticateUser();
+    }
+
+    useEffect(() => {
+        authenticateUser();
+    }, [])
+
     return (
-        <UserAuthContext.Provider value={{ isLoggedIn, isLoading, user, storeToken }}>
+        <UserAuthContext.Provider value={{
+            isLoggedIn,
+            isLoading,
+            user,
+            storeToken,
+            authenticateUser,
+            logOutUser
+        }}>
             {props.children}
         </UserAuthContext.Provider>
     )

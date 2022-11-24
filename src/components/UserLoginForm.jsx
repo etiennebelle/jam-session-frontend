@@ -8,14 +8,13 @@ function UserLoginForm() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState();
+    const [errorMessage, setErrorMessage] = useState();
 
-    const { storeToken } = useContext(UserAuthContext);
+    const { storeToken, authenticateUser } = useContext(UserAuthContext);
 
-    const handleSubmit = async event => {
-        event.preventDefault();
-       
+    const handleSubmit = async event => { 
         try {
+            event.preventDefault();
             const res = await fetch('http://localhost:5005/user/login', {
                 method: 'POST',
                 headers: {
@@ -23,8 +22,10 @@ function UserLoginForm() {
                 },
                 body: JSON.stringify({ email, password }),
             })
-            const parsed = res.json();
-            storeToken(parsed.authToken)
+            const parsed = await res.json();
+            storeToken(parsed.authToken);
+            authenticateUser();
+            // navigate('/user/profile');
             
         } catch (error) {
             console.log(error);
@@ -50,6 +51,7 @@ function UserLoginForm() {
                 </label>
                 <button type='submit'>Log in</button>
             </form>
+            { errorMessage && <p className="error-message">{errorMessage}</p> }
         </div>
     )
 }

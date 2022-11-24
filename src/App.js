@@ -6,6 +6,7 @@ import UserSignupPage from './pages/UserSignupPage';
 import UserLoginPage from './pages/UserLoginPage';
 import HostLoginPage from './pages/HostLoginPage';
 import HostProfilePage from './pages/HostProfilePage';
+import UserProfilePage from './pages/UserProfilePage';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/user/signup" element={<UserSignupPage />} />
         <Route path="/user/login" element={<UserLoginPage />} />
+        <Route path="/user/profile" element={<UserProfilePage />} />
         <Route path="/host/signup" element={<HostSignupPage />} />
         <Route path="/host/login" element={<HostLoginPage />} />
         <Route path="/host/profile" element={<HostProfilePage />} />
