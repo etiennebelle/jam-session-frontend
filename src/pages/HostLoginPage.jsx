@@ -9,7 +9,7 @@ function HostLoginPage() {
 
     const navigate = useNavigate();
 
-    const { storeToken, authenticateHost } = useContext(HostAuthContext); 
+    const { storeToken, setIsHostLoggedIn } = useContext(HostAuthContext); 
 
     const handleSubmit = async event => {
         try {
@@ -24,8 +24,13 @@ function HostLoginPage() {
             })
             const parsed = await response.json()
             storeToken(parsed.authToken)
-            
-            navigate('/host/profile')
+            if (response.status === 200) {
+                setIsHostLoggedIn(true)
+                navigate('/host/profile')
+                console.log('hello')
+            } else {
+                setErrorMessage(parsed.message)
+            }
         } catch (error) {
            const errorDescription = error.message;
             setErrorMessage(errorDescription); 
