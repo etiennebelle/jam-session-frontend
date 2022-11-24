@@ -14,27 +14,41 @@ function HostAuthProviderWrapper(props) {
     
     const authenticateHost = async () => {
       const storedToken = localStorage.getItem('hostAuthToken');
-      if (storeToken) {
+      if (storedToken) {
         const response = await fetch('http://localhost:5005/host/verify', {
           headers: {
             Authorization: `Bearer ${storedToken}`,
           },
         })
         const parsed = await response.json()
-        console.log(parsed)
+        console.log('parsed', parsed)
         setIsLoggedIn(true);
         setIsLoading(false)
         setHost(parsed)
-        //// I don't think the above setHost works + payload undefined
       } else {
-        setIsLoggedIn(true);
+        setIsLoggedIn(false);
         setIsLoading(false);
         setHost(null)
       }
     }
+
+/*     const removeHostToken = () => {
+      localStorage.removeItem("hostAuthToken");
+    } */
+/* 
+    const logoutHost = () => {
+      removeHostToken()
+      authenticateHost()
+    }
+ */
+
+    useEffect(() => {
+      authenticateHost()
+    }, []) 
+    
    
     return (
-      <HostAuthContext.Provider value={{ isLoggedIn, isLoading, host, storeToken, authenticateHost}}>
+      <HostAuthContext.Provider value={{ isLoggedIn, isLoading, host, storeToken, authenticateHost, /* logoutHost */}}>
         {props.children}
       </HostAuthContext.Provider>
     )
