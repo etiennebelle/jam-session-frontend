@@ -50,7 +50,7 @@ function HostLoginPage() {
             </label>
             <label>Password: 
                 <input 
-                type="text" 
+                type="password" 
                 value={password} 
                 onChange={event => setPassword(event.target.value)} 
                 required

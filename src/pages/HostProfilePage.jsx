@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";                      
+import { Link } from "react-router-dom";
 import {HostAuthContext} from '../contexts/host-auth.context';
  
 
@@ -12,14 +13,7 @@ function HostProfilePage() {
 
   return (
     <>
-    {isHostLoggedIn && 
-      <>
-      <h1>Hello!</h1>
-      </>
-    }
-    {!isHostLoggedIn && <h1>Please login as a host</h1>}
-
-
+      <Link to="/host/create-jam-session" >Create Jam Session</Link>
     </>
   )
 }
