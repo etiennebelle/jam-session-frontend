@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 function HostSignupPage() {
@@ -65,6 +65,7 @@ function HostSignupPage() {
             </label>
             <button type="submit">Signup</button>
         </form>
+        <p>Already have an host account? <Link to="/host/login">Login</Link></p>
         { errorMessage && <p>{errorMessage}</p> }
 
     </>
