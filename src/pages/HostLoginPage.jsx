@@ -24,7 +24,7 @@ function HostLoginPage() {
             })
             const parsed = await response.json()
             storeToken(parsed.authToken)
-            authenticateHost()
+            
             navigate('/host/profile')
         } catch (error) {
            const errorDescription = error.message;
