@@ -8,6 +8,7 @@ import HostLoginPage from './pages/HostLoginPage';
 import HostProfilePage from './pages/HostProfilePage';
 import UserProfilePage from './pages/UserProfilePage';
 import Navbar from './components/Navbar';
+import IsPrivateUser from './components/IsPrivateUser';
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
       <Routes>
         <Route path="/user/signup" element={<UserSignupPage />} />
         <Route path="/user/login" element={<UserLoginPage />} />
-        <Route path="/user/profile" element={<UserProfilePage />} />
+        <Route path="/user/profile" element={<IsPrivateUser> <UserProfilePage /> </IsPrivateUser>} />
         <Route path="/host/signup" element={<HostSignupPage />} />
         <Route path="/host/login" element={<HostLoginPage />} />
         <Route path="/host/profile" element={<HostProfilePage />} />

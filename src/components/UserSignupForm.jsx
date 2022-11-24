@@ -10,19 +10,33 @@ function UserSignupForm() {
     const [errorMessage, setErrorMessage] = useState(undefined);
 
     const handleSubmit = async event => {
-        event.preventDefault();
 
-        const res = await fetch('http://localhost:5005/user/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({username, email, password}),
-        })
+        try {
+           event.preventDefault();
 
-        const parsed = await res.json();
-        console.log(parsed);
+            const res = await fetch('http://localhost:5005/user/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({username, email, password}),
+            })
 
+            const parsed = await res.json();
+
+            // console.log(res.status, parsed.message)
+
+            if (res.status === 201) {
+                console.log(parsed.status)
+                navigate('/user/login')
+                } else {
+                setErrorMessage(parsed.message)
+            }
+ 
+        } catch (error) {
+            const errorDescription = error.message;
+            setErrorMessage(errorDescription);
+        }
      };
 
     return (
@@ -51,6 +65,7 @@ function UserSignupForm() {
                 </label>
                 <button type='submit'>Sign up</button>
             </form>
+            { errorMessage && <p>{errorMessage}</p> }
         </div>
     )
 }
