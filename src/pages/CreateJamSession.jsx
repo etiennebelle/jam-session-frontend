@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useState, useContext} from 'react'
 import { useNavigate } from "react-router-dom";
+import {HostAuthContext} from '../contexts/host-auth.context';
+
 
 
 function CreateJamSession() {
@@ -9,19 +11,20 @@ function CreateJamSession() {
     const [genre, setGenre] = useState('')
     const [description, setDescription] = useState('')
     const [errorMessage, setErrorMessage] = useState(undefined);
+    const { host } = useContext(HostAuthContext);  
+
 
     const navigate = useNavigate();
-
+    
     const handleSubmit = async event => {
         try {
             event.preventDefault()
-
             const response = await fetch('http://localhost:5005/host/create-jam-session', {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json', 
                 },
-                body: JSON.stringify({date, jamSessionName, capacity, genre, description})
+                body: JSON.stringify({date, jamSessionName, capacity, genre, description, host: host.data})
             })
             const parsed = await response.json()
             if (response.status === 201) {
