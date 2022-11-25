@@ -12,6 +12,7 @@ import IsPrivateUser from './components/IsPrivateUser';
 import IsPrivateHost from './components/IsPrivateHost';
 import IsAnonymous from './components/IsAnonymous';
 import Home from './pages/Home';
+import CreateJamSession from './pages/CreateJamSession';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/host/signup" element={<IsAnonymous><HostSignupPage /></IsAnonymous>} />
         <Route path="/host/login" element={<IsAnonymous><HostLoginPage /></IsAnonymous>} />
         <Route path="/host/profile" element={<IsPrivateHost><HostProfilePage /></IsPrivateHost>} />
+        <Route path="/host/create-jam-session" element={<IsPrivateHost><CreateJamSession /></IsPrivateHost>} />
       </Routes>
     </div>
   );

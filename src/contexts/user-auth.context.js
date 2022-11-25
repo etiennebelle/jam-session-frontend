@@ -38,6 +38,7 @@ function UserAuthProviderWrapper(props) {
     const logOutUser = () => {
         removeToken();
         authenticateUser();
+        
     }
 
     useEffect(() => {

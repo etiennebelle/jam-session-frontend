@@ -39,10 +39,7 @@ function UserSignupForm() {
 
             const parsed = await res.json();
 
-            // console.log(res.status, parsed.message)
-
             if (res.status === 201) {
-                console.log(parsed.status)
                 navigate('/user/login')
                 } else {
                 setErrorMessage(parsed.message)

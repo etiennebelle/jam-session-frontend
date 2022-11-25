@@ -7,7 +7,6 @@ function IsPrivateHost( { children } ) {
     const { isHostLoggedIn } = useContext(HostAuthContext);
    
     if (!isHostLoggedIn) {
-      console.log('not loggedin ')
       return <Navigate to="/host/login" />;
       
     } else {

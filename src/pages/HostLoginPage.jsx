@@ -27,7 +27,6 @@ function HostLoginPage() {
             if (response.status === 200) {
                 setIsHostLoggedIn(true)
                 navigate('/host/profile')
-                console.log('hello')
             } else {
                 setErrorMessage(parsed.message)
             }
@@ -50,7 +49,7 @@ function HostLoginPage() {
             </label>
             <label>Password: 
                 <input 
-                type="text" 
+                type="password" 
                 value={password} 
                 onChange={event => setPassword(event.target.value)} 
                 required

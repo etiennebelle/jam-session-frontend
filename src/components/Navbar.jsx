@@ -16,12 +16,12 @@ function Navbar() {
     <div>
         <Link to="/user/signup">Signup</Link>
         <Link to="/user/login">Login</Link>
+        <button onClick={logOutUser}>Logout User</button>
     </div>
     <div>
         <Link to="/host/signup">Signup as a host</Link>
         <Link to="/host/login">Login as a host</Link>
         <button onClick={logoutHost}>Logout</button>
-        <button onClick={logOutUser}>Logout User</button>
     </div>
 
     </>
