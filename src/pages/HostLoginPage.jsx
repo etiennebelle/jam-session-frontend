@@ -27,7 +27,6 @@ function HostLoginPage() {
             if (response.status === 200) {
                 setIsHostLoggedIn(true)
                 navigate('/host/profile')
-                console.log('hello')
             } else {
                 setErrorMessage(parsed.message)
             }

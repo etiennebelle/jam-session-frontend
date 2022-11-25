@@ -1,11 +1,14 @@
 
 import { useState, useEffect, createContext } from "react";
+import { useNavigate } from 'react-router-dom';
 
 const HostAuthContext = createContext();
 
 function HostAuthProviderWrapper(props) {
     const [isHostLoggedIn, setIsHostLoggedIn] = useState(false);
     const [host, setHost] = useState(null);
+
+    const navigate = useNavigate();
 
     const storeToken = (token) => {       
       localStorage.setItem('hostAuthToken', token);
@@ -20,7 +23,6 @@ function HostAuthProviderWrapper(props) {
           },
         })
         const parsed = await response.json()
-        console.log('parsed', parsed)
         setIsHostLoggedIn(true);
         setHost(parsed)
       } else {
@@ -36,6 +38,7 @@ function HostAuthProviderWrapper(props) {
     const logoutHost = () => {
       removeHostToken()
       authenticateHost()
+      navigate('/host/login')
     }
 
 

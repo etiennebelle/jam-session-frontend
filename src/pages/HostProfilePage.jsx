@@ -9,10 +9,9 @@ function HostProfilePage() {
     authenticateHost() 
     }, [])
     
-  
-
   return (
     <>
+      <p>Hello host</p>
       <Link to="/host/create-jam-session" >Create Jam Session</Link>
     </>
   )
