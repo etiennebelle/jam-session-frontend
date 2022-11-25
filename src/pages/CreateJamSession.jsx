@@ -14,8 +14,13 @@ function CreateJamSession() {
     const [errorMessage, setErrorMessage] = useState(undefined);
     const { host, setHost } = useContext(HostAuthContext);  
 
-    const hostid = host.data.id
+    const hostid = host.data._id
+    console.log(host, hostid)
+    if (!hostid){
+        return <p>Loading...</p>
+    }  
   return (
+  
     <>
     <form method="POST" action="http://localhost:5005/host/create-jam-session" encType="multipart/form-data">
         <label>Event Name: 
@@ -74,8 +79,7 @@ required >
         <input type="file" name="imageUrl" accept="image/png, image/jpg"/>
         <input 
             name='host'
-            value={hostid} 
-            onChange={event => setHost(event.target.value)} 
+            defaultValue={hostid}
             hidden
         />
         <button type="submit">Create Jam Session</button>
