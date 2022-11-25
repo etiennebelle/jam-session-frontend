@@ -10,7 +10,7 @@ function UserLoginForm() {
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState()
 
-    const { storeToken, setIsLoggedIn } = useContext(UserAuthContext);
+    const { storeToken, setIsLoggedIn, authenticateUser } = useContext(UserAuthContext);
 
     const handleSubmit = async event => { 
         try {
@@ -27,6 +27,7 @@ function UserLoginForm() {
 
             if (res.status === 200) {
                 setIsLoggedIn(true);
+                authenticateUser();
                 navigate('/user/profile');
             } else {
                 setErrorMessage(parsed.message)

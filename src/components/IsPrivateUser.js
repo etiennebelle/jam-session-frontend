@@ -9,7 +9,6 @@ function IsPrivateUser({children}) {
     if (isLoading) return <p>Loading ...</p>
 
     if (!isLoggedIn) {
-        console.log('Not Logged in')
         return <Navigate to="/user/login" />
     } else {
         return children

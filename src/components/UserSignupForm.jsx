@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 import { Links, useNavigate } from 'react-router-dom';
 
@@ -6,8 +7,22 @@ function UserSignupForm() {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [instrument, setInstrument] = useState('');
     const [email, setEmail] = useState('');
     const [errorMessage, setErrorMessage] = useState(undefined);
+
+    const popularInstruments = [
+        {name: 'Vocals'},
+        {name: 'Piano'},
+        {name: 'Guitar'},
+        {name: 'Bass'},
+        {name: 'Double Bass'},
+        {name: 'Drums'},
+        {name: 'Violin'},
+        {name: 'Saxophone'},
+        {name: 'Trumpet'},
+        {name: 'Clarinet'},
+    ]
 
     const handleSubmit = async event => {
 
@@ -19,7 +34,7 @@ function UserSignupForm() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({username, email, password}),
+                body: JSON.stringify({username, email, password, instrument}),
             })
 
             const parsed = await res.json();
@@ -55,6 +70,18 @@ function UserSignupForm() {
                         value={email}
                         onChange={event => setEmail(event.target.value)}
                     />
+                </label>
+                <label> Choose your instrument:
+                    <select
+                        name="selectInstrument"
+                        onChange={event => setInstrument(event.target.value)}
+                    >
+                        {popularInstruments.map((instrument) => {
+                            return (
+                                <option key={instrument.name} value={instrument.name}>{instrument.name}</option>
+                            )
+                        })}
+                    </select>
                 </label>
                 <label> Password:
                     <input
