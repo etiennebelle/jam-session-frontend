@@ -7,6 +7,8 @@ const HostAuthContext = createContext();
 function HostAuthProviderWrapper(props) {
     const [isHostLoggedIn, setIsHostLoggedIn] = useState(false);
     const [host, setHost] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+
 
     const navigate = useNavigate();
 
@@ -25,9 +27,11 @@ function HostAuthProviderWrapper(props) {
         const parsed = await response.json()
         setIsHostLoggedIn(true);
         setHost(parsed)
+        setIsLoading(false);
       } else {
         setIsHostLoggedIn(false);
         setHost(null)
+        setIsLoading(false);
       }
     }
 
@@ -48,7 +52,7 @@ function HostAuthProviderWrapper(props) {
     
    
     return (
-      <HostAuthContext.Provider value={{ isHostLoggedIn, host, storeToken, authenticateHost, logoutHost, setIsHostLoggedIn}}>
+      <HostAuthContext.Provider value={{ isLoading, isHostLoggedIn, host, storeToken, authenticateHost, logoutHost, setIsHostLoggedIn}}>
         {props.children}
       </HostAuthContext.Provider>
     )
