@@ -6,10 +6,9 @@ function HostLoginPage() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [errorMessage, setErrorMessage] = useState(undefined);
-
     const navigate = useNavigate();
 
-    const { storeToken, setIsHostLoggedIn } = useContext(HostAuthContext); 
+    const { storeToken, setIsHostLoggedIn, authenticateHost } = useContext(HostAuthContext); 
 
     const handleSubmit = async event => {
         try {
@@ -26,6 +25,7 @@ function HostLoginPage() {
             storeToken(parsed.authToken)
             if (response.status === 200) {
                 setIsHostLoggedIn(true)
+                authenticateHost();
                 navigate('/host/profile')
             } else {
                 setErrorMessage(parsed.message)

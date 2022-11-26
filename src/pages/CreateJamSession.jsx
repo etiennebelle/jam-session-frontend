@@ -15,10 +15,10 @@ function CreateJamSession() {
     const { host, setHost } = useContext(HostAuthContext);  
 
     const hostid = host.data._id
-    console.log(host, hostid)
     if (!hostid){
         return <p>Loading...</p>
     }  
+
   return (
   
     <>

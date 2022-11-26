@@ -7,6 +7,7 @@ import { UserAuthContext } from "../contexts/user-auth.context";
 function IsAnonymous({children}) {
     const { isHostLoggedIn } = useContext(HostAuthContext);
     const { isLoggedIn } = useContext(UserAuthContext);
+    console.log('anon', isHostLoggedIn)
 
     
     if (isHostLoggedIn || isLoggedIn ) {
