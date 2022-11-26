@@ -1,7 +1,8 @@
 import { useState, useContext, useEffect } from "react";                      
 import { Link } from "react-router-dom";
 import {HostAuthContext} from '../contexts/host-auth.context';
- 
+import { v4 as uuidv4 } from 'uuid';
+
 
 function HostProfilePage() {
     const [currentHost, setCurrentHost] = useState('')
@@ -26,7 +27,17 @@ function HostProfilePage() {
       <Link to="/host/create-jam-session" >Create Jam Session</Link>
       <h3>Your Scheduled Jam Sessions: </h3>
       {currentHost && currentHost.jamSessions.map(oneJamSess =>{
-       <h4>oneJamSess.jamSessionName</h4> 
+        return(
+          <div key={uuidv4()}>
+          <img src={oneJamSess.image} />
+          <h4>{oneJamSess.jamSessionName}</h4> 
+          <p>Date: {oneJamSess.date}</p> 
+          <p>Time: {oneJamSess.time}</p> 
+          <p>Capacity: {oneJamSess.capacity}</p> 
+          <p>Genre: {oneJamSess.genre}</p> 
+          <p>Event Description: {oneJamSess.description}</p>          
+          </div>
+        )
       })}
 
     </>
