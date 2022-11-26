@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 function HostSignupPage() {
     const [barName, setBarName] = useState('')
     const [address, setAddress] = useState('')
+    const [town, setTown] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [errorMessage, setErrorMessage] = useState(undefined);
@@ -20,7 +21,7 @@ function HostSignupPage() {
                 headers: {
                     'Content-type': 'application/json', 
                 },
-                body: JSON.stringify({barName, address, email, password})
+                body: JSON.stringify({barName, address, town, email, password})
             })
             const parsed = await response.json()
             if (response.status === 201) {
@@ -49,6 +50,13 @@ function HostSignupPage() {
                 type="text" 
                 value={address} 
                 onChange={event => setAddress(event.target.value)} 
+                required/>
+            </label>
+            <label>Town: 
+                <input 
+                type="text" 
+                value={town} 
+                onChange={event => setTown(event.target.value)} 
                 required/>
             </label>
             <label>Email: 
