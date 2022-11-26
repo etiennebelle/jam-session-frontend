@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Link } from 'react-router-dom';
+import { useState, useContext, useEffect } from 'react';
+
 import HostSignupPage from './pages/HostSignupPage';
 import UserSignupPage from './pages/UserSignupPage';
 import UserLoginPage from './pages/UserLoginPage';
@@ -13,14 +15,35 @@ import IsPrivateHost from './components/IsPrivateHost';
 import IsAnonymous from './components/IsAnonymous';
 import Home from './pages/Home';
 import CreateJamSession from './pages/CreateJamSession';
+import JamSessions from './pages/JamSessions';
 
 
 function App() {
+  const API_URL = "http://localhost:5005";
+  const [events, setEvents] = useState([]);
+
+  const fetchEvents = async() => {
+      try {
+        
+        const response = await fetch(`${API_URL}/events`);
+        const events = await response.json();
+        setEvents(events);
+
+      } catch (error) {
+        console.log(error);
+      }
+  };
+  
+  useEffect(() => {
+    fetchEvents();
+  }, [])
+
   return (
     <div className="App">
       <Navbar />
       <Routes>
         <Route path="/" element={ <Home /> } />
+        <Route path="/events" element={<JamSessions events={events} /> } />
         <Route path="/user/signup" element={ <IsAnonymous><UserSignupPage /></IsAnonymous> } />
         <Route path="/user/login" element={<IsAnonymous><UserLoginPage /></IsAnonymous>} />
         <Route path="/user/profile" element={<IsPrivateUser> <UserProfilePage /> </IsPrivateUser>} />
