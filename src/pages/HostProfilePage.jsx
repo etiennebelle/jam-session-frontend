@@ -7,17 +7,13 @@ function HostProfilePage() {
     const [currentHost, setCurrentHost] = useState('')
     const { isHostLoggedIn, host, authenticateHost } = useContext(HostAuthContext);  
 
-    console.log('host', host)
-    console.log('isHostLoggedIn', isHostLoggedIn)
-
-
     useEffect(() => {
       if (host) {
         const getHostData = async() => {
           const response = await fetch(`http://localhost:5005/host/${host.data._id}`)
           const hostData = await response.json();
           delete hostData.password;
-          console.log(hostData);
+          console.log('hostData', hostData);
           setCurrentHost(hostData);
       } 
       getHostData();
@@ -28,6 +24,11 @@ function HostProfilePage() {
     <>
       <p>Hello {currentHost && currentHost.barName}!</p>
       <Link to="/host/create-jam-session" >Create Jam Session</Link>
+      <h3>Your Scheduled Jam Sessions: </h3>
+      {currentHost && currentHost.jamSessions.map(oneJamSess =>{
+       <h4>oneJamSess.jamSessionName</h4> 
+      })}
+
     </>
   )
 }
