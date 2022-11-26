@@ -12,7 +12,6 @@ function UserProfilePage() {
                 const response = await fetch(`http://localhost:5005/user/${user.data._id}`)
                 const userData = await response.json();
                 delete userData.password;
-                console.log(userData);
                 setCurrentUser(userData);
             } 
             getUserData();
