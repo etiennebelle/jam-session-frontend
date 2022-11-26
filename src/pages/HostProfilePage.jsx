@@ -20,6 +20,10 @@ function HostProfilePage() {
       getHostData();
       }
     }, [host])
+
+    const formatDate = (oneDate) => {
+      return oneDate.slice(0,10)
+    }
     
   return (
     <>
@@ -31,7 +35,7 @@ function HostProfilePage() {
           <div key={uuidv4()}>
           <img src={oneJamSess.image} />
           <h4>{oneJamSess.jamSessionName}</h4> 
-          <p>Date: {oneJamSess.date}</p> 
+          <p>Date: {formatDate(oneJamSess.date)}</p> 
           <p>Time: {oneJamSess.time}</p> 
           <p>Capacity: {oneJamSess.capacity}</p> 
           <p>Genre: {oneJamSess.genre}</p> 
