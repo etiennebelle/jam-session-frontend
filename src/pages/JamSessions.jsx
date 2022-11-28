@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 function JamSessions({ events }) {
 
     const [jamsArr, setJamsArr] = useState([]);
-    const [filteredJams, setFilteredJams] = useState([]);
+    const [filteredJams, setFilteredJams] = useState('');
 
     const sortEventsByDate = () => {
         const jamsArr = [...events];
@@ -29,7 +29,7 @@ function JamSessions({ events }) {
                 <p>Search</p>
                 <input
                     value={filteredJams}
-                    placeholder='Look for a jam in your town!'
+                    placeholder='Search'
                     type='text'
                     onChange={handleSearchInput}
                 />
