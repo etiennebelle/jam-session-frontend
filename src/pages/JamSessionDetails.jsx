@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { UserAuthContext } from '../contexts/user-auth.context';
 import { v4 as uuidv4 } from 'uuid';
+import { Modal, Button, Group } from '@mantine/core';
 
 function JamSessionDetails() {
 
@@ -11,6 +12,7 @@ function JamSessionDetails() {
     const [jamSession, setJamSession] = useState();
     const [players, setPlayers] = useState([]);
     const [userAttending, setUserAttending] = useState(false)
+    const [opened, setOpened] = useState(false);
 
     const navigate = useNavigate();
 
@@ -20,10 +22,6 @@ function JamSessionDetails() {
             const parsed = await response.json();
             setJamSession(parsed);
             parsed.players.map((onePlayer)=> {
-                ///to be checked 
-                if (user && onePlayer._id == user.data._id) {
-                    setUserAttending(true)
-                }
             })            
         } catch (error) {
             console.log(error);
@@ -32,16 +30,19 @@ function JamSessionDetails() {
 
     const addPlayers = async () => {
         try {
-            await fetch(`${API_URL}/events/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${storedToken}`,
-                },
-                body: JSON.stringify({id: user.data._id})
-            })
-            fetchJamId()
-            setUserAttending(true)
+            if (user) {
+                await fetch(`${API_URL}/events/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${storedToken}`,
+                    },
+                    body: JSON.stringify({id: user.data._id})
+                })
+                fetchJamId()
+                setUserAttending(true)
+            }
+            
         } catch (error) {
             console.log(error);
         }
@@ -67,6 +68,12 @@ function JamSessionDetails() {
     useEffect(() => {
         fetchJamId();
     }, [])
+
+    useEffect(() => {
+        fetchJamId();
+    }, [user])
+    
+
 
     return jamSession ? (
 
@@ -103,23 +110,27 @@ function JamSessionDetails() {
                 })}
 
                 </div>
-                {isLoggedIn ? (
-                    <div>
-                        {userAttending 
-                            ? <div>
-                                <p>You are attending this jam session</p>
-                                <button type='submit' onClick={removePlayers}>Leave the Session!</button>
-                            </div>
-                            : <button type='submit' onClick={addPlayers}>Join the Session!</button> 
-                        }
-                    </div>
-                ) : (
-                    <div>
-                        <p>You need to have an account to join the session!</p>
-                        <Link to="/user/signup">Signup</Link>
-                        <Link to="/user/login">Login</Link>
-                    </div>
-                )}
+                <div>
+                    {!user 
+                        ? <button type='submit' onClick={()=> setOpened(true)}>Not a user </button> 
+                        : user && userAttending  
+                        ? 
+                        <div>
+                            <p>You are attending this jam session</p>
+                            <button type='submit' onClick={removePlayers}>Leave the Session!</button>
+                        </div>
+                        : <button type='submit' onClick={addPlayers}>Join the Session!</button> 
+                    }
+                </div>
+                <Modal
+                    opened={opened}
+                    onClose={() => setOpened(false)}
+                    title="Hello modal!"
+                >
+                    <p>Hello modal</p>
+                </Modal>
+
+
                 
             </div>
         </div>
