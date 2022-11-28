@@ -6,7 +6,7 @@ function JamSessionDetails() {
     const API_URL = "http://localhost:5005";
     const { id } = useParams();
     const [jamSession, setJamSession] = useState();
-
+    
     const fetchJamId = async () => {
         try {
             const response = await fetch(`${API_URL}/events/${id}`);
@@ -19,14 +19,21 @@ function JamSessionDetails() {
     }
 
     useEffect(() => {
-        fetchJamId(setJamSession);
+        fetchJamId();
     }, [])
 
-    return (
+    return jamSession ? (
+
         <div>
             <div className=''>
                 <h2>{jamSession.jamSessionName}</h2>
            </div>
+        </div>
+
+    ) : (
+            
+        <div>
+                
         </div>
     )
 }
