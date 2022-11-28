@@ -14,7 +14,6 @@ function HostProfilePage() {
           const response = await fetch(`http://localhost:5005/host/${host.data._id}`)
           const hostData = await response.json();
           delete hostData.password;
-          console.log('hostData', hostData);
           setCurrentHost(hostData);
       } 
       getHostData();
@@ -23,6 +22,26 @@ function HostProfilePage() {
 
     const formatDate = (oneDate) => {
       return oneDate.slice(0,10)
+    }
+
+    if (currentHost && currentHost.jamSessions.length < 1){
+      return (
+      <>
+      <p>No jams sessions created yet</p>
+      <Link to="/host/create-jam-session" >Create Jam Session</Link>
+      </>
+      )
+    } 
+
+    const deleteJamSess = async (jamSessionId) => {
+      try {
+        console.log(jamSessionId)
+        await fetch(`http://localhost:5005/host/jam-sessions/${jamSessionId}`, {
+          method: 'DELETE',
+        })
+      } catch (error) {
+        console.log(error)
+      }
     }
     
   return (
@@ -39,7 +58,8 @@ function HostProfilePage() {
           <p>Time: {oneJamSess.time}</p> 
           <p>Capacity: {oneJamSess.capacity}</p> 
           <p>Genre: {oneJamSess.genre}</p> 
-          <p>Event Description: {oneJamSess.description}</p>          
+          <p>Event Description: {oneJamSess.description}</p>
+          <button onClick={()=>deleteJamSess(oneJamSess._id)}>Delete Jam Session</button>          
           </div>
         )
       })}
