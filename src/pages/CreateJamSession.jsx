@@ -43,7 +43,7 @@ function CreateJamSession() {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${storedToken}`,
-            },
+              },
             body: formData
         })
         const parsed = await response.json()

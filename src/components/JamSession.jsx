@@ -40,7 +40,9 @@ function JamSession({oneJamSess, deleteJamSess, hostid, formatDate, getHostData}
         try {
             let response = await fetch(`http://localhost:5005/host/jam-sessions/${oneJamSess._id}`, {
                 method: 'PUT',
-                Authorization: `Bearer ${storedToken}`,
+                headers: {
+                    Authorization: `Bearer ${storedToken}`,
+                },
                 body: formData
             })
             const parsed = await response.json()

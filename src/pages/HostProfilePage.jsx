@@ -11,9 +11,9 @@ function HostProfilePage() {
 
     const getHostData = async() => {
       const response = await fetch(`http://localhost:5005/host/${host.data._id}`, {
-      headers: {
+        headers: {
           Authorization: `Bearer ${storedToken}`,
-      },
+        },
       }
       )
       const hostData = await response.json();
@@ -26,11 +26,6 @@ function HostProfilePage() {
       getHostData();
       }
     }, [host])
-
-    const hostid = host.data._id
-    if (!hostid){
-        return <p>Loading...</p>
-    }  
 
     const formatDate = (oneDate) => {
       return oneDate.slice(0,10)
@@ -71,7 +66,7 @@ function HostProfilePage() {
           oneJamSess={oneJamSess} 
           deleteJamSess={deleteJamSess} 
           formatDate={formatDate}
-          hostid={hostid}
+          hostid={ host.data._id}
           />
         )
       })}

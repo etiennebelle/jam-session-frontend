@@ -12,8 +12,7 @@ function HostSignupPage() {
     const [errorMessage, setErrorMessage] = useState(undefined);
 
     const navigate = useNavigate();
-    const { storedToken } = useContext(HostAuthContext);  
-
+    
     const handleSubmit = async event => {
         try {
             event.preventDefault();
@@ -22,7 +21,6 @@ function HostSignupPage() {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json', 
-                    Authorization: `Bearer ${storedToken}`,
                 },
                 body: JSON.stringify({barName, address, town, email, password})
             })
