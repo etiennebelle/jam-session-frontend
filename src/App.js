@@ -16,6 +16,7 @@ import IsAnonymous from './components/IsAnonymous';
 import Home from './pages/Home';
 import CreateJamSession from './pages/CreateJamSession';
 import JamSessions from './pages/JamSessions';
+import JamSessionDetails from './pages/JamSessionDetails';
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
       <Routes>
         <Route path="/" element={ <Home /> } />
         <Route path="/events" element={<JamSessions events={events} /> } />
+        <Route path="/events/:id" element={<JamSessionDetails /> } />
         <Route path="/user/signup" element={ <IsAnonymous><UserSignupPage /></IsAnonymous> } />
         <Route path="/user/login" element={<IsAnonymous><UserLoginPage /></IsAnonymous>} />
         <Route path="/user/profile" element={<IsPrivateUser> <UserProfilePage /> </IsPrivateUser>} />
