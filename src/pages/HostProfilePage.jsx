@@ -22,6 +22,11 @@ function HostProfilePage() {
       }
     }, [host])
 
+    const hostid = host.data._id
+    if (!hostid){
+        return <p>Loading...</p>
+    }  
+
     const formatDate = (oneDate) => {
       return oneDate.slice(0,10)
     }
@@ -59,6 +64,7 @@ function HostProfilePage() {
           oneJamSess={oneJamSess} 
           deleteJamSess={deleteJamSess} 
           formatDate={formatDate}
+          hostid={hostid}
           />
         )
       })}

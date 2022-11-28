@@ -1,5 +1,6 @@
 import { useState, useContext} from 'react'
 import { Link, useNavigate } from "react-router-dom";
+import JamSessionForm from '../components/JamSessionForm';
 import {HostAuthContext} from '../contexts/host-auth.context';
 
 
@@ -14,78 +15,68 @@ function CreateJamSession() {
     const [errorMessage, setErrorMessage] = useState(undefined);
     const { host, setHost } = useContext(HostAuthContext);  
 
+    const navigate = useNavigate();
+
     const hostid = host.data._id
     if (!hostid){
         return <p>Loading...</p>
     }  
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        //get the image from file input, its files with an 's' and [0] for the first one because you possibly could add multiple.
+        const image = event.target.imageUrl.files[0];
+    
+        //create a new form data to send and append all the key value pairs to it
+        const formData = new FormData();
+        formData.append("imageUrl", image);
+        formData.append("jamSessionName", jamSessionName);
+        formData.append("date", date);
+        formData.append("time", time);
+        formData.append("capacity", capacity);
+        formData.append("genre", genre);
+        formData.append("description", description);
+        formData.append("host", hostid);
+
+        // Send the formData with all the key: value pairs attached to it
+        let response = await fetch("http://localhost:5005/host/create-jam-session", {
+            method: 'POST',
+            body: formData
+        })
+        const parsed = await response.json()
+        if (response.status === 201) {
+            navigate('/host/profile')
+        } else {
+            setErrorMessage(parsed.message)
+        }
+    }
+
   return (
   
     <>
-    <form method="POST" action="http://localhost:5005/host/create-jam-session" encType="multipart/form-data">
-        <label>Event Name: 
-            <input 
-            type="string" 
-            value={jamSessionName}
-            name='jamSessionName'
-            onChange={event => setJamSessionName(event.target.value)} 
-            required/>
-        </label>
-        <label>Date: 
-            <input 
-            type="date" 
-            name='date'
-            value={date} 
-            onChange={event => setDate(event.target.value)} 
-            required/>
-        </label>
-        <label>Time: 
-            <input 
-            type="time" 
-            name='time'
-            value={time} 
-            onChange={event => setTime(event.target.value)} 
-            required/>
-        </label>
-        <label>Max number of artists: 
-            <input 
-            type="number" 
-            name='capacity'
-            value={capacity} 
-            onChange={event => setCapacity(event.target.value)} 
-            required/>
-        </label>
-        <label>Genre: 
-            <select onChange={event => setGenre(event.target.value)} name='genre'
-required >
-                <option value="Rock">Rock</option>
-                <option value="Funk">Funk</option>
-                <option value="Jazz">Jazz</option>
-                <option value="Pop">Pop</option>
-                <option value="Balcan">Balcan</option>
-                <option value="Hip Hop">Hip Hop</option>
-                <option value="Classical">Classical</option>
-                <option value="Electronic">Electronic</option>
-            </select>
-        </label>
-        <label>Description: 
-            <input 
-            type="text" 
-            name='description'
-            value={description} 
-            onChange={event => setDescription(event.target.value)} 
-            required/>
-        </label>
-        <input type="file" name="imageUrl" accept="image/png, image/jpg"/>
-        <input 
-            name='host'
-            defaultValue={hostid}
-            hidden
+    <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <JamSessionForm 
+                jamSessionName={jamSessionName}
+                setJamSessionName={setJamSessionName}
+                date={date}
+                setDate={setDate}
+                time={time}
+                setTime={setTime}
+                capacity={capacity}
+                setCapacity={setCapacity}
+                genre={genre}
+                setGenre={setGenre}
+                description={description}
+                setDescription={setDescription}
+                hostid={hostid}
         />
-        <button type="submit">Create Jam Session</button>
+       <button type="submit">Create Jam Session</button>
     </form>
+    
+
     </>
   )
 }
+
 
 export default CreateJamSession
