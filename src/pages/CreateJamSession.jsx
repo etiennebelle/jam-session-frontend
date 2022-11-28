@@ -13,7 +13,7 @@ function CreateJamSession() {
     const [genre, setGenre] = useState('')
     const [description, setDescription] = useState('')
     const [errorMessage, setErrorMessage] = useState(undefined);
-    const { host, setHost } = useContext(HostAuthContext);  
+    const { host, setHost, storedToken } = useContext(HostAuthContext);  
 
     const navigate = useNavigate();
 
@@ -39,8 +39,11 @@ function CreateJamSession() {
         formData.append("host", hostid);
 
         // Send the formData with all the key: value pairs attached to it
-        let response = await fetch("http://localhost:5005/host/create-jam-session", {
+        let response = await fetch("http://localhost:5005/host/jam-sessions", {
             method: 'POST',
+            headers: {
+                Authorization: `Bearer ${storedToken}`,
+            },
             body: formData
         })
         const parsed = await response.json()

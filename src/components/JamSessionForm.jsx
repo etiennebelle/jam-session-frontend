@@ -34,7 +34,7 @@ function JamSessionForm({jamSessionName, setJamSessionName, date, setDate, time,
             required/>
         </label>
         <label>Genre: 
-            <select onChange={event => setGenre(event.target.value)} name='genre' required >
+            <select value={genre} onChange={event => setGenre(event.target.value)} name='genre' required >
                 <option value="Rock">Rock</option>
                 <option value="Funk">Funk</option>
                 <option value="Jazz">Jazz</option>

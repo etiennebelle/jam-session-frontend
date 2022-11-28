@@ -7,10 +7,15 @@ import JamSession from "../components/JamSession";
 
 function HostProfilePage() {
     const [currentHost, setCurrentHost] = useState('')
-    const { isHostLoggedIn, host, authenticateHost } = useContext(HostAuthContext);  
+    const { storedToken, isHostLoggedIn, host, authenticateHost } = useContext(HostAuthContext);  
 
     const getHostData = async() => {
-      const response = await fetch(`http://localhost:5005/host/${host.data._id}`)
+      const response = await fetch(`http://localhost:5005/host/${host.data._id}`, {
+      headers: {
+          Authorization: `Bearer ${storedToken}`,
+      },
+      }
+      )
       const hostData = await response.json();
       delete hostData.password;
       setCurrentHost(hostData);
@@ -42,9 +47,11 @@ function HostProfilePage() {
 
     const deleteJamSess = async (jamSessionId) => {
       try {
-        console.log(jamSessionId)
         await fetch(`http://localhost:5005/host/${jamSessionId}`, {
           method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
         })
         getHostData();
       } catch (error) {

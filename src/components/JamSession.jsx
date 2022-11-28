@@ -2,18 +2,59 @@ import { useState, useContext } from "react";
 import { Modal, Button, Group } from '@mantine/core';
 import JamSessionForm from '../components/JamSessionForm';
 import {HostAuthContext} from '../contexts/host-auth.context';
+import { useNavigate } from "react-router-dom";
 
-function JamSession({oneJamSess, deleteJamSess, formatDate, hostid}) {
+function JamSession({oneJamSess, deleteJamSess, hostid, formatDate, getHostData}) {
     const [isEditing, setIsEditing] = useState(false)
-    const [opened, setOpened] = useState(false);
-    const [date, setDate] = useState('')
-    const [time, setTime] = useState('')
-    const [jamSessionName, setJamSessionName] = useState('')
-    const [capacity, setCapacity] = useState('')
-    const [genre, setGenre] = useState('')
-    const [description, setDescription] = useState('')
+    const [date, setDate] = useState(oneJamSess.date)
+    const [time, setTime] = useState(oneJamSess.time)
+    const [jamSessionName, setJamSessionName] = useState(oneJamSess.jamSessionName)
+    const [capacity, setCapacity] = useState(oneJamSess.capacity)
+    const [genre, setGenre] = useState(oneJamSess.genre)
+    const [description, setDescription] = useState(oneJamSess.description)
     const [errorMessage, setErrorMessage] = useState(undefined);
-    const { host, setHost } = useContext(HostAuthContext);   
+    const { host, setHost, storedToken } = useContext(HostAuthContext);   
+    const [successMessage, setSuccessMessage] = useState(undefined);
+
+    
+    const navigate = useNavigate();
+
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        //get the image from file input, its files with an 's' and [0] for the first one because you possibly could add multiple.
+        const image = event.target.imageUrl.files[0];
+    
+        //create a new form data to send and append all the key value pairs to it
+        const formData = new FormData();
+        formData.append("imageUrl", image);
+        formData.append("jamSessionName", jamSessionName);
+        formData.append("date", date);
+        formData.append("time", time);
+        formData.append("capacity", capacity);
+        formData.append("genre", genre);
+        formData.append("description", description);
+        formData.append("host", hostid);
+
+        // Send the formData with all the key: value pairs attached to it
+        try {
+            let response = await fetch(`http://localhost:5005/host/jam-sessions/${oneJamSess._id}`, {
+                method: 'PUT',
+                Authorization: `Bearer ${storedToken}`,
+                body: formData
+            })
+            const parsed = await response.json()
+            if (response.status === 200) {
+                setSuccessMessage("Event updated successfully")
+            } else {
+                setErrorMessage(parsed.message)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+       
+    }
+
 
   return (
     <div>
@@ -31,67 +72,25 @@ function JamSession({oneJamSess, deleteJamSess, formatDate, hostid}) {
             onClose={() => setIsEditing(false)}
             title="Edit Jam Session"
         >
-            <form method="POST" action={`http://localhost:5005/host/jam-sessions/${oneJamSess._id}`} encType="multipart/form-data">
-            <label>Event Name: 
-                <input 
-                type="string" 
-                defaultValue={oneJamSess.jamSessionName}
-                name='jamSessionName'
-                onChange={event => setJamSessionName(event.target.value)} 
-                required/>
-            </label>
-        <label>Date: 
-            <input 
-            type="date" 
-            name='date'
-            value={date} 
-            onChange={event => setDate(event.target.value)} 
-            required/>
-        </label>
-        <label>Time: 
-            <input 
-            type="time" 
-            name='time'
-            value={time} 
-            onChange={event => setTime(event.target.value)} 
-            required/>
-        </label>
-        <label>Max number of artists: 
-            <input 
-            type="number" 
-            name='capacity'
-            value={capacity} 
-            onChange={event => setCapacity(event.target.value)} 
-            required/>
-        </label>
-        <label>Genre: 
-            <select onChange={event => setGenre(event.target.value)} name='genre' required >
-                <option value="Rock">Rock</option>
-                <option value="Funk">Funk</option>
-                <option value="Jazz">Jazz</option>
-                <option value="Pop">Pop</option>
-                <option value="Balcan">Balcan</option>
-                <option value="Hip Hop">Hip Hop</option>
-                <option value="Classical">Classical</option>
-                <option value="Electronic">Electronic</option>
-            </select>
-        </label>
-        <label>Description: 
-            <input 
-            type="text" 
-            name='description'
-            value={description} 
-            onChange={event => setDescription(event.target.value)} 
-            required/>
-        </label>
-        <input type="file" name="imageUrl" accept="image/png, image/jpg"/>
-        <input 
-            name='host'
-            defaultValue={hostid}
-            hidden
-        />
+            <form onSubmit={handleSubmit}  encType="multipart/form-data">
+                <JamSessionForm 
+                    jamSessionName={jamSessionName}
+                    setJamSessionName={setJamSessionName}
+                    date={formatDate(date)}
+                    setDate={setDate}
+                    time={time}
+                    setTime={setTime}
+                    capacity={capacity}
+                    setCapacity={setCapacity}
+                    genre={genre}
+                    setGenre={setGenre}
+                    description={description}
+                    setDescription={setDescription}
+                    hostid={hostid}
+                />
+                <button type="submit">Update Jam Session</button>
             </form>
-             <button type="submit">Update Jam Session</button>
+            {successMessage && <p>{successMessage}</p>}
         </Modal>
     </div>
   )
