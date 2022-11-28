@@ -11,6 +11,16 @@ function JamSessions({ events }) {
         jamsArr.sort(function (a, b) {
             return new Date(a.date) - new Date(b.date);
         })
+        
+        // jamsArr.forEach(jam => {
+        //     const formatDate = Date.parse(jam.date);
+        //     console.log('events date:', formatDate);
+        //     console.log('current date:', Date.now());
+        //     if (formatDate < Date.now()) {
+        //         jamsArr.shift(jam);
+        //     }
+        // })
+
         setJamsArr(jamsArr);
     }
 
@@ -22,7 +32,7 @@ function JamSessions({ events }) {
         sortEventsByDate();
     }, [events])
 
-    return (
+    return jamsArr.length > 0 ? (
         <div>
 
             <div className='searchbar'>
@@ -57,7 +67,7 @@ function JamSessions({ events }) {
             ))}
             
         </div>
-    )
+    ) : (<></>)
 }
 
 export default JamSessions
