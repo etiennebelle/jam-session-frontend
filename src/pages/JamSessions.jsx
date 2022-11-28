@@ -1,6 +1,3 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-
 function JamSessions({ events }) {
 
     const [jamsArr, setJamsArr] = useState([]);

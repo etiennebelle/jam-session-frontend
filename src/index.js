@@ -6,16 +6,19 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { HostAuthProviderWrapper } from './contexts/host-auth.context';
 import { UserAuthProviderWrapper } from './contexts/user-auth.context';
+import { MantineProvider } from '@mantine/core';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <HostAuthProviderWrapper>
-        <UserAuthProviderWrapper>
-          <App />
-        </UserAuthProviderWrapper>
-      </HostAuthProviderWrapper>
+      <MantineProvider withGlobalStyles withNormalizeCSS>
+        <HostAuthProviderWrapper>
+          <UserAuthProviderWrapper>
+            <App />
+          </UserAuthProviderWrapper>
+        </HostAuthProviderWrapper>
+      </MantineProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

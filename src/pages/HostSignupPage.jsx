@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Link, useNavigate } from "react-router-dom";
+import {HostAuthContext} from '../contexts/host-auth.context';
 
 
 function HostSignupPage() {
@@ -11,6 +12,7 @@ function HostSignupPage() {
     const [errorMessage, setErrorMessage] = useState(undefined);
 
     const navigate = useNavigate();
+    const { storedToken } = useContext(HostAuthContext);  
 
     const handleSubmit = async event => {
         try {
@@ -20,6 +22,7 @@ function HostSignupPage() {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json', 
+                    Authorization: `Bearer ${storedToken}`,
                 },
                 body: JSON.stringify({barName, address, town, email, password})
             })

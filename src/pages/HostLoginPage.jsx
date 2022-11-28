@@ -32,7 +32,7 @@ function HostLoginPage() {
             }
         } catch (error) {
            const errorDescription = error.message;
-            setErrorMessage(errorDescription); 
+           setErrorMessage(errorDescription); 
         }
         
     }

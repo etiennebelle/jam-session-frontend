@@ -2,24 +2,62 @@ import { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {HostAuthContext} from '../contexts/host-auth.context';
 import { v4 as uuidv4 } from 'uuid';
+import JamSession from "../components/JamSession";
 
 
 function HostProfilePage() {
     const [currentHost, setCurrentHost] = useState('')
-    const { isHostLoggedIn, host, authenticateHost } = useContext(HostAuthContext);  
+    const { storedToken, isHostLoggedIn, host, authenticateHost } = useContext(HostAuthContext);  
 
+    const getHostData = async() => {
+      const response = await fetch(`http://localhost:5005/host/${host.data._id}`, {
+      headers: {
+          Authorization: `Bearer ${storedToken}`,
+      },
+      }
+      )
+      const hostData = await response.json();
+      delete hostData.password;
+      setCurrentHost(hostData);
+    
+    } 
     useEffect(() => {
       if (host) {
-        const getHostData = async() => {
-          const response = await fetch(`http://localhost:5005/host/${host.data._id}`)
-          const hostData = await response.json();
-          delete hostData.password;
-          console.log('hostData', hostData);
-          setCurrentHost(hostData);
-      } 
       getHostData();
       }
     }, [host])
+
+    const hostid = host.data._id
+    if (!hostid){
+        return <p>Loading...</p>
+    }  
+
+    const formatDate = (oneDate) => {
+      return oneDate.slice(0,10)
+    }
+
+    if (currentHost && currentHost.jamSessions.length < 1){
+      return (
+      <>
+      <p>No jams sessions created yet</p>
+      <Link to="/host/create-jam-session" >Create Jam Session</Link>
+      </>
+      )
+    } 
+
+    const deleteJamSess = async (jamSessionId) => {
+      try {
+        await fetch(`http://localhost:5005/host/${jamSessionId}`, {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
+        })
+        getHostData();
+      } catch (error) {
+        console.log(error)
+      }
+    }
     
   return (
     <>
@@ -28,15 +66,13 @@ function HostProfilePage() {
       <h3>Your Scheduled Jam Sessions: </h3>
       {currentHost && currentHost.jamSessions.map(oneJamSess =>{
         return(
-          <div key={uuidv4()}>
-          <img src={oneJamSess.image} />
-          <h4>{oneJamSess.jamSessionName}</h4> 
-          <p>Date: {oneJamSess.date}</p> 
-          <p>Time: {oneJamSess.time}</p> 
-          <p>Capacity: {oneJamSess.capacity}</p> 
-          <p>Genre: {oneJamSess.genre}</p> 
-          <p>Event Description: {oneJamSess.description}</p>          
-          </div>
+          <JamSession 
+          key={uuidv4()} 
+          oneJamSess={oneJamSess} 
+          deleteJamSess={deleteJamSess} 
+          formatDate={formatDate}
+          hostid={hostid}
+          />
         )
       })}
 
