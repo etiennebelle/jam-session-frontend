@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { UserAuthContext } from '../contexts/user-auth.context';
+import { v4 as uuidv4 } from 'uuid';
 
 function JamSessionDetails() {
 
@@ -9,13 +10,21 @@ function JamSessionDetails() {
     const { isLoggedIn, user, storedToken } = useContext(UserAuthContext);
     const [jamSession, setJamSession] = useState();
     const [players, setPlayers] = useState([]);
+    const [userAttending, setUserAttending] = useState(false)
+
+    const navigate = useNavigate();
 
     const fetchJamId = async () => {
         try {
             const response = await fetch(`${API_URL}/events/${id}`);
             const parsed = await response.json();
             setJamSession(parsed);
-            console.log(parsed);
+            parsed.players.map((onePlayer)=> {
+                ///to be checked 
+                if (user && onePlayer._id == user.data._id) {
+                    setUserAttending(true)
+                }
+            })            
         } catch (error) {
             console.log(error);
         }
@@ -31,6 +40,8 @@ function JamSessionDetails() {
                 },
                 body: JSON.stringify({id: user.data._id})
             })
+            fetchJamId()
+            setUserAttending(true)
         } catch (error) {
             console.log(error);
         }
@@ -46,6 +57,8 @@ function JamSessionDetails() {
                 },
                 body: JSON.stringify({id: user.data._id})
             })
+            fetchJamId()
+            setUserAttending(false)
         } catch (error) {
             console.log(error);
         }
@@ -79,14 +92,26 @@ function JamSessionDetails() {
             </div>
 
             <div className='players-ctn'>
-                <h3>Players:</h3>
+                <h3>Artists that will be playing:</h3>
                 <div className='users-playing'>
+                {jamSession.players.map((onePlayer)=> {
+                    return (
+                        <div key={uuidv4()}>
+                            <p>{onePlayer.username} as {onePlayer.instrument}</p>
+                        </div>
+                    )
+                })}
 
                 </div>
                 {isLoggedIn ? (
                     <div>
-                        <button type='submit' onClick={addPlayers}>Join the Session!</button>
-                        <button type='submit' onClick={removePlayers}>Leave the Session!</button>
+                        {userAttending 
+                            ? <div>
+                                <p>You are attending this jam session</p>
+                                <button type='submit' onClick={removePlayers}>Leave the Session!</button>
+                            </div>
+                            : <button type='submit' onClick={addPlayers}>Join the Session!</button> 
+                        }
                     </div>
                 ) : (
                     <div>
