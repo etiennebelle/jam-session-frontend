@@ -11,6 +11,8 @@ function UserAuthProviderWrapper(props) {
     const storeToken = (token) => {
         localStorage.setItem('userAuthToken', token);
     }
+    
+    const storedToken = localStorage.getItem('userAuthToken');
 
     const authenticateUser = async() => {
         const storedToken = localStorage.getItem('userAuthToken');
@@ -54,6 +56,7 @@ function UserAuthProviderWrapper(props) {
             authenticateUser,
             setIsLoggedIn,
             logOutUser,
+            storedToken
         }}>
             {props.children}
         </UserAuthContext.Provider>

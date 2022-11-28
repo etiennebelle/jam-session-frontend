@@ -4,12 +4,16 @@ import { UserAuthContext } from '../contexts/user-auth.context';
 
 function UserProfilePage() {
     const [currentUser, setCurrentUser] = useState();
-    const { user } = useContext(UserAuthContext);
+    const { user, storedToken } = useContext(UserAuthContext);
 
     useEffect(() => {
         if (user){
             const getUserData = async() => {
-                const response = await fetch(`http://localhost:5005/user/${user.data._id}`)
+                const response = await fetch(`http://localhost:5005/user/${user.data._id}`, {
+                    headers: {
+                        Authorization: `Bearer ${storedToken}`,
+                    },
+                })
                 const userData = await response.json();
                 delete userData.password;
                 setCurrentUser(userData);

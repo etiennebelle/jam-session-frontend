@@ -6,7 +6,7 @@ function JamSessionDetails() {
 
     const API_URL = "http://localhost:5005";
     const { id } = useParams();
-    const { isLoggedIn, user } = useContext(UserAuthContext);
+    const { isLoggedIn, user, storedToken } = useContext(UserAuthContext);
     const [jamSession, setJamSession] = useState();
     const [players, setPlayers] = useState([]);
 
@@ -27,6 +27,7 @@ function JamSessionDetails() {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${storedToken}`,
                 },
                 body: JSON.stringify({id: user.data._id})
             })
@@ -41,6 +42,7 @@ function JamSessionDetails() {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${storedToken}`,
                 },
                 body: JSON.stringify({id: user.data._id})
             })
