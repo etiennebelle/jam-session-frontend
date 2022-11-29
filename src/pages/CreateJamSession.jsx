@@ -1,15 +1,17 @@
 import { useState, useContext} from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import JamSessionForm from '../components/JamSessionForm';
-import {HostAuthContext} from '../contexts/host-auth.context';
+import { HostAuthContext } from '../contexts/host-auth.context';
+import { Button } from '@mantine/core';
+import { format, compareAsc } from 'date-fns'
 
 
 
 function CreateJamSession() {
-    const [date, setDate] = useState('')
-    const [time, setTime] = useState('')
+    const [date, setDate] = useState(''); //useState(new Date()) to get current date by default
+    const [time, setTime] = useState(new Date()); //useState(new Date()) to get current time by default
     const [jamSessionName, setJamSessionName] = useState('')
-    const [capacity, setCapacity] = useState('')
+    const [capacity, setCapacity] = useState()
     const [genre, setGenre] = useState('')
     const [description, setDescription] = useState('')
     const [errorMessage, setErrorMessage] = useState(undefined);
@@ -20,13 +22,13 @@ function CreateJamSession() {
     const hostid = host.data._id
     if (!hostid){
         return <p>Loading...</p>
-    }  
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         //get the image from file input, its files with an 's' and [0] for the first one because you possibly could add multiple.
         const image = event.target.imageUrl.files[0];
-    
+
         //create a new form data to send and append all the key value pairs to it
         const formData = new FormData();
         formData.append("imageUrl", image);
@@ -43,7 +45,7 @@ function CreateJamSession() {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${storedToken}`,
-              },
+            },
             body: formData
         })
         const parsed = await response.json()
@@ -54,8 +56,8 @@ function CreateJamSession() {
         }
     }
 
-  return (
-  
+return (
+
     <>
     <form onSubmit={handleSubmit} encType="multipart/form-data">
         <JamSessionForm 
@@ -73,7 +75,13 @@ function CreateJamSession() {
                 setDescription={setDescription}
                 hostid={hostid}
         />
-       <button type="submit">Create Jam Session</button>
+            <Button
+                type='submit'
+                color="red"
+                radius="xs"
+            >
+            Create Jam Session
+        </Button>
     </form>
     
 
