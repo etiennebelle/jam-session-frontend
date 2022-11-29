@@ -12,14 +12,14 @@ function JamSessions({ events }) {
             return new Date(a.date) - new Date(b.date);
         })
         
-         jamsArr.forEach(jam => {
+        /*  jamsArr.forEach(jam => {
              const formatDate = Date.parse(jam.date);
              console.log('events date:', formatDate);
              console.log('current date:', Date.now());
         //     if (formatDate < Date.now()) {
         //         jamsArr.shift(jam);
         //     }
-         })
+         }) */
 
         setJamsArr(jamsArr);
     }

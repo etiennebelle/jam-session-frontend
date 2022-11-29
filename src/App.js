@@ -27,11 +27,9 @@ function App() {
 
   const fetchEvents = async() => {
       try {
-        
         const response = await fetch(`${API_URL}/events`);
         const events = await response.json();
         setEvents(events);
-
       } catch (error) {
         console.log(error);
       }

@@ -7,6 +7,7 @@ import JamSession from "../components/JamSession";
 
 function HostProfilePage() {
     const [currentHost, setCurrentHost] = useState('')
+    const [jamSessions, setJamSessions] = useState([])
     const { storedToken, isHostLoggedIn, host, authenticateHost } = useContext(HostAuthContext);  
 
     const getHostData = async() => {
@@ -19,7 +20,7 @@ function HostProfilePage() {
       const hostData = await response.json();
       delete hostData.password;
       setCurrentHost(hostData);
-    
+      setJamSessions(hostData.jamSessions)
     } 
     useEffect(() => {
       if (host) {
@@ -59,14 +60,16 @@ function HostProfilePage() {
       <p>Hello {currentHost && currentHost.barName}!</p>
       <Link to="/host/create-jam-session" >Create Jam Session</Link>
       <h3>Your Scheduled Jam Sessions: </h3>
-      {currentHost && currentHost.jamSessions.map(oneJamSess =>{
+      {jamSessions && jamSessions.map(oneJamSess =>{
         return(
           <JamSession 
-          key={uuidv4()} 
-          oneJamSess={oneJamSess} 
-          deleteJamSess={deleteJamSess} 
-          formatDate={formatDate}
-          hostid={ host.data._id}
+            key={uuidv4()} 
+            oneJamSess={oneJamSess} 
+            deleteJamSess={deleteJamSess} 
+            formatDate={formatDate}
+            hostid={ host.data._id}
+            jamSessions={jamSessions}
+            setJamSessions={setJamSessions}
           />
         )
       })}

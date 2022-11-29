@@ -12,7 +12,6 @@ function JamSessionDetails() {
     const { id } = useParams();
     const { isLoggedIn, user, storedToken } = useContext(UserAuthContext);
     const [jamSession, setJamSession] = useState();
-    const [players, setPlayers] = useState([]);
     const [userAttending, setUserAttending] = useState(false)
     const [opened, setOpened] = useState(false);
 

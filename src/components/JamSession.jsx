@@ -1,10 +1,10 @@
-import { useState, useContext } from "react";                      
+import { useState, useContext, useEffect } from "react";                      
 import { Modal, Button, Group } from '@mantine/core';
 import JamSessionForm from '../components/JamSessionForm';
 import {HostAuthContext} from '../contexts/host-auth.context';
 import { useNavigate } from "react-router-dom";
 
-function JamSession({oneJamSess, deleteJamSess, hostid, formatDate, getHostData}) {
+function JamSession({oneJamSess, deleteJamSess, hostid, formatDate, getHostData, jamSessions, setJamSessions}) {
     const [isEditing, setIsEditing] = useState(false)
     const [date, setDate] = useState(oneJamSess.date)
     const [time, setTime] = useState(oneJamSess.time)
@@ -18,7 +18,6 @@ function JamSession({oneJamSess, deleteJamSess, hostid, formatDate, getHostData}
 
     
     const navigate = useNavigate();
-
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -48,6 +47,8 @@ function JamSession({oneJamSess, deleteJamSess, hostid, formatDate, getHostData}
             const parsed = await response.json()
             if (response.status === 200) {
                 setSuccessMessage("Event updated successfully")
+                setJamSessions(parsed.jamSessions)
+
             } else {
                 setErrorMessage(parsed.message)
             }
@@ -56,6 +57,8 @@ function JamSession({oneJamSess, deleteJamSess, hostid, formatDate, getHostData}
         }
        
     }
+
+
 
 
   return (
