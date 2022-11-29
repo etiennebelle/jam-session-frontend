@@ -3,6 +3,8 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { UserAuthContext } from '../contexts/user-auth.context';
 import { v4 as uuidv4 } from 'uuid';
 import { Modal, Button, Group } from '@mantine/core';
+import UserLoginForm from '../components/UserLoginForm';
+import UserLoginComponent from '../components/UserLoginComponent';
 
 function JamSessionDetails() {
 
@@ -15,6 +17,40 @@ function JamSessionDetails() {
     const [opened, setOpened] = useState(false);
 
     const navigate = useNavigate();
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState()
+
+    const { storeToken, setIsLoggedIn, authenticateUser } = useContext(UserAuthContext);
+
+    const handleSubmit = async event => { 
+        try {
+            event.preventDefault();
+            const res = await fetch('http://localhost:5005/user/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password }),
+            })
+            const parsed = await res.json();
+            storeToken(parsed.authToken);
+
+            if (res.status === 200) {
+                setIsLoggedIn(true);
+                authenticateUser();
+                setOpened(false)
+            } else {
+                setErrorMessage(parsed.message)
+            }
+
+        } catch (error) {
+            console.log(error);
+            const errorDescription = error.message;
+            setErrorMessage(errorDescription);
+        }
+    }
 
     const fetchJamId = async () => {
         try {
@@ -110,7 +146,10 @@ function JamSessionDetails() {
                 </div>
                 <div>
                     {!isLoggedIn 
-                        ? <button type='button' onClick={()=> setOpened(true)}>Not a user </button> 
+                        ? <div> 
+                        <p>You need to login/signup to join the session</p> 
+                        <button type='button' onClick={()=> setOpened(true)}>Login/Signup </button> 
+                        </div>
                         : userAttending  
                         ? 
                         <div>
@@ -123,11 +162,17 @@ function JamSessionDetails() {
                 <Modal
                     opened={opened}
                     onClose={() => setOpened(false)}
-                    title="Hello modal!"
+                    title="Login"
                 >
-                    <p>Hello modal</p>
+                    <UserLoginComponent
+                        handleSubmit={handleSubmit}
+                        email={email}
+                        setEmail={setEmail}
+                        password={password}
+                        setPassword={setPassword}
+                        errorMessage={errorMessage}
+                    />
                 </Modal>
-
 
                 
             </div>

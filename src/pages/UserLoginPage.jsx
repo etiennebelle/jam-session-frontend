@@ -6,8 +6,6 @@ function UserLoginPage() {
     return (
         <div>
             <UserLoginForm />
-            <p>Don't have an account yet?</p>
-            <Link to={"/user/signup"}> Sign Up</Link>
         </div>
     )
 }
