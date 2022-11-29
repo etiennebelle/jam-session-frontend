@@ -9,7 +9,7 @@ import { format, compareAsc } from 'date-fns'
 
 function CreateJamSession() {
     const [date, setDate] = useState(''); //useState(new Date()) to get current date by default
-    const [time, setTime] = useState(new Date()); //useState(new Date()) to get current time by default
+    const [time, setTime] = useState(''); //useState(new Date()) to get current time by default
     const [jamSessionName, setJamSessionName] = useState('')
     const [capacity, setCapacity] = useState()
     const [genre, setGenre] = useState('')

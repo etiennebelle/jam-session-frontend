@@ -79,7 +79,7 @@ function JamSessions({ events }) {
             ))}
             
         </div>
-    ) : (<> <p>No jam found </p></>)
+    ) : (<></>)
 }
 
 export default JamSessions
