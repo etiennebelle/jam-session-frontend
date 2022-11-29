@@ -21,8 +21,7 @@ function JamSessionDetails() {
             const response = await fetch(`${API_URL}/events/${id}`);
             const parsed = await response.json();
             setJamSession(parsed);
-            parsed.players.map((onePlayer)=> {
-            })            
+          
         } catch (error) {
             console.log(error);
         }
@@ -76,7 +75,6 @@ function JamSessionDetails() {
 
 
     return jamSession ? (
-
         <div>
             <div className='jam-img-ctn'>
                 <img src={jamSession.image} style={{width: '300px'}} />
@@ -90,7 +88,7 @@ function JamSessionDetails() {
                     <p>{jamSession.time}</p>
                 </div>
                 <div className='jam-host-ctn'>
-                    <p>Created by: <Link to={``}>{jamSession.host.barName}</Link></p>
+                    <p>Created by: <Link to={`/locations/${jamSession.host._id}`}>{jamSession.host.barName}</Link></p>
                     <p>{jamSession.host.address}, {jamSession.host.town}</p>
                 </div>
                 <div className='jam-description-ctn'>
