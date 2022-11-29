@@ -19,7 +19,7 @@ function HostAuthProviderWrapper(props) {
     const storedToken = localStorage.getItem('hostAuthToken');
 
     const authenticateHost = async () => {
-      const storedToken = localStorage.getItem('hostAuthToken');
+        const storedToken = localStorage.getItem('hostAuthToken');
       if (storedToken) {
         const response = await fetch('http://localhost:5005/host/verify', {
           headers: {
