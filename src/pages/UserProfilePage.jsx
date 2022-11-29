@@ -24,8 +24,21 @@ function UserProfilePage() {
 
     return (
         <div>
-            <h2>Hi {currentUser && currentUser.username}!</h2>
-            
+            <h2>{currentUser && currentUser.username}!</h2>
+            <h3>Your Upcoming Jam Sessions:</h3>
+            {currentUser && currentUser.jamSessions.map(oneJam => {
+                return( 
+                    <div key={oneJam._id}>
+                    <img src={oneJam.img}/>
+                    <h4>{oneJam.jamSessionName}</h4>
+                    <p>{oneJam.date}</p>
+                    <p>{oneJam.time}</p>
+                    <Link to={`/events/${oneJam._id}`}>More info</Link>
+                    </div>
+                )
+            })} 
+
+           
         </div>
     )
 }
