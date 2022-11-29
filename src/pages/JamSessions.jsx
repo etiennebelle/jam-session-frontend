@@ -58,7 +58,7 @@ function JamSessions({ events }) {
                 <Link to={`/events/${jam._id}`} key={jam._id}>
                 <div className='jam-item-ctn'>
                     <h3>{jam.jamSessionName}</h3>
-                    <p>Created by: {jam.host.barName}</p>
+                    <p>Created by: <Link to={`/locations/${jam.host._id}`}>{jam.host.barName}</Link></p>
                     <p>Location: {jam.host.town}</p>
                     <span>{jam.date}</span>
                     <span>{jam.time}</span>

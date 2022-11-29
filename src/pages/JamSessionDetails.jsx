@@ -21,7 +21,8 @@ function JamSessionDetails() {
             const response = await fetch(`${API_URL}/events/${id}`);
             const parsed = await response.json();
             setJamSession(parsed);
-          
+
+            setUserAttending(parsed.players.some((onePlayer)=> onePlayer._id == user.data._id))
         } catch (error) {
             console.log(error);
         }
@@ -39,7 +40,6 @@ function JamSessionDetails() {
                     body: JSON.stringify({id: user.data._id})
                 })
                 fetchJamId()
-                setUserAttending(true)
             }
             
         } catch (error) {
@@ -101,7 +101,7 @@ function JamSessionDetails() {
                 <div className='users-playing'>
                 {jamSession.players.map((onePlayer)=> {
                     return (
-                        <div key={uuidv4()}>
+                        <div key={onePlayer._id}>
                             <p>{onePlayer.username} as {onePlayer.instrument}</p>
                         </div>
                     )
@@ -109,15 +109,15 @@ function JamSessionDetails() {
 
                 </div>
                 <div>
-                    {!user 
-                        ? <button type='submit' onClick={()=> setOpened(true)}>Not a user </button> 
-                        : user && userAttending  
+                    {!isLoggedIn 
+                        ? <button type='button' onClick={()=> setOpened(true)}>Not a user </button> 
+                        : userAttending  
                         ? 
                         <div>
                             <p>You are attending this jam session</p>
-                            <button type='submit' onClick={removePlayers}>Leave the Session!</button>
+                            <button type='button' onClick={removePlayers}>Leave the Session!</button>
                         </div>
-                        : <button type='submit' onClick={addPlayers}>Join the Session!</button> 
+                        : <button type='button' onClick={addPlayers}>Join the Session!</button> 
                     }
                 </div>
                 <Modal

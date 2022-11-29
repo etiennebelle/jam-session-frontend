@@ -18,6 +18,7 @@ import CreateJamSession from './pages/CreateJamSession';
 import JamSessions from './pages/JamSessions';
 import JamSessionDetails from './pages/JamSessionDetails';
 import LocationPage from './pages/LocationPage';
+import AllLocationsPage from './pages/AllLocationsPage';
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
         <Route path="/" element={ <Home /> } />
         <Route path="/events" element={<JamSessions events={events} /> } />
         <Route path="/events/:id" element={<JamSessionDetails /> } />
+        <Route path="/locations" element={<AllLocationsPage /> } />
         <Route path="/locations/:id" element={<LocationPage /> } />
         <Route path="/user/signup" element={ <IsAnonymous><UserSignupPage /></IsAnonymous> } />
         <Route path="/user/login" element={<IsAnonymous><UserLoginPage /></IsAnonymous>} />
