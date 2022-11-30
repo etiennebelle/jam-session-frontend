@@ -1,5 +1,5 @@
-import { useState, useContext, useEffect } from "react";                      
-import { Modal, Button, Group } from '@mantine/core';
+import { useState, useContext } from "react";                      
+import { Modal } from '@mantine/core';
 import JamSessionForm from '../components/JamSessionForm';
 import {HostAuthContext} from '../contexts/host-auth.context';
 import { useNavigate } from "react-router-dom";

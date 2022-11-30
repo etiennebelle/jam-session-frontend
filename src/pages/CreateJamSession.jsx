@@ -1,9 +1,8 @@
 import { useState, useContext} from 'react'
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import JamSessionForm from '../components/JamSessionForm';
 import { HostAuthContext } from '../contexts/host-auth.context';
 import { Button } from '@mantine/core';
-import { format, compareAsc } from 'date-fns'
 
 
 

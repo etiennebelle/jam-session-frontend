@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Input } from '@mantine/core';
-import { DatePicker } from '@mantine/dates';
+// import { DatePicker } from '@mantine/dates';
 import { format } from 'date-fns'
 
 function JamSessions({ events }) {

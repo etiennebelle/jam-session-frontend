@@ -1,7 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
-import { Route, Routes, Link } from 'react-router-dom';
-import { useState, useContext, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 import HostSignupPage from './pages/HostSignupPage';
 import UserSignupPage from './pages/UserSignupPage';
