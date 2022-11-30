@@ -24,8 +24,9 @@ function Navbar() {
           </div>
         : host ?
           <div> 
-            <p>{host.data.username}</p>
-            <button onClick={logoutHost}>Logout</button>
+            {console.log(host.data.barName)}
+            <p>{host.data.barName}</p>
+            <button onClick={logoutHost}>Logout Host</button>
           </div>
           : 
           <div>
