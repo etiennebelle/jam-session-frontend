@@ -10,6 +10,7 @@ function JamSessions() {
     const [value, setValue] = useState(null);
     const [searchDate, setSearchDate] = useState('');
     const [events, setEvents] = useState([]);
+    const [checkboxCapacity, setCheckboxCapacity] = useState(true)
 
     const fetchEvents = async() => {
         try {
@@ -40,6 +41,19 @@ function JamSessions() {
      // Set search input value
     const handleSearchInput = (event) => {
         setFilteredJams(event.target.value)
+    }
+
+    const handleClick = () => {
+        setCheckboxCapacity(!checkboxCapacity)
+
+        if (checkboxCapacity) {
+            const sessFilterByCapacity = jamsArr.filter((oneJam) => {
+                return (oneJam.capacity > oneJam.players.length)
+            })
+            setJamsArr(sessFilterByCapacity)
+        } else {
+            sortEventsByDate()
+        }
     }
 
     useEffect(() => {
@@ -79,7 +93,8 @@ function JamSessions() {
 
                 </div>
             </div>
-            
+            <label><input type="checkbox" onClick={handleClick}></input>Only Show Sessions Sith Spots Left</label>
+
             <section className='upcoming-events'>
                 <div className='section-title'>
                     <h2>Upcoming Jam Sessions</h2>

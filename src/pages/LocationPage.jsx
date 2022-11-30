@@ -5,17 +5,31 @@ import { Link, useParams } from 'react-router-dom';
 function LocationPage() {
   const [location, setLocation] = useState('');
   const { id } = useParams();
-
+  const [checkboxCapacity, setCheckboxCapacity] = useState(true)
+  const [jamsArr, setJamsArr] = useState([]);
 
   const fetchLocationDetails = async () => {
     try {
         const response = await fetch(`${process.env.REACT_APP_API_URL}locations/${id}`);
         const parsed = await response.json();
-        setLocation(parsed);  
+        setLocation(parsed); 
+        setJamsArr(parsed.jamSessions) 
     } catch (error) {
         console.log(error);
     }
   }
+
+  const handleClick = () => {
+    setCheckboxCapacity(!checkboxCapacity)
+    if (checkboxCapacity) {
+        const sessFilterByCapacity = location.jamSessions.filter((oneJam) => {
+            return (oneJam.capacity > oneJam.players.length)
+        })
+        setJamsArr(sessFilterByCapacity)
+    } else {
+      fetchLocationDetails()
+    }
+}
 
   useEffect(() => {
     fetchLocationDetails();
@@ -27,7 +41,8 @@ function LocationPage() {
       <p>{location.address}</p>
       <p>{location.town}</p>
       <h4>{location.barName}'s Upcoming Jam Sessions:</h4>
-      {location && location.jamSessions.map((jamSess)=> {
+      <label><input type="checkbox" onClick={handleClick}></input>Only Show Sessions Sith Spots Left</label>
+      {location && jamsArr.map((jamSess)=> {
         
             return(
               <div key={jamSess._id}>
