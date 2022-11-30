@@ -20,10 +20,11 @@ function Navbar() {
       {user ? 
           <div> 
             <button onClick={logOutUser}>Logout User</button>
+            <Link to="/user/profile">Your Profile</Link>
           </div>
         : host ?
           <div> 
-            {console.log(host.data.barName)}
+            <Link to="/host/profile">Your Profile</Link>
             <button onClick={logoutHost}>Logout Host</button>
           </div>
           : 
