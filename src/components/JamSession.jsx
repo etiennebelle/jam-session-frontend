@@ -67,7 +67,7 @@ function JamSession({oneJamSess, deleteJamSess, hostid, formatDate, getHostData,
         <img src={oneJamSess.image} />
         <h4>{oneJamSess.jamSessionName}</h4> 
         <p>Date: {formatDate(oneJamSess.date)}</p> 
-        <p>Time: {oneJamSess.time}</p> 
+        <p>Time: {oneJamSess.time.slice(16,21)}</p> 
         <p>Capacity: {oneJamSess.capacity}</p> 
         <p>Genre: {oneJamSess.genre}</p> 
         <p>Event Description: {oneJamSess.description}</p>

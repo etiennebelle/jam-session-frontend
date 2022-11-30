@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { UserAuthContext } from '../contexts/user-auth.context';
+import { format } from 'date-fns'
 
 function UserProfilePage() {
     const [currentUser, setCurrentUser] = useState();
@@ -22,6 +23,10 @@ function UserProfilePage() {
         }
     }, [user])
 
+    const formatDate = (oneDate) => {
+        return format(new Date(oneDate), 'PPPP');
+      }
+
     return (
         <div>
             <h2>{currentUser && currentUser.username}!</h2>
@@ -31,8 +36,8 @@ function UserProfilePage() {
                     <div key={oneJam._id}>
                     <img src={oneJam.img}/>
                     <h4>{oneJam.jamSessionName}</h4>
-                    <p>{oneJam.date}</p>
-                    <p>{oneJam.time}</p>
+                    <p>{formatDate(oneJam.date)}</p>
+                    <p>{oneJam.time.slice(16,21)}</p>
                     <Link to={`/events/${oneJam._id}`}>More info</Link>
                     </div>
                 )

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {HostAuthContext} from '../contexts/host-auth.context';
 import { v4 as uuidv4 } from 'uuid';
 import JamSession from "../components/JamSession";
+import { format } from 'date-fns'
 
 
 function HostProfilePage() {
@@ -29,7 +30,7 @@ function HostProfilePage() {
     }, [host])
 
     const formatDate = (oneDate) => {
-      return oneDate.slice(0,10)
+      return format(new Date(oneDate), 'PPPP');
     }
 
     if (currentHost && currentHost.jamSessions.length < 1){
