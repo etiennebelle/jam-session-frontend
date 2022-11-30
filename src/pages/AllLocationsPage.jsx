@@ -6,7 +6,7 @@ function AllLocationsPage() {
 
     const fetchLocations = async() => {
         try {
-            const allLocations = await fetch(`${process.env.API_URL}locations`)
+            const allLocations = await fetch(`${process.env.REACT_APP_API_URL}locations`)
             const allLocationsData = await allLocations.json();
             setAllLocations(allLocationsData)
         } catch (error) {

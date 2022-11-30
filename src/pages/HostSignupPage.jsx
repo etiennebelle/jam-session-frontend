@@ -17,7 +17,7 @@ function HostSignupPage() {
         try {
             event.preventDefault();
 
-            const response = await fetch(`${process.env.API_URL}host/signup`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}host/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json', 

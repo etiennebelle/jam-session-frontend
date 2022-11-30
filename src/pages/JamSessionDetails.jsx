@@ -8,7 +8,7 @@ import UserLoginComponent from '../components/UserLoginComponent';
 
 function JamSessionDetails() {
 
-    const API_URL = "http://localhost:5005";
+    // const API_URL = "http://localhost:5005";
     const { id } = useParams();
     const { isLoggedIn, user, storedToken } = useContext(UserAuthContext);
     const [jamSession, setJamSession] = useState();
@@ -28,7 +28,7 @@ function JamSessionDetails() {
     const handleSubmit = async event => { 
         try {
             event.preventDefault();
-            const res = await fetch(`${process.env.API_URL}user/login`, {
+            const res = await fetch(`${process.env.REACT_APP_API_URL}user/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -54,7 +54,7 @@ function JamSessionDetails() {
 
     const fetchJamId = async () => {
         try {
-            const response = await fetch(`${API_URL}/events/${id}`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}events/${id}`);
             const parsed = await response.json();
             setJamSession(parsed);
             setUserAttending(parsed.players.some((onePlayer)=> onePlayer._id == user.data._id))
@@ -66,7 +66,7 @@ function JamSessionDetails() {
     const addPlayers = async () => {
         try {
             if (user) {
-                const resAdd = await fetch(`${API_URL}/events/${id}`, {
+                const resAdd = await fetch(`${process.env.REACT_APP_API_URL}events/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ function JamSessionDetails() {
     
     const removePlayers = async () => {
         try {
-            await fetch(`${API_URL}/events/${id}`, {
+            await fetch(`${process.env.REACT_APP_API_URL}events/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

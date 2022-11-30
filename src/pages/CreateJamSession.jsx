@@ -40,7 +40,7 @@ function CreateJamSession() {
         formData.append("host", hostid);
 
         // Send the formData with all the key: value pairs attached to it
-        let response = await fetch(`${process.env.API_URL}host/jam-sessions`, {
+        let response = await fetch(`${process.env.REACT_APP_API_URL}host/jam-sessions`, {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${storedToken}`,

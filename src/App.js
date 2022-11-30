@@ -26,7 +26,7 @@ function App() {
 
   const fetchEvents = async() => {
       try {
-        const response = await fetch(`${process.env.API_URL}events`);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}events`);
         const events = await response.json();
         setEvents(events);
       } catch (error) {

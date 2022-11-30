@@ -28,7 +28,7 @@ function UserSignupForm() {
         try {
            event.preventDefault();
 
-            const res = await fetch(`${process.env.API_URL}user/signup`, {
+            const res = await fetch(`${process.env.REACT_APP_API_URL}user/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

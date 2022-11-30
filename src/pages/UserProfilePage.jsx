@@ -9,7 +9,7 @@ function UserProfilePage() {
     useEffect(() => {
         if (user){
             const getUserData = async() => {
-                const response = await fetch(`${process.env.API_URL}user/${user.data._id}`, {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}user/${user.data._id}`, {
                     headers: {
                         Authorization: `Bearer ${storedToken}`,
                     },

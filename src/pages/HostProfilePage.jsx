@@ -11,7 +11,7 @@ function HostProfilePage() {
     const { storedToken, isHostLoggedIn, host, authenticateHost } = useContext(HostAuthContext);  
 
     const getHostData = async() => {
-      const response = await fetch(`${process.env.API_URL}host/${host.data._id}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}host/${host.data._id}`, {
         headers: {
           Authorization: `Bearer ${storedToken}`,
         },
@@ -43,7 +43,7 @@ function HostProfilePage() {
 
     const deleteJamSess = async (jamSessionId) => {
       try {
-        await fetch(`${process.env.API_URL}host/${jamSessionId}`, {
+        await fetch(`${process.env.REACT_APP_API_URL}host/${jamSessionId}`, {
           method: 'DELETE',
           headers: {
             Authorization: `Bearer ${storedToken}`,

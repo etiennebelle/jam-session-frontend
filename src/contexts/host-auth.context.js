@@ -21,7 +21,7 @@ function HostAuthProviderWrapper(props) {
     const authenticateHost = async () => {
         const storedToken = localStorage.getItem('hostAuthToken');
       if (storedToken) {
-        const response = await fetch(`${process.env.API_URL}host/verify`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}host/verify`, {
           headers: {
             Authorization: `Bearer ${storedToken}`,
           },
