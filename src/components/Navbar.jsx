@@ -8,7 +8,7 @@ import { UserAuthContext } from '../contexts/user-auth.context';
 function Navbar() {
   const { logoutHost, host } = useContext(HostAuthContext);
   const { logOutUser, user } = useContext(UserAuthContext);
-
+  console.log(host)
   return (
     <>
       <div>
@@ -19,13 +19,11 @@ function Navbar() {
     <div>
       {user ? 
           <div> 
-            <p>{user.data.username}</p>
             <button onClick={logOutUser}>Logout User</button>
           </div>
         : host ?
           <div> 
             {console.log(host.data.barName)}
-            <p>{host.data.barName}</p>
             <button onClick={logoutHost}>Logout Host</button>
           </div>
           : 
