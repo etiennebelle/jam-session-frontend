@@ -21,12 +21,12 @@ import AllLocationsPage from './pages/AllLocationsPage';
 
 
 function App() {
-  const API_URL = "http://localhost:5005";
+  // const API_URL = "http://localhost:5005";
   const [events, setEvents] = useState([]);
 
   const fetchEvents = async() => {
       try {
-        const response = await fetch(`${API_URL}/events`);
+        const response = await fetch(`${process.env.API_URL}events`);
         const events = await response.json();
         setEvents(events);
       } catch (error) {

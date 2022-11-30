@@ -17,7 +17,7 @@ function HostSignupPage() {
         try {
             event.preventDefault();
 
-            const response = await fetch('http://localhost:5005/host/signup', {
+            const response = await fetch(`${process.env.API_URL}host/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json', 

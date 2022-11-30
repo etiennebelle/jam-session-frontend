@@ -17,7 +17,7 @@ function UserAuthProviderWrapper(props) {
     const authenticateUser = async() => {
         const storedToken = localStorage.getItem('userAuthToken');
         if (storedToken) {
-            const res = await fetch('http://localhost:5005/user/verify', {
+            const res = await fetch(`${process.env.API_URL}user/verify`, {
                 headers: {
                     Authorization: `Bearer ${storedToken}`,
                 }

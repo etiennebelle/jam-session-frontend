@@ -28,7 +28,7 @@ function UserSignupForm() {
         try {
            event.preventDefault();
 
-            const res = await fetch('http://localhost:5005/user/signup', {
+            const res = await fetch(`${process.env.API_URL}user/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

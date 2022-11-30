@@ -9,7 +9,7 @@ function LocationPage() {
 
   const fetchLocationDetails = async () => {
     try {
-        const response = await fetch(`http://localhost:5005/locations/${id}`);
+        const response = await fetch(`${process.env.API_URL}locations/${id}`);
         const parsed = await response.json();
         setLocation(parsed);  
     } catch (error) {

@@ -14,7 +14,7 @@ function HostLoginPage() {
         try {
             event.preventDefault();
 
-            const response = await fetch('http://localhost:5005/host/login', {
+            const response = await fetch(`${process.env.API_URL}host/login`, {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json', 

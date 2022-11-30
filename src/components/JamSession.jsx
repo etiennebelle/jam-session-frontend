@@ -37,7 +37,7 @@ function JamSession({oneJamSess, deleteJamSess, hostid, formatDate, getHostData,
 
         // Send the formData with all the key: value pairs attached to it
         try {
-            let response = await fetch(`http://localhost:5005/host/jam-sessions/${oneJamSess._id}`, {
+            let response = await fetch(`${process.env.API_URL}host/jam-sessions/${oneJamSess._id}`, {
                 method: 'PUT',
                 headers: {
                     Authorization: `Bearer ${storedToken}`,
