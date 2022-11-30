@@ -76,7 +76,6 @@ function JamSessionDetails() {
                 })
                 fetchJamId()
                 const resAddParsed = await resAdd.json()
-                console.log(resAddParsed.message)
                 if (resAddParsed.message == "This jam session is full") {
                     setMaxCapacity(true)
                 }
