@@ -13,7 +13,6 @@ function Navbar() {
       <div>
         <Link to='/'>Home</Link>
         <Link to='/events'>Jam Sessions Events</Link>
-        <Link to='/locations'>Jam Sessions Locations</Link>
       </div>
     <div>
       {user ? 

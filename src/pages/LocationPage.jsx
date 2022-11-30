@@ -41,7 +41,7 @@ function LocationPage() {
       <p>{location.address}</p>
       <p>{location.town}</p>
       <h4>{location.barName}'s Upcoming Jam Sessions:</h4>
-      <label><input type="checkbox" onClick={handleClick}></input>Only Show Sessions Sith Spots Left</label>
+      <label><input type="checkbox" onClick={handleClick}></input>Only Show Sessions With Spots Left</label>
       {location && jamsArr.map((jamSess)=> {
         
             return(

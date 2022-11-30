@@ -34,6 +34,7 @@ function JamSessions() {
         jamsArr.sort(function (a, b) {
             return new Date(a.date) - new Date(b.date);
         }).map(jam => {
+            console.log(jam.date)
             jam.date = format(new Date(jam.date), 'PPPP');
             return jam
         })
@@ -96,7 +97,7 @@ function JamSessions() {
 
                 </div>
             </div>
-            <label><input type="checkbox" onClick={handleClick}></input>Only Show Sessions Sith Spots Left</label>
+            <label><input type="checkbox" onClick={handleClick}></input>Only Show Sessions With Spots Left</label>
 
             <section className='upcoming-events'>
                 <div className='section-title'>

@@ -9,20 +9,40 @@ import { format } from 'date-fns'
 function HostProfilePage() {
     const [currentHost, setCurrentHost] = useState('')
     const [jamSessions, setJamSessions] = useState([])
+    const [futureEvents, setFutureEvents] = useState(true)
+
     const { storedToken, isHostLoggedIn, host, authenticateHost } = useContext(HostAuthContext);  
 
     const getHostData = async() => {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}host/${host.data._id}`, {
-        headers: {
-          Authorization: `Bearer ${storedToken}`,
-        },
+      if (futureEvents) {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}host/${host.data._id}`, {
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
+        })
+        const hostData = await response.json();
+        delete hostData.password;
+        setCurrentHost(hostData);
+        setJamSessions(hostData.jamSessions)
+      } else {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}host/${host.data._id}/past-jam-sessions`, {
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
+        })
+        const hostData = await response.json();
+        delete hostData.password;
+        setCurrentHost(hostData);
+        setJamSessions(hostData.jamSessions)
       }
-      )
-      const hostData = await response.json();
-      delete hostData.password;
-      setCurrentHost(hostData);
-      setJamSessions(hostData.jamSessions)
     } 
+
+    const handlePastClick = () => {
+      setFutureEvents(!futureEvents)
+      getHostData()
+    }
+
+
     useEffect(() => {
       if (host) {
       getHostData();
@@ -60,6 +80,7 @@ function HostProfilePage() {
     <>
       <p>Hello {currentHost && currentHost.barName}!</p>
       <Link to="/host/create-jam-session" >Create Jam Session</Link>
+      <button type="button" onClick={handlePastClick}>Your Past Events</button>
       <h3>Your Scheduled Jam Sessions: </h3>
       {jamSessions && jamSessions.map(oneJamSess =>{
         return(
