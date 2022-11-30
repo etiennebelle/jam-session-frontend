@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Input } from '@mantine/core';
 import { Calendar, RangeCalendar, DatePicker } from '@mantine/dates';
-import { format, compareAsc, isSameDay, parseISO } from 'date-fns'
+import { format, compareAsc } from 'date-fns'
 
 function JamSessions({ events }) {
     const [jamsArr, setJamsArr] = useState([]);
@@ -10,36 +10,29 @@ function JamSessions({ events }) {
     const [value, setValue] = useState(null);
     const [searchDate, setSearchDate] = useState('');
     
-    // Sort events by date
     const sortEventsByDate = () => {
-        const jamsArr = structuredClone(events);
+        const jamsArr = [...events];
         jamsArr.sort(function (a, b) {
             return new Date(a.date) - new Date(b.date);
-        }).map(jam => {
-            jam.date = format(new Date(jam.date), 'PPPP');
-            return jam
         })
         setJamsArr(jamsArr);
     }
 
-     // Set search input value
     const handleSearchInput = (event) => {
         setFilteredJams(event.target.value)
     }
-
+    
     useEffect(() => {
-        console.log(value);
-        if (!value) {
-            setSearchDate('');
-        } else {
-          
         const searchDate = format(new Date(value), 'PPPP');
-        setSearchDate(searchDate);  
-        }
+        setSearchDate(searchDate);
     }, [value])
 
     useEffect(() => {
         sortEventsByDate();
+        jamsArr.map(e => {
+            e.date = format(new Date(e.date), 'PPPP');
+            return e
+        })
     }, [events])
 
     return jamsArr.length > 0 ? (

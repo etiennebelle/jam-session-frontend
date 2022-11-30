@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -32,7 +32,7 @@ function LocationPage() {
         return(
           <div key={jamSess._id}>
             <img src={jamSess.image} />
-            <h2>{jamSess.jamSessionName}</h2>
+            <h2> <Link to={`/events/${jamSess._id}`}>{jamSess.jamSessionName}</Link></h2>
             <p>{jamSess.date}</p>
             <p>{jamSess.time}</p>
             <p>{jamSess.genre}</p>

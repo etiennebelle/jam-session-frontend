@@ -14,6 +14,8 @@ function JamSessionDetails() {
     const [jamSession, setJamSession] = useState();
     const [userAttending, setUserAttending] = useState(false)
     const [opened, setOpened] = useState(false);
+    const [maxCapacity, setMaxCapacity] = useState(false);
+
 
     const navigate = useNavigate();
 
@@ -35,7 +37,6 @@ function JamSessionDetails() {
             })
             const parsed = await res.json();
             storeToken(parsed.authToken);
-
             if (res.status === 200) {
                 setIsLoggedIn(true);
                 authenticateUser();
@@ -56,7 +57,6 @@ function JamSessionDetails() {
             const response = await fetch(`${API_URL}/events/${id}`);
             const parsed = await response.json();
             setJamSession(parsed);
-
             setUserAttending(parsed.players.some((onePlayer)=> onePlayer._id == user.data._id))
         } catch (error) {
             console.log(error);
@@ -66,7 +66,7 @@ function JamSessionDetails() {
     const addPlayers = async () => {
         try {
             if (user) {
-                await fetch(`${API_URL}/events/${id}`, {
+                const resAdd = await fetch(`${API_URL}/events/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -75,8 +75,11 @@ function JamSessionDetails() {
                     body: JSON.stringify({id: user.data._id})
                 })
                 fetchJamId()
+                const resAddParsed = await resAdd.json()
+                if (resAddParsed.message == "This jam session is full") {
+                    setMaxCapacity(true)
+                }
             }
-            
         } catch (error) {
             console.log(error);
         }
@@ -144,7 +147,8 @@ function JamSessionDetails() {
 
                 </div>
                 <div>
-                    {!isLoggedIn 
+                    {maxCapacity ? <p>This event has already reached the max number of artists. If you want to join a jam session, checkout other events!</p>
+                        : !isLoggedIn 
                         ? <div> 
                         <p>You need to login/signup to join the session</p> 
                         <button type='button' onClick={()=> setOpened(true)}>Login/Signup </button> 
