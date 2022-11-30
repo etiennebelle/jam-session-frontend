@@ -1,8 +1,8 @@
-import { useState, useEffect, useContext } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Input } from '@mantine/core';
-import { Calendar, RangeCalendar, DatePicker } from '@mantine/dates';
-import { format, compareAsc } from 'date-fns'
+import { DatePicker } from '@mantine/dates';
+import { format } from 'date-fns'
 
 function JamSessions({ events }) {
     const [jamsArr, setJamsArr] = useState([]);
@@ -17,7 +17,7 @@ function JamSessions({ events }) {
         })
         setJamsArr(jamsArr);
     }
-
+    
     const handleSearchInput = (event) => {
         setFilteredJams(event.target.value)
     }
@@ -48,12 +48,12 @@ function JamSessions({ events }) {
                         onChange={handleSearchInput}
                     />
                     
-                    <DatePicker
+                    {/* <DatePicker
                         placeholder="Event date"
                         label="Pick date"
                         value={value}
                         onChange={setValue}
-                    />
+                    /> */}
 
                 </div>
             </div>
@@ -64,20 +64,19 @@ function JamSessions({ events }) {
                 </div>
 
                 {jamsArr
-                    .filter(jam => {
-                        if (!searchDate) {
-                            return true;
-                        }
-                        return jam.date === searchDate;
-                    })
+                    // .filter(jam => {
+                    //     if (!searchDate) {
+                    //         return true;
+                    //     }
+                    //     return jam.date === searchDate;
+                    // })
                     .filter(jam => {
                         const filter = filteredJams.toLowerCase();
                         return jam.host.town.toLowerCase().includes(filter)
                             || jam.host.barName.toLowerCase().includes(filter)
                             || jam.jamSessionName.toLowerCase().includes(filter)
-                    })
+                    }) 
                     .map((jam) => (
-                        
                         <div className={`jam-session-card ${jam.genre.toLowerCase()}`} key={jam._id}>
                             <Link to={`/events/${jam._id}`} >
                                 <div className='jam-img-ctn' >
