@@ -62,6 +62,7 @@ function JamSession({oneJamSess, deleteJamSess, hostid, formatDate, getHostData,
 
 
   return (
+
     <div>
         <img src={oneJamSess.image} />
         <h4>{oneJamSess.jamSessionName}</h4> 

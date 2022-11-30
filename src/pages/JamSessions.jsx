@@ -4,11 +4,26 @@ import { Input } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 import { format } from 'date-fns'
 
-function JamSessions({ events }) {
+function JamSessions() {
     const [jamsArr, setJamsArr] = useState([]);
     const [filteredJams, setFilteredJams] = useState('');
     const [value, setValue] = useState(null);
     const [searchDate, setSearchDate] = useState('');
+    const [events, setEvents] = useState([]);
+
+    const fetchEvents = async() => {
+        try {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}events`);
+            const events = await response.json();
+            setEvents(events);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+  
+    useEffect(() => {
+        fetchEvents();
+    }, [])
     
     // Sort events by date
     const sortEventsByDate = () => {
@@ -40,6 +55,7 @@ function JamSessions({ events }) {
     useEffect(() => {
         sortEventsByDate();
     }, [events])
+    
 
     return jamsArr.length > 0 ? (
         <div>

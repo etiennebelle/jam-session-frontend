@@ -26,17 +26,20 @@ function LocationPage() {
       <h3>{location.barName}</h3>
       <p>{location.address}</p>
       <p>{location.town}</p>
-      <h4>{location.barName}'s Jam Sessions:</h4>
+      <h4>{location.barName}'s Upcoming Jam Sessions:</h4>
       {location && location.jamSessions.map((jamSess)=> {
-        return(
-          <div key={jamSess._id}>
-            <img src={jamSess.image} />
-            <h2> <Link to={`/events/${jamSess._id}`}>{jamSess.jamSessionName}</Link></h2>
-            <p>{jamSess.date}</p>
-            <p>{jamSess.time}</p>
-            <p>{jamSess.genre}</p>
-          </div>
-        )
+        
+            return(
+              <div key={jamSess._id}>
+                <img src={jamSess.image} />
+                <h2> <Link to={`/events/${jamSess._id}`}>{jamSess.jamSessionName}</Link></h2>
+                <p>{jamSess.date}</p>
+                <p>{jamSess.time}</p>
+                <p>{jamSess.genre}</p>
+              </div>
+            )
+          
+      
       })}
 
     </div>

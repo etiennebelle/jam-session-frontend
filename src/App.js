@@ -21,29 +21,14 @@ import AllLocationsPage from './pages/AllLocationsPage';
 
 
 function App() {
-  // const API_URL = "http://localhost:5005";
-  const [events, setEvents] = useState([]);
-
-  const fetchEvents = async() => {
-      try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}events`);
-        const events = await response.json();
-        setEvents(events);
-      } catch (error) {
-        console.log(error);
-      }
-  };
   
-  useEffect(() => {
-    fetchEvents();
-  }, [])
 
   return (
     <div className="App">
       <Navbar />
       <Routes>
         <Route path="/" element={ <Home /> } />
-        <Route path="/events" element={<JamSessions events={events} /> } />
+        <Route path="/events" element={<JamSessions /> } />
         <Route path="/events/:id" element={<JamSessionDetails /> } />
         <Route path="/locations" element={<AllLocationsPage /> } />
         <Route path="/locations/:id" element={<LocationPage /> } />

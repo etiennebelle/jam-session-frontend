@@ -8,7 +8,6 @@ import { UserAuthContext } from '../contexts/user-auth.context';
 function Navbar() {
   const { logoutHost, host } = useContext(HostAuthContext);
   const { logOutUser, user } = useContext(UserAuthContext);
-  console.log(host)
   return (
     <>
       <div>

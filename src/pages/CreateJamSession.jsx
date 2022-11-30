@@ -81,6 +81,7 @@ return (
             >
             Create Jam Session
         </Button>
+        {errorMessage && <p>{errorMessage}</p>}
     </form>
     
 
