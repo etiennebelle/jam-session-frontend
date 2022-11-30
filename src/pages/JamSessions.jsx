@@ -10,29 +10,35 @@ function JamSessions({ events }) {
     const [value, setValue] = useState(null);
     const [searchDate, setSearchDate] = useState('');
     
+    // Sort events by date
     const sortEventsByDate = () => {
-        const jamsArr = [...events];
+        const jamsArr = structuredClone(events);
         jamsArr.sort(function (a, b) {
             return new Date(a.date) - new Date(b.date);
+        }).map(jam => {
+            jam.date = format(new Date(jam.date), 'PPPP');
+            return jam
         })
         setJamsArr(jamsArr);
     }
-    
+
+     // Set search input value
     const handleSearchInput = (event) => {
         setFilteredJams(event.target.value)
     }
-    
+
     useEffect(() => {
+        if (!value) {
+            setSearchDate('');
+        } else {
+          
         const searchDate = format(new Date(value), 'PPPP');
-        setSearchDate(searchDate);
+        setSearchDate(searchDate);  
+        }
     }, [value])
 
     useEffect(() => {
         sortEventsByDate();
-        jamsArr.map(e => {
-            e.date = format(new Date(e.date), 'PPPP');
-            return e
-        })
     }, [events])
 
     return jamsArr.length > 0 ? (
@@ -48,12 +54,12 @@ function JamSessions({ events }) {
                         onChange={handleSearchInput}
                     />
                     
-                    {/* <DatePicker
+                    <DatePicker
                         placeholder="Event date"
                         label="Pick date"
                         value={value}
                         onChange={setValue}
-                    /> */}
+                    />
 
                 </div>
             </div>
@@ -64,12 +70,12 @@ function JamSessions({ events }) {
                 </div>
 
                 {jamsArr
-                    // .filter(jam => {
-                    //     if (!searchDate) {
-                    //         return true;
-                    //     }
-                    //     return jam.date === searchDate;
-                    // })
+                    .filter(jam => {
+                        if (!searchDate) {
+                            return true;
+                        }
+                        return jam.date === searchDate;
+                    })
                     .filter(jam => {
                         const filter = filteredJams.toLowerCase();
                         return jam.host.town.toLowerCase().includes(filter)
