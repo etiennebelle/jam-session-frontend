@@ -6,8 +6,8 @@ import { UserAuthContext } from '../contexts/user-auth.context';
 
 
 function Navbar() {
-  const { logoutHost } = useContext(HostAuthContext);
-  const { logOutUser } = useContext(UserAuthContext);
+  const { logoutHost, host } = useContext(HostAuthContext);
+  const { logOutUser, user } = useContext(UserAuthContext);
 
   return (
     <>
@@ -17,16 +17,31 @@ function Navbar() {
         <Link to='/locations'>Jam Sessions Locations</Link>
       </div>
     <div>
-        <Link to="/user/signup">Signup</Link>
-        <Link to="/user/login">Login</Link>
-        <button onClick={logOutUser}>Logout User</button>
-    </div>
-    <div>
-        <Link to="/host/signup">Signup as a host</Link>
-        <Link to="/host/login">Login as a host</Link>
-        <button onClick={logoutHost}>Logout</button>
-    </div>
+      {user ? 
+          <div> 
+            <p>{user.data.username}</p>
+            <button onClick={logOutUser}>Logout User</button>
+          </div>
+        : host ?
+          <div> 
+            <p>{host.data.username}</p>
+            <button onClick={logoutHost}>Logout</button>
+          </div>
+          : 
+          <div>
+            <div> 
+              <Link to="/user/signup">Signup</Link>
+              <Link to="/user/login">Login</Link>
+            </div>
+            <div>
+              <Link to="/host/signup">Signup as a host</Link>
+              <Link to="/host/login">Login as a host</Link>
+            </div>
+          </div>
+      }
 
+       
+    </div>
     </>
   )
 }
