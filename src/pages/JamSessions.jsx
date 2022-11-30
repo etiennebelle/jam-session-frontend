@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Input } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 import { format } from 'date-fns'
+import dayjs from 'dayjs';
+
 
 function JamSessions() {
     const [jamsArr, setJamsArr] = useState([]);
@@ -89,6 +91,7 @@ function JamSessions() {
                         label="Pick date"
                         value={value}
                         onChange={setValue}
+                        minDate={dayjs(new Date()).toDate()}
                     />
 
                 </div>

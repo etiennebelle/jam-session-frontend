@@ -1,6 +1,7 @@
 import { TextInput, Textarea, Select, FileInput, NumberInput } from '@mantine/core';
 import { DatePicker, } from '@mantine/dates';
 import { TimeInput } from '@mantine/dates';
+import dayjs from 'dayjs';
 
 function JamSessionForm({ jamSessionName, setJamSessionName, date, setDate, time, setTime, capacity, setCapacity, genre, setGenre, description, setDescription, hostid }) {
   
@@ -38,6 +39,7 @@ function JamSessionForm({ jamSessionName, setJamSessionName, date, setDate, time
                     placeholder="Pick a date"
                     radius="xs"
                     required
+                    minDate={dayjs(new Date()).toDate()}
                 /> 
             </label>
             <label>
