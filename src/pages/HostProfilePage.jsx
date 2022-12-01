@@ -12,6 +12,8 @@ function HostProfilePage() {
     const [jamSessions, setJamSessions] = useState([])
     const [futureEvents, setFutureEvents] = useState(true)
     const [pastOrFutureText, setPastOrFutureText] = useState('Past Jams')
+    const [pastOrFutureTitle, setPastOrFutureTitle] = useState('Upcoming Jams')
+    const [noPastEvents, setNoPastEvents] = useState('')
 
 
     const { storedToken, isHostLoggedIn, host, authenticateHost } = useContext(HostAuthContext);  
@@ -34,19 +36,27 @@ function HostProfilePage() {
           },
         })
         const hostData = await response.json();
-        delete hostData.password;
-        setCurrentHost(hostData);
-        setJamSessions(hostData.jamSessions)
+        if (response.status === 200) {
+          delete hostData.password;
+          setCurrentHost(hostData);
+          setJamSessions(hostData.jamSessions)
+        } else {
+          setNoPastEvents(hostData.message)
+        }
       }
     } 
 
     const handlePastClick = () => {
       setFutureEvents(!futureEvents)
       getHostData()
+      console.log('futureEvents from bytton', futureEvents )
+
       if (futureEvents) {
         setPastOrFutureText("Past Jams")
+        setPastOrFutureTitle('Upcoming Jams')
       } else {
         setPastOrFutureText("Upcoming Jams")
+        setPastOrFutureTitle('Past Jams')
       }
     }
 
@@ -76,6 +86,7 @@ function HostProfilePage() {
       )
     } 
 
+
     const deleteJamSess = async (jamSessionId) => {
       try {
         await fetch(`${process.env.REACT_APP_API_URL}host/${jamSessionId}`, {
@@ -85,7 +96,8 @@ function HostProfilePage() {
           },
         })
         getHostData();
-      } catch (error) {
+/*         console.log('futureEvents from deelet', futureEvents )
+ */      } catch (error) {
         console.log(error)
       }
     }
@@ -107,7 +119,8 @@ function HostProfilePage() {
       </div>
       <section className='events'>
       <div className='section-title'>
-        <h3>Your Scheduled Jam Sessions</h3>
+{/*         <p>{noPastEvents}</p> */}
+        <h3>{`Your ${pastOrFutureTitle} Sessions`}</h3>
       </div>
       {jamSessions && jamSessions.map(oneJamSess =>{
         return(
