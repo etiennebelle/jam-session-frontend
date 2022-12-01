@@ -80,7 +80,7 @@ function JamSessions() {
 
                     <Input
                         className='search txt-input'
-                        placeholder="What are you looking for?"
+                        placeholder="Search for cities, bars, event names...Everything you want!"
                         type='text'
                         value={filteredJams}
                         onChange={handleSearchInput}
