@@ -17,6 +17,9 @@
 }
 
 .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 0 1.2em 1.2em 1.2em;
     margin-top: 5.2rem;
     /* global margin*/
@@ -96,7 +99,7 @@ a {
     border: 1px solid lightgrey;
     border-radius: .5rem;
     overflow: hidden;
-    font-size: .9rem;
+    font-size: 1rem;
     font-weight: 500;
 
     &:last-child{
@@ -121,8 +124,6 @@ a {
         padding-left: 1rem;
     }
 }
-
-
 
 .jam-main {
     background-position: center top;
@@ -187,8 +188,79 @@ a {
     gap: 1rem;
 }
 
+/*********************** location-details ***********************/
+
+.details-main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: .5rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.jam-details-top{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: .5rem 0;
+
+    .jam-time {
+        border-left: 1px solid lightgray;
+        padding-left: 1rem;
+    }
+}
+
+
 /*********************** jam-details ***********************/
 
+.details-main {
+    padding: 0 1.2em 1.2em 1.2em;
+    /* global margin*/
+}
+
+.jam-cover{
+    background-position: center top;
+    background-size: auto 100%;
+    flex-grow: 1;
+    width: 100%;
+    height: 250px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 4rem;
+
+    .cover-img {
+            width: 100%;
+            object-fit: cover;
+    }
+
+    &:before {
+            content: '';
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.5872724089635855) 0%, rgba(0, 0, 0, 0) 70%);
+            inset: 0;
+            position: absolute;
+        }
+    
+    .jam-name {
+        position: absolute;
+        bottom: .5rem;
+        left: 1rem;
+        color: #E8EDDF;
+        font-size: 1.5em;
+        font-weight: 700;
+
+    }
+}
+
+.jam-session-infos{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    font-weight: 500;
+}
 
 /*********************** host-profile ***********************/
 
@@ -209,7 +281,7 @@ a {
 
 .host-btns{
     display: flex;
-    margin: 3rem 0 1rem;
+    margin: 2.5rem 0 1rem;
     gap: 1rem;
 }
 

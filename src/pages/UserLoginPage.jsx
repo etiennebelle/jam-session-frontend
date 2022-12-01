@@ -3,7 +3,7 @@ import UserLoginForm from '../components/UserLoginForm'
 
 function UserLoginPage() {
     return (
-        <div>
+        <div className='main'>
             <UserLoginForm />
         </div>
     )

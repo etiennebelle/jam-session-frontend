@@ -57,7 +57,7 @@ function CreateJamSession() {
 
 return (
 
-    <div>
+    <div className='main'>
     <div className='section-title'>
         <h3>Create a new Jam Session</h3>
     </div>

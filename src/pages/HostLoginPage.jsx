@@ -38,7 +38,7 @@ function HostLoginPage() {
     }
 
   return (
-    <>
+    <div className="main">
         <form onSubmit={handleSubmit}>
             <label>Email: 
                 <input 
@@ -61,7 +61,7 @@ function HostLoginPage() {
         { errorMessage && <p>{errorMessage}</p> }
         
 
-    </>
+    </div>
   )
 }
 

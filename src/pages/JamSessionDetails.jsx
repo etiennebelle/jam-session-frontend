@@ -119,23 +119,49 @@ function JamSessionDetails() {
                     <div className='jam-name'><p><span className={`${jamSession.genre.toLowerCase()}`}></span>{jamSession.jamSessionName}</p></div>
                 </div>
             </div>
-            <div className='main'>
-                <div className='jam-host-ctn'>
-                    <p>Created by: <Link to={`/locations/${jamSession.host._id}`}>{jamSession.host.barName}</Link></p>
+            <div className='details-main'>
+                <div className='jam-details-top'>
+                    <p className='jam-date'>{jamSession.date}</p>
+                    <p className='jam-time'>{jamSession.time.slice(16,21)}</p>
+                </div>
+                <div className='jam-details-host'>
+                    <p>By: <Link to={`/locations/${jamSession.host._id}`}>{jamSession.host.barName}</Link></p>
+                    <p>{jamSession.host.address}</p>
+                </div>
+            </div>
+            
+                <div>
+                    {maxCapacity ? <p>This event has already reached the max number of artists. If you want to join a jam session, <Link to='/events'>checkout other events!</Link></p>
+                        : !isLoggedIn 
+                        ? <div> 
+                        <p>You need to login/signup to join the session</p> 
+                        <button type='button' onClick={()=> setOpened(true)}>Login/Signup </button> 
+                        </div>
+                        : userAttending  
+                        ? 
+                        <div>
+                            <p>You are attending this jam session</p>
+                            <button type='button' onClick={removePlayers}>Leave the Session!</button>
+                        </div>
+                        : <button type='button' onClick={addPlayers}>Join the Session!</button> 
+                    }
+                </div>
+        </div>
+    ) : (<></>)
+}
+
+export default JamSessionDetails
+
+{/* <div className='details-main jam-session-infos'>
+                <div className='jam-top'>
+                    <p className='jam-date'>{jamSession.date}</p>
+                    <p className='jam-time'>{jamSession.time.slice(16,21)}</p>
+                </div>
+                <div className='jam-host'>
+                    <p>By: <Link to={`/locations/${jamSession.host._id}`}>{jamSession.host.barName}</Link></p>
                     <p>{jamSession.host.address}</p>
                 </div>
                 <div className='jam-infos-ctn'>
-                    <div className='jam-title-ctn'>
-                        <h2>{jamSession.jamSessionName}</h2>
-                    </div>
-                    <div className='jam-date-ctn'>
-                        <p>{jamSession.date}</p>
-                        <p>{jamSession.time}</p>
-                    </div>
-                    <div className='jam-host-ctn'>
-                        <p>Created by: <Link to={`/locations/${jamSession.host._id}`}>{jamSession.host.barName}</Link></p>
-                        <p>{jamSession.host.address}, {jamSession.host.town}</p>
-                    </div>
                     <div className='jam-description-ctn'>
                         <p>{jamSession.description}</p>
                     </div>
@@ -153,25 +179,4 @@ function JamSessionDetails() {
                         })}
                     </div>
                 </div>
-                <div>
-                    {maxCapacity ? <p>This event has already reached the max number of artists. If you want to join a jam session, <Link to='/events'>checkout other events!</Link></p>
-                        : !isLoggedIn 
-                        ? <div> 
-                        <p>You need to login/signup to join the session</p> 
-                        <button type='button' onClick={()=> setOpened(true)}>Login/Signup </button> 
-                        </div>
-                        : userAttending  
-                        ? 
-                        <div>
-                            <p>You are attending this jam session</p>
-                            <button type='button' onClick={removePlayers}>Leave the Session!</button>
-                        </div>
-                        : <button type='button' onClick={addPlayers}>Join the Session!</button> 
-                    }
-                </div>
-            </div> 
-        </div>
-    ) : (<></>)
-}
-
-export default JamSessionDetails
+            </div>  */}
