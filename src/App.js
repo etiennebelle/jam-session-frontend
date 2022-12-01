@@ -1,6 +1,5 @@
-import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import './App.scss';
 
 import HostSignupPage from './pages/HostSignupPage';
 import UserSignupPage from './pages/UserSignupPage';

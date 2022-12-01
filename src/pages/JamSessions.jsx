@@ -79,8 +79,8 @@ function JamSessions() {
             <div className='searchbar-ctn'>
                 <div className='searchbar'>
 
-                    <p>Search</p>
                     <Input
+                        className='search txt-input'
                         placeholder="What are you looking for?"
                         type='text'
                         value={filteredJams}
@@ -88,8 +88,8 @@ function JamSessions() {
                     />
                     
                     <DatePicker
+                        className='search cal-input'
                         placeholder="Event date"
-                        label="Pick date"
                         value={value}
                         onChange={setValue}
                         minDate={dayjs(new Date()).toDate()}
@@ -120,14 +120,20 @@ function JamSessions() {
                     .map((jam) => (
                         <div className={`jam-session-card ${jam.genre.toLowerCase()}`} key={jam._id}>
                             <Link to={`/events/${jam._id}`} >
-                                <div className='jam-img-ctn' >
-                                    <img src={jam.image} className="jam-img" alt='jam-session-image' />
+
+                                <div className='jam-title-ctn' style={{ backgroundImage: `url(${jam.image})` }}>
+                                    <div className='jam-name'>{jam.jamSessionName}</div>
                                 </div>
+
+                                {/* <div className='jam-img-ctn' >
+                                    <img src={jam.image} className="jam-img" alt='jam-session-image' />
+                                </div> */}
+
                             </Link>
                             <div className='jam-infos-ctn'>
-                                <div className='jam-name-ctn'>
+                                {/* <div className='jam-name-ctn'>
                                     <h3 className='jam-name'>{jam.jamSessionName}</h3>
-                                </div>
+                                </div> */}
                                 <div className='jam-date-ctn'>
                                     <p>{jam.date}</p>
                                     <p>{jam.time.slice(16,21)}</p>
