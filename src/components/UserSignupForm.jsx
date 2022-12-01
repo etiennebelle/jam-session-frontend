@@ -1,7 +1,8 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TextInput, PasswordInput, Textarea, Select, FileInput, NumberInput, Button } from '@mantine/core';
+import { UserAuthContext } from '../contexts/user-auth.context';
 
 function UserSignupForm() {
     const navigate = useNavigate();
@@ -10,6 +11,7 @@ function UserSignupForm() {
     const [instrument, setInstrument] = useState('');
     const [email, setEmail] = useState('');
     const [errorMessage, setErrorMessage] = useState(undefined);
+    const { storeToken, setIsLoggedIn, authenticateUser } = useContext(UserAuthContext);
 
     const popularInstruments = [
         {value: 'Vocals', label: 'Vocals'},
@@ -38,9 +40,21 @@ function UserSignupForm() {
             })
 
             const parsed = await res.json();
+            const loginResponse = await fetch(`${process.env.REACT_APP_API_URL}user/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password }),
+            })
+            const parsedLoginRes = await loginResponse.json();
+            storeToken(parsedLoginRes.authToken);
+
 
             if (res.status === 201) {
-                navigate('/user/login')
+                setIsLoggedIn(true);
+                authenticateUser();
+                navigate('/user/profile')
                 } else {
                 setErrorMessage(parsed.message)
             }
