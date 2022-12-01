@@ -3,8 +3,9 @@ import { Modal, Button } from '@mantine/core';
 import JamSessionForm from '../components/JamSessionForm';
 import {HostAuthContext} from '../contexts/host-auth.context';
 import { useNavigate, Link } from "react-router-dom";
+import { format } from 'date-fns'
 
-function JamSession({oneJamSess, deleteJamSess, hostid, formatDate, getHostData, jamSessions, setJamSessions}) {
+function JamSession({oneJamSess, deleteJamSess, hostid, getHostData, jamSessions, setJamSessions}) {
     const [isEditing, setIsEditing] = useState(false)
     const [date, setDate] = useState(oneJamSess.date)
     const [time, setTime] = useState(oneJamSess.time)
@@ -57,12 +58,16 @@ function JamSession({oneJamSess, deleteJamSess, hostid, formatDate, getHostData,
        
     }
 
+    const formatDate = (oneDate) => {
+        return format(new Date(oneDate), 'PPPP');
+      }
+
   return (
 
       <div className="jam-session-card">
           
             <div className='jam-top'>
-                <p className='jam-date'>{oneJamSess.date}</p>
+                <p className='jam-date'>{formatDate(oneJamSess.date)}</p>
                 <p className='jam-time'>{oneJamSess.time.slice(16,21)}</p>
             </div>
             

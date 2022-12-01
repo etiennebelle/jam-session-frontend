@@ -11,6 +11,9 @@ function HostSignupPage() {
     const [errorMessage, setErrorMessage] = useState(undefined);
 
     const navigate = useNavigate();
+
+    const { storeToken, setIsHostLoggedIn, authenticateHost } = useContext(HostAuthContext); 
+
     const handleSubmit = async event => {
         try {
             event.preventDefault();
@@ -23,8 +26,20 @@ function HostSignupPage() {
                 body: JSON.stringify({barName, address, email, password})
             })
             const parsed = await response.json()
+            const loginResponse = await fetch(`${process.env.REACT_APP_API_URL}host/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json', 
+                },
+                body: JSON.stringify({email, password})
+            })
+            const parsedLoginRes = await loginResponse.json()
+            storeToken(parsedLoginRes.authToken)
+
             if (response.status === 201) {
-                navigate('/host/login')
+                setIsHostLoggedIn(true)
+                authenticateHost();
+                navigate('/host/profile')
               } else {
                 setErrorMessage(parsed.message)
             }
