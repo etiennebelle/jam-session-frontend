@@ -18,8 +18,7 @@ function UserProfilePage() {
         const userData = await response.json();
         delete userData.password;
         setCurrentUser(userData);
-        console.log(currentUser.jamSessions)
-    } 
+   } 
 
     const getUserDataPast = async() => {
         const response = await fetch(`${process.env.REACT_APP_API_URL}user/${user.data._id}/past-jam-sessions`, {
@@ -62,16 +61,16 @@ function UserProfilePage() {
             <h2>{currentUser && currentUser.username}!</h2>
             <button type="button" onClick={handlePastClick}>Your Past Events</button>
             <h3>Your Upcoming Jam Sessions:</h3>
-            {currentUser.jamSessions.map(oneJam => {
+            {currentUser && currentUser.jamSessions.map(oneJam => {
                 return( 
-                        <div key={oneJam._id}>
-                        <img src={oneJam.img}/>
-                        <h4>{oneJam.jamSessionName}</h4>
-                        <p>{formatDate(oneJam.date)}</p>
-                        <p>{oneJam.time.slice(16,21)}</p>
-                        <Link to={`/events/${oneJam._id}`}>More info</Link>
-                        </div>
-                    )
+                    <div key={oneJam._id}>
+                    <img src={oneJam.img}/>
+                    <h4>{oneJam.jamSessionName}</h4>
+                    <p>{formatDate(oneJam.date)}</p>
+                    <p>{oneJam.time.slice(16,21)}</p>
+                    <Link to={`/events/${oneJam._id}`}>More info</Link>
+                    </div>
+                )
             })} 
 
            
