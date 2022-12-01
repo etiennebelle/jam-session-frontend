@@ -40,7 +40,9 @@ function HostSignupPage() {
                 setIsHostLoggedIn(true)
                 authenticateHost();
                 navigate('/host/profile')
-              } else {
+              } else if (response.status === 400){
+                setErrorMessage(parsed.message)
+            } else {
                 setErrorMessage(parsed.message)
             }
         } catch (error) {
