@@ -71,6 +71,14 @@ function JamSession({oneJamSess, deleteJamSess, hostid, formatDate, getHostData,
         <p>Capacity: {oneJamSess.capacity}</p> 
         <p>Genre: {oneJamSess.genre}</p> 
         <p>Event Description: {oneJamSess.description}</p>
+        {oneJamSess && oneJamSess.players.map((onePlayer)=> {
+            return (
+                <div key={onePlayer._id}>
+                    {console.log(onePlayer)}
+                    <p>{onePlayer.username} as {onePlayer.instrument}</p>
+                </div>
+            )
+        })}
         <button onClick={()=>setIsEditing(true)}>Edit Jam Session</button>          
         <button onClick={()=>deleteJamSess(oneJamSess._id)}>Delete Jam Session</button>          
         <Modal

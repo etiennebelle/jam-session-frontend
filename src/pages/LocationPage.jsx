@@ -8,13 +8,22 @@ function LocationPage() {
   const { id } = useParams();
   const [checkboxCapacity, setCheckboxCapacity] = useState(true)
   const [jamsArr, setJamsArr] = useState([]);
+  const [futureEvents, setFutureEvents] = useState(true)
 
   const fetchLocationDetails = async () => {
     try {
+      if (futureEvents) {
         const response = await fetch(`${process.env.REACT_APP_API_URL}locations/${id}`);
         const parsed = await response.json();
         setLocation(parsed); 
         setJamsArr(parsed.jamSessions) 
+      } else {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}locations/${id}/past-events`);
+        const parsed = await response.json();
+        setLocation(parsed); 
+        setJamsArr(parsed.jamSessions) 
+      }
+       
     } catch (error) {
         console.log(error);
     }
@@ -39,10 +48,16 @@ function LocationPage() {
     fetchLocationDetails();
   }, [])
 
+  const handlePastClick = () => {
+    setFutureEvents(!futureEvents)
+    fetchLocationDetails()
+  }
+
   return (
     <div>
       <h3>{location.barName}</h3>
       <p>{location.address}</p>
+      <button type="button" onClick={handlePastClick}>{location.barName}'s Past Events</button>
       <h4>{location.barName}'s Upcoming Jam Sessions:</h4>
       <label><input type="checkbox" onClick={handleClick}></input>Only Show Sessions With Spots Left</label>
       {location && jamsArr.map((jamSess)=> {

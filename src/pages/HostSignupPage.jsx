@@ -11,7 +11,6 @@ function HostSignupPage() {
     const [errorMessage, setErrorMessage] = useState(undefined);
 
     const navigate = useNavigate();
-    
     const handleSubmit = async event => {
         try {
             event.preventDefault();
@@ -45,10 +44,9 @@ function HostSignupPage() {
                 onChange={event => setBarName(event.target.value)} 
                 required/>
             </label>
-            <label>Address:             </label>
-
+            <label>Address: </label>
             <Autocomplete
-                apiKey='AIzaSyDYJYkW2xCArWrPfnFeUhmQP9D0CCcGu_Q'
+                apiKey={`${process.env.REACT_APP_GOOGLE_API_KEY}`}
                 onPlaceSelected={(place) => {
                     setAddress(place.formatted_address);
                 }}
