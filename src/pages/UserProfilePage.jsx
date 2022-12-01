@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { UserAuthContext } from '../contexts/user-auth.context';
 import { format } from 'date-fns'
+import { Button } from '@mantine/core';
 
 function UserProfilePage() {
     const [currentUser, setCurrentUser] = useState();
@@ -51,6 +52,20 @@ function UserProfilePage() {
         }
     }
 
+    if (currentUser && currentUser.jamSessions.length < 1){
+        return (
+        <div className='no-jams-ctn'>
+            <h2>You didn't sign up for any jam sessions yet!</h2>
+            <div className="no-jams-btn">
+              <Link to="/events" >
+                <Button color="dark" radius="xl">
+                  Explore Jam Sessions
+                </Button>
+              </Link>
+            </div>
+        </div>
+        )
+    } 
 
     const formatDate = (oneDate) => {
         return format(new Date(oneDate), 'PPPP');
