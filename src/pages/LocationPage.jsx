@@ -10,6 +10,8 @@ function LocationPage() {
   const [checkboxCapacity, setCheckboxCapacity] = useState(true)
   const [jamsArr, setJamsArr] = useState([]);
   const [futureEvents, setFutureEvents] = useState(true)
+  const [pastOrFutureText, setPastOrFutureText] = useState('Past Jams')
+  const [pastOrFutureTitle, setPastOrFutureTitle] = useState('Upcoming Jam')
 
   const fetchLocationDetails = async () => {
     try {
@@ -52,6 +54,13 @@ function LocationPage() {
   const handlePastClick = () => {
     setFutureEvents(!futureEvents)
     fetchLocationDetails()
+    if (futureEvents) {
+      setPastOrFutureText("Past Jams")
+      setPastOrFutureTitle('Upcoming Jam')
+    } else {
+      setPastOrFutureText("Upcoming Jams")
+      setPastOrFutureTitle('Past Jam')
+    }
   }
 
   return (
@@ -64,11 +73,11 @@ function LocationPage() {
       </div>
       <div className='host-btns'>
         <Button variant="outline" color="dark" radius="xl" onClick={handlePastClick}>
-            {location.barName}'s Past Jams
+            {location.barName}'s {pastOrFutureText}
         </Button>
       </div>
       <div className='section-title'>
-        <h4>{location.barName}'s Upcoming Jam Sessions:</h4>
+        <h4>{`${location.barName}'s ${pastOrFutureTitle} Sessions:`}</h4>
       </div>
       <div className='sessions-checkbox'>
         <label><input type="checkbox" onClick={handleClick}></input>Only Show Sessions With Spots Left</label>

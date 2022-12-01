@@ -12,7 +12,7 @@ function HostProfilePage() {
     const [jamSessions, setJamSessions] = useState([])
     const [futureEvents, setFutureEvents] = useState(true)
     const [pastOrFutureText, setPastOrFutureText] = useState('Past Jams')
-    const [pastOrFutureTitle, setPastOrFutureTitle] = useState('Upcoming Jams')
+    const [pastOrFutureTitle, setPastOrFutureTitle] = useState('Upcoming Jam')
     const [noPastEvents, setNoPastEvents] = useState('')
 
 
@@ -47,14 +47,12 @@ function HostProfilePage() {
     const handlePastClick = () => {
       setFutureEvents(!futureEvents)
       getHostData()
-      console.log('futureEvents from bytton', futureEvents )
-
       if (futureEvents) {
         setPastOrFutureText("Past Jams")
-        setPastOrFutureTitle('Upcoming Jams')
+        setPastOrFutureTitle('Upcoming Jam')
       } else {
         setPastOrFutureText("Upcoming Jams")
-        setPastOrFutureTitle('Past Jams')
+        setPastOrFutureTitle('Past Jam')
       }
     }
 
@@ -69,23 +67,6 @@ function HostProfilePage() {
       return format(new Date(oneDate), 'PPPP');
     }
 
-/*     if (currentHost && currentHost.jamSessions.length < 1){
-      return (
-      <div className='no-jams-ctn'>
-          <h2>No jams sessions created yet</h2>
-          <div className="no-jams-btn">
-            <Link to="/host/create-jam-session" >
-              <Button color="dark" radius="xl">
-                Create Jam
-              </Button>
-            </Link>
-          </div>
-      </div>
-      )
-    } 
- */
-    console.log(host.data._id)
-
     const deleteJamSess = async (jamSessionId) => {
       try {
         await fetch(`${process.env.REACT_APP_API_URL}host/${jamSessionId}`, {
@@ -97,7 +78,6 @@ function HostProfilePage() {
           body: JSON.stringify({id: host.data._id})
         })
         getHostData();
-        console.log('futureEvents from deelet', futureEvents )
       } catch (error) {
         console.log(error)
       }

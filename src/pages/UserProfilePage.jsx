@@ -7,7 +7,8 @@ import { Button } from '@mantine/core';
 function UserProfilePage() {
     const [currentUser, setCurrentUser] = useState();
     const [futureEvents, setFutureEvents] = useState(true)
-
+    const [pastOrFutureText, setPastOrFutureText] = useState('Past Jams')
+    const [pastOrFutureTitle, setPastOrFutureTitle] = useState('Upcoming Jam')
     const { user, storedToken } = useContext(UserAuthContext);
 
     const getUserData = async() => {
@@ -47,25 +48,14 @@ function UserProfilePage() {
         setFutureEvents(!futureEvents)
         if (futureEvents) {
             getUserData();
+            setPastOrFutureText("Past Jams")
+            setPastOrFutureTitle('Upcoming Jam')
         } else {
             getUserDataPast()
+            setPastOrFutureText("Upcoming Jams")
+            setPastOrFutureTitle('Past Jam')
         }
     }
-
-    if (currentUser && currentUser.jamSessions.length < 1){
-        return (
-        <div className='no-jams-ctn'>
-            <h2>You didn't sign up for any jam sessions yet!</h2>
-            <div className="no-jams-btn">
-              <Link to="/events" >
-                <Button color="dark" radius="xl">
-                  Explore Jam Sessions
-                </Button>
-              </Link>
-            </div>
-        </div>
-        )
-    } 
 
     const formatDate = (oneDate) => {
         return format(new Date(oneDate), 'PPPP');
@@ -77,13 +67,14 @@ function UserProfilePage() {
                 <h2>{currentUser && currentUser.username}!</h2>
             </div>
             <div className='host-btns'>
-                <Button variant="outline" color="dark" radius="xl" type="button" onClick={handlePastClick}>Your Past Events</Button>
+                <Button variant="outline" color="dark" radius="xl" type="button" onClick={handlePastClick}>Your {pastOrFutureText}</Button>
             </div>
             <section>
             <div className='section-title'>
-                <h3>Your Upcoming Jam Sessions:</h3>
+                <h3>{`Your ${pastOrFutureTitle} Sessions`}</h3>
             </div>
-                {currentUser && currentUser.jamSessions.map(oneJam => {
+            { currentUser && currentUser.jamSessions.length >= 1 ?
+                currentUser.jamSessions.map(oneJam => {
                     return( 
                         <div className="jam-session-card" key={oneJam._id}>
                             <div className='jam-top'>
@@ -101,7 +92,9 @@ function UserProfilePage() {
                             </div> 
                         </div>
                     )
-                })} 
+                })
+            : <p>No Jam Sessions Here</p>
+            } 
             </section>
                 
 
