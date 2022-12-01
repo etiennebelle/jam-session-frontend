@@ -1,11 +1,15 @@
 import React from 'react'
 import UserSignupForm from '../components/UserSignupForm';
+import { Link } from 'react-router-dom';
 
 function UserSignupPage() {
 
     return (
-        <div>
+        <div className='main'>
             <UserSignupForm />
+            <div>
+                <p>Already have an account? <Link to="/user/login">Login</Link></p>
+            </div>
         </div>
     )
 }

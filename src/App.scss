@@ -22,7 +22,6 @@
     align-items: center;
     padding: 0 1.2em 1.2em 1.2em;
     margin-top: 5.2rem;
-    /* global margin*/
 }
 
 h2 {
@@ -190,35 +189,20 @@ a {
 
 /*********************** location-details ***********************/
 
-.details-main{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    margin-top: .5rem;
-    font-size: 1rem;
-    font-weight: 500;
+.sessions-checkbox{
+    margin-bottom: 1rem;
 }
-
-.jam-details-top{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin: .5rem 0;
-
-    .jam-time {
-        border-left: 1px solid lightgray;
-        padding-left: 1rem;
-    }
-}
-
 
 /*********************** jam-details ***********************/
 
 .details-main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     padding: 0 1.2em 1.2em 1.2em;
-    /* global margin*/
+    margin-top: .5rem;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
 .jam-cover{
@@ -254,12 +238,18 @@ a {
     }
 }
 
-.jam-session-infos{
+.jam-details-top {
     width: 100%;
     display: flex;
-    flex-direction: column;
-    font-size: 1rem;
-    font-weight: 500;
+    justify-content: space-between;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: .5rem 0;
+
+    .jam-time {
+        border-left: 1px solid lightgray;
+        padding-left: 1rem;
+    }
 }
 
 /*********************** host-profile ***********************/

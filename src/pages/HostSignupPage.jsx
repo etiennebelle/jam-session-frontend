@@ -50,7 +50,7 @@ function HostSignupPage() {
         
     }
   return (
-    <>
+    <div className='main'>
         <form onSubmit={handleSubmit}>
             <label>Bar Name: 
                 <input 
@@ -93,7 +93,7 @@ function HostSignupPage() {
         <p>Already have an host account? <Link to="/host/login">Login</Link></p>
         { errorMessage && <p>{errorMessage}</p> }
 
-    </>
+    </div>
   )
 }
 

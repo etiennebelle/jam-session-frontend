@@ -51,7 +51,7 @@ function UserSignupForm() {
      };
 
     return (
-        <div className='user-signup-form'>
+        <div className='main'>
             <form onSubmit={handleSubmit}>
                 <label> Username:
                     <input

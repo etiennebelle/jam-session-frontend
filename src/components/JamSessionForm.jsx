@@ -20,7 +20,7 @@ function JamSessionForm({ jamSessionName, setJamSessionName, date, setDate, time
         <div className='labels-ctn'>
             <label className='create-label'>
                 <TextInput
-                    type="string" 
+                    type="text" 
                     value={jamSessionName}
                     name='jamSessionName'
                     onChange={(event) => setJamSessionName(event.currentTarget.value)} 
