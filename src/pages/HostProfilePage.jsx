@@ -4,6 +4,7 @@ import {HostAuthContext} from '../contexts/host-auth.context';
 import { v4 as uuidv4 } from 'uuid';
 import JamSession from "../components/JamSession";
 import { format } from 'date-fns'
+import {Button} from '@mantine/core'
 
 
 function HostProfilePage() {
@@ -55,10 +56,16 @@ function HostProfilePage() {
 
     if (currentHost && currentHost.jamSessions.length < 1){
       return (
-      <>
-      <p>No jams sessions created yet</p>
-      <Link to="/host/create-jam-session" >Create Jam Session</Link>
-      </>
+      <div className='no-jams-ctn'>
+          <h2>No jams sessions created yet</h2>
+          <div className="no-jams-btn">
+            <Link to="/host/create-jam-session" >
+              <Button color="dark" radius="xl">
+                Create Jam
+              </Button>
+            </Link>
+          </div>
+      </div>
       )
     } 
 
@@ -77,15 +84,24 @@ function HostProfilePage() {
     }
     
   return (
-    <div className="host-profile-main">
-      <p>Hello {currentHost && currentHost.barName}!</p>
-      
-      <Link to="/host/create-jam-session" >Create Jam Session</Link>
-
-      <button type="button" onClick={handlePastClick}>Your Past Events</button>
-
-      <h3>Your Scheduled Jam Sessions: </h3>
-
+    <div className="host-profile-main main">
+      <div className="greeting-host greeting">
+        <h2>Hello {currentHost && currentHost.barName}!</h2>
+      </div>
+      <div className='host-btns'>
+        <Link to="/host/create-jam-session" >
+          <Button color="dark" radius="xl">
+            Create Jam
+          </Button>
+        </Link>
+        <Button variant="outline" color="dark" radius="xl" onClick={handlePastClick}>
+          Past Jams
+        </Button>
+      </div>
+      <section className='events'>
+      <div className='section-title'>
+        <h3>Your Scheduled Jam Sessions</h3>
+      </div>
       {jamSessions && jamSessions.map(oneJamSess =>{
         return(
           <JamSession 
@@ -99,7 +115,7 @@ function HostProfilePage() {
           />
         )
       })}
-
+      </section>
     </div>
   )
 }

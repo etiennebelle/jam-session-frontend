@@ -57,8 +57,11 @@ function CreateJamSession() {
 
 return (
 
-    <>
-    <form onSubmit={handleSubmit} encType="multipart/form-data">
+    <div>
+    <div className='section-title'>
+        <h3>Create a new Jam Session</h3>
+    </div>
+    <form className='crud-form' onSubmit={handleSubmit} encType="multipart/form-data">
         <JamSessionForm 
                 jamSessionName={jamSessionName}
                 setJamSessionName={setJamSessionName}
@@ -73,19 +76,20 @@ return (
                 description={description}
                 setDescription={setDescription}
                 hostid={hostid}
-        />
-            <Button
-                type='submit'
-                color="red"
-                radius="xs"
-            >
-            Create Jam Session
-        </Button>
+            />
+            <div className='crud-btn'>
+                <Button
+                    type='submit'
+                    color="dark"
+                    radius="xl">
+                    Create Jam
+                </Button>
+            </div>
         {errorMessage && <p>{errorMessage}</p>}
     </form>
     
 
-    </>
+    </div>
   )
 }
 

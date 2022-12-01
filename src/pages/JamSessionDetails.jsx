@@ -114,37 +114,44 @@ function JamSessionDetails() {
 
     return jamSession ? (
         <div>
-            <div className='jam-img-ctn'>
-                <img src={jamSession.image} style={{width: '300px'}} />
+            <div className='cover'>
+                <div className='jam-cover' style={{ backgroundImage: `url(${jamSession.image})` }}>
+                    <div className='jam-name'><p><span className={`${jamSession.genre.toLowerCase()}`}></span>{jamSession.jamSessionName}</p></div>
+                </div>
             </div>
-            <div className='jam-infos-ctn'>
-                <div className='jam-title-ctn'>
-                    <h2>{jamSession.jamSessionName}</h2>
-                </div>
-                <div className='jam-date-ctn'>
-                    <p>{jamSession.date}</p>
-                    <p>{jamSession.time}</p>
-                </div>
+            <div className='main'>
                 <div className='jam-host-ctn'>
                     <p>Created by: <Link to={`/locations/${jamSession.host._id}`}>{jamSession.host.barName}</Link></p>
                     <p>{jamSession.host.address}</p>
                 </div>
-                <div className='jam-description-ctn'>
-                    <p>{jamSession.description}</p>
+                <div className='jam-infos-ctn'>
+                    <div className='jam-title-ctn'>
+                        <h2>{jamSession.jamSessionName}</h2>
+                    </div>
+                    <div className='jam-date-ctn'>
+                        <p>{jamSession.date}</p>
+                        <p>{jamSession.time}</p>
+                    </div>
+                    <div className='jam-host-ctn'>
+                        <p>Created by: <Link to={`/locations/${jamSession.host._id}`}>{jamSession.host.barName}</Link></p>
+                        <p>{jamSession.host.address}, {jamSession.host.town}</p>
+                    </div>
+                    <div className='jam-description-ctn'>
+                        <p>{jamSession.description}</p>
+                    </div>
                 </div>
-            </div>
 
-            <div className='players-ctn'>
-                <h3>Artists that will be playing:</h3>
-                <div className='users-playing'>
-                {jamSession.players.map((onePlayer)=> {
-                    return (
-                        <div key={onePlayer._id}>
-                            <p>{onePlayer.username} as {onePlayer.instrument}</p>
-                        </div>
-                    )
-                })}
-
+                <div className='players-ctn'>
+                    <h3>Artists that will be playing:</h3>
+                    <div className='users-playing'>
+                        {jamSession.players.map((onePlayer)=> {
+                            return (
+                                <div key={onePlayer._id}>
+                                    <p>{onePlayer.username} as {onePlayer.instrument}</p>
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
                 <div>
                     {maxCapacity ? <p>This event has already reached the max number of artists. If you want to join a jam session, <Link to='/events'>checkout other events!</Link></p>
@@ -162,25 +169,8 @@ function JamSessionDetails() {
                         : <button type='button' onClick={addPlayers}>Join the Session!</button> 
                     }
                 </div>
-                <Modal
-                    opened={opened}
-                    onClose={() => setOpened(false)}
-                    title="Login"
-                >
-                    <UserLoginComponent
-                        handleSubmit={handleSubmit}
-                        email={email}
-                        setEmail={setEmail}
-                        password={password}
-                        setPassword={setPassword}
-                        errorMessage={errorMessage}
-                    />
-                </Modal>
-
-                
-            </div>
+            </div> 
         </div>
-
     ) : (<></>)
 }
 

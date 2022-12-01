@@ -106,7 +106,7 @@ function JamSession({oneJamSess, deleteJamSess, hostid, getHostData, jamSessions
             onClose={() => setIsEditing(false)}
             title="Edit Jam Session"
         >
-            <form onSubmit={handleSubmit}  encType="multipart/form-data">
+            <form className='crud-form' onSubmit={handleSubmit}  encType="multipart/form-data">
                 <JamSessionForm 
                     jamSessionName={jamSessionName}
                     setJamSessionName={setJamSessionName}
@@ -122,7 +122,14 @@ function JamSession({oneJamSess, deleteJamSess, hostid, getHostData, jamSessions
                     setDescription={setDescription}
                     hostid={hostid}
                 />
-                <button type="submit">Update Jam Session</button>
+                <div className='crud-btn'>
+                    <Button
+                        type='submit'
+                        color="dark"
+                        radius="xl">
+                        Edit Jam
+                    </Button>
+                </div>
               </form>
               
               {successMessage && <p>{successMessage}</p>}
