@@ -2,6 +2,8 @@ import { useState, useContext } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import {HostAuthContext} from '../contexts/host-auth.context';
 import Autocomplete from "react-google-autocomplete";
+import { TextInput, PasswordInput, Textarea, Select, FileInput, NumberInput, Button } from '@mantine/core';
+
 
 function HostSignupPage() {
     const [barName, setBarName] = useState('')
@@ -40,7 +42,9 @@ function HostSignupPage() {
                 setIsHostLoggedIn(true)
                 authenticateHost();
                 navigate('/host/profile')
-              } else {
+              } else if (response.status === 400){
+                setErrorMessage(parsed.message)
+            } else {
                 setErrorMessage(parsed.message)
             }
         } catch (error) {
@@ -51,46 +55,68 @@ function HostSignupPage() {
     }
   return (
     <div className='main'>
-        <form onSubmit={handleSubmit}>
-            <label>Bar Name: 
-                <input 
-                type="text" 
-                value={barName} 
-                onChange={event => setBarName(event.target.value)} 
-                required/>
-            </label>
-            <label>Address: </label>
-            <Autocomplete
-                apiKey={`${process.env.REACT_APP_GOOGLE_API_KEY}`}
-                onPlaceSelected={(place) => {
-                    setAddress(place.formatted_address);
-                }}
-                options={{
-                    types: ["geocode", "establishment"],
-                  }}
-                value={address} 
-                onChange={event => setAddress(event.target.value)} 
-                placeholder=""
-                required
-            />
-            <label>Email: 
-                <input 
-                type="text" 
-                value={email} 
-                onChange={event => setEmail(event.target.value)} 
-                required/>
-            </label>
-            <label>Password: 
-                <input 
-                type="password" 
-                value={password} 
-                onChange={event => setPassword(event.target.value)} 
-                required
+         <div className='section-title'>
+            <h3>Host Sign Up</h3>
+        </div>
+        <div className='labels-ctn'>
+            <form className='crud-form' onSubmit={handleSubmit}>
+                <label className='create-label'> 
+                    <TextInput 
+                    type="text" 
+                    placeholder="Location Name"
+                    value={barName} 
+                    radius="xs"
+                    onChange={event => setBarName(event.target.value)} 
+                    required/>
+                </label>
+                <label className='create-label'> 
+            
+                <Autocomplete
+                    apiKey={`${process.env.REACT_APP_GOOGLE_API_KEY}`}
+                    onPlaceSelected={(place) => {
+                        setAddress(place.formatted_address);
+                    }}
+                    options={{
+                        types: ["geocode", "establishment"],
+                    }}
+                    value={address} 
+                    onChange={event => setAddress(event.target.value)} 
+                    placeholder=""
+                    required
                 />
-            </label>
-            <button type="submit">Signup</button>
-        </form>
-        <p>Already have an host account? <Link to="/host/login">Login</Link></p>
+                </label>
+                <label className='create-label'>
+                    <TextInput 
+                    type="text" 
+                    placeholder="Email"
+                    radius="xs"
+                    value={email} 
+                    onChange={event => setEmail(event.target.value)} 
+                    required/>
+                </label>
+                <label className='create-label'>
+                    <PasswordInput 
+                    type="password" 
+                    value={password} 
+                    description="Password must include at least one letter, number and special character"
+                    radius="xs"
+                    onChange={event => setPassword(event.target.value)} 
+                    required
+                    />
+                </label>
+                <div className='crud-btn'>
+                    <Button
+                        type='submit'
+                        color="dark"
+                        radius="xl">
+                        Signup
+                    </Button>
+                </div>
+            </form>
+            </div>
+            <div className='form-redirect'>
+              <p>Already have an host account? <Link to="/host/login">Login</Link></p>
+            </div>
         { errorMessage && <p>{errorMessage}</p> }
 
     </div>

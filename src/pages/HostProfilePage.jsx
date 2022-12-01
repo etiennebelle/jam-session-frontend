@@ -11,6 +11,8 @@ function HostProfilePage() {
     const [currentHost, setCurrentHost] = useState('')
     const [jamSessions, setJamSessions] = useState([])
     const [futureEvents, setFutureEvents] = useState(true)
+    const [pastOrFutureText, setPastOrFutureText] = useState('Past Jams')
+
 
     const { storedToken, isHostLoggedIn, host, authenticateHost } = useContext(HostAuthContext);  
 
@@ -41,6 +43,11 @@ function HostProfilePage() {
     const handlePastClick = () => {
       setFutureEvents(!futureEvents)
       getHostData()
+      if (futureEvents) {
+        setPastOrFutureText("Past Jams")
+      } else {
+        setPastOrFutureText("Upcoming Jams")
+      }
     }
 
 
@@ -95,7 +102,7 @@ function HostProfilePage() {
           </Button>
         </Link>
         <Button variant="outline" color="dark" radius="xl" onClick={handlePastClick}>
-          Past Jams
+          {pastOrFutureText}
         </Button>
       </div>
       <section className='events'>

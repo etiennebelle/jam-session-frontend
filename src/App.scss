@@ -293,6 +293,7 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
 }
 
 .labels-ctn{
@@ -309,6 +310,12 @@ a {
 
 .crud-btn{
     margin-top: 2rem;
+}
+
+/*********************** create-jam ***********************/
+
+.form-redirect{
+    margin-top: 1rem;
 }
 
 @media (max-width: 768px) {
