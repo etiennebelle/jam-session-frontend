@@ -79,7 +79,7 @@ function HostLoginPage() {
         { errorMessage && <p>{errorMessage}</p> }
         
 
-    </divdiv>
+    </div>
   )
 }
 
