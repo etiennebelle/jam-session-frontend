@@ -17,8 +17,9 @@ function HostProfilePage() {
 
 
     const { storedToken, isHostLoggedIn, host, authenticateHost } = useContext(HostAuthContext);  
-
     const getHostData = async() => {
+      console.log('futureEvents from getHostData', futureEvents )
+
       if (futureEvents) {
         const response = await fetch(`${process.env.REACT_APP_API_URL}host/${host.data._id}`, {
           headers: {
@@ -36,13 +37,10 @@ function HostProfilePage() {
           },
         })
         const hostData = await response.json();
-        if (response.status === 200) {
-          delete hostData.password;
-          setCurrentHost(hostData);
-          setJamSessions(hostData.jamSessions)
-        } else {
-          setNoPastEvents(hostData.message)
-        }
+        
+        delete hostData.password;
+        setCurrentHost(hostData);
+        setJamSessions(hostData.jamSessions)
       }
     } 
 
@@ -71,7 +69,7 @@ function HostProfilePage() {
       return format(new Date(oneDate), 'PPPP');
     }
 
-    if (currentHost && currentHost.jamSessions.length < 1){
+/*     if (currentHost && currentHost.jamSessions.length < 1){
       return (
       <div className='no-jams-ctn'>
           <h2>No jams sessions created yet</h2>
@@ -85,19 +83,22 @@ function HostProfilePage() {
       </div>
       )
     } 
-
+ */
+    console.log(host.data._id)
 
     const deleteJamSess = async (jamSessionId) => {
       try {
         await fetch(`${process.env.REACT_APP_API_URL}host/${jamSessionId}`, {
           method: 'DELETE',
           headers: {
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${storedToken}`,
           },
+          body: JSON.stringify({id: host.data._id})
         })
         getHostData();
-/*         console.log('futureEvents from deelet', futureEvents )
- */      } catch (error) {
+        console.log('futureEvents from deelet', futureEvents )
+      } catch (error) {
         console.log(error)
       }
     }
@@ -119,10 +120,10 @@ function HostProfilePage() {
       </div>
       <section className='events'>
       <div className='section-title'>
-{/*         <p>{noPastEvents}</p> */}
         <h3>{`Your ${pastOrFutureTitle} Sessions`}</h3>
       </div>
-      {jamSessions && jamSessions.map(oneJamSess =>{
+      {jamSessions.length >= 1 ?
+         jamSessions.map(oneJamSess =>{
         return(
           <JamSession 
             key={uuidv4()} 
@@ -134,7 +135,9 @@ function HostProfilePage() {
             setJamSessions={setJamSessions}
           />
         )
-      })}
+      })
+      : <p>No Jam Sessions Here</p>
+      }
       </section>
     </div>
   )
