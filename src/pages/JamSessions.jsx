@@ -95,8 +95,8 @@ function JamSessions() {
                     />
 
                 </div>
+                <label><input type="checkbox" onClick={handleClick}></input>Only Show Sessions With Spots Left</label>
             </div>
-            <label><input type="checkbox" onClick={handleClick}></input>Only Show Sessions With Spots Left</label>
 
             <section className='upcoming-events'>
                 <div className='section-title'>
