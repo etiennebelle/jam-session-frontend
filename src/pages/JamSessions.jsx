@@ -34,7 +34,6 @@ function JamSessions() {
         jamsArr.sort(function (a, b) {
             return new Date(a.date) - new Date(b.date);
         }).map(jam => {
-            console.log(jam.date)
             jam.date = format(new Date(jam.date), 'PPPP');
             return jam
         })
@@ -119,28 +118,26 @@ function JamSessions() {
                     }) 
                     .map((jam) => (
                         <div className={`jam-session-card ${jam.genre.toLowerCase()}`} key={jam._id}>
+                            
+                            <div className='jam-top'>
+                                <p className='jam-date'>{jam.date}</p>
+                                <p className='jam-time'>{jam.time.slice(16,21)}</p>
+                            </div>
+
                             <Link to={`/events/${jam._id}`} >
 
-                                <div className='jam-title-ctn' style={{ backgroundImage: `url(${jam.image})` }}>
-                                    <div className='jam-name'>{jam.jamSessionName}</div>
+                                <div className='jam-main' style={{ backgroundImage: `url(${jam.image})` }}>
+                                    <div className='jam-name'><p><span className={`${jam.genre.toLowerCase()}`}></span>{jam.jamSessionName}</p><span className={''}></span></div>
                                 </div>
-
-                                {/* <div className='jam-img-ctn' >
-                                    <img src={jam.image} className="jam-img" alt='jam-session-image' />
-                                </div> */}
 
                             </Link>
-                            <div className='jam-infos-ctn'>
-                                {/* <div className='jam-name-ctn'>
-                                    <h3 className='jam-name'>{jam.jamSessionName}</h3>
-                                </div> */}
-                                <div className='jam-date-ctn'>
-                                    <p>{jam.date}</p>
-                                    <p>{jam.time.slice(16,21)}</p>
+
+                            <div className='jam-bottom'>
+                                <div className='jam-host'>
+                                    <p>By <Link to={`/locations/${jam.host._id}`}>{jam.host.barName}</Link></p>
                                 </div>
-                                <div className='jam-host-ctn'>
-                                    <p>Created by: <Link to={`/locations/${jam.host._id}`}>{jam.host.barName}</Link></p>
-                                    <p>Location: {jam.host.town}</p>
+                                <div className='jam-town'>
+                                    <p>{jam.host.town}</p>
                                 </div>
                             </div>
                         </div>

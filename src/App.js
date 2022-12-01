@@ -23,7 +23,10 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
+      <div id='navbar'>
+        <Navbar />
+      </div>
+      <div id='main'>
       <Routes>
         <Route path="/" element={ <Home /> } />
         <Route path="/events" element={<JamSessions /> } />
@@ -36,7 +39,8 @@ function App() {
         <Route path="/host/login" element={<IsAnonymous><HostLoginPage /></IsAnonymous>} />
         <Route path="/host/profile" element={<IsPrivateHost><HostProfilePage /></IsPrivateHost>} />
         <Route path="/host/create-jam-session" element={<IsPrivateHost><CreateJamSession /></IsPrivateHost>} />
-      </Routes>
+        </Routes>
+      </div>
     </div>
   );
 }
