@@ -71,6 +71,54 @@ a {
     gap: 5rem;
 }
 
+/*********************** home ***********************/
+
+.home-header{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5.2rem;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+}
+
+.hero{
+    font-size: 2.2rem;
+    line-height: 4.5rem;
+    text-align: center;
+}
+
+.intro{
+    width: 100%;
+    text-align: center;
+    margin: 2rem 0 1rem;
+    font-weight: 600;
+}
+
+.explore{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-main{
+    width: 100%;
+    padding: 0 1.2em 1.2em 1.2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home-card{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid lightgrey;
+    border-radius: .5rem;
+}
+
 /*********************** navbar ***********************/
 
 .events {
