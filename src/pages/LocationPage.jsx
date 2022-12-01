@@ -79,17 +79,21 @@ function LocationPage() {
       <div className='section-title'>
         <h4>{`${location.barName}'s ${pastOrFutureTitle} Sessions:`}</h4>
       </div>
-      <div className='sessions-checkbox'>
-        <label><input type="checkbox" onClick={handleClick}></input>Only Show Sessions With Spots Left</label>
-      </div>
+      {!futureEvents ? 
+        <div className='sessions-checkbox'>
+          <label><input type="checkbox" onClick={handleClick}></input>Only Show Sessions With Spots Left</label>
+      </div>    
+      : null
+      }
+      
 
-      {location && jamsArr.map((jamSess)=> {
+      {location && jamsArr.length >= 1 ?
+        jamsArr.map((jamSess)=> {
         return (
-              
           <div className={`jam-session-card ${jamSess.genre.toLowerCase()}`} key={jamSess._id}>
-                            
+         
               <div className='jam-top'>
-                  <p className='jam-date'>{jamSess.date}</p>
+                  <p className='jam-date'>{formatDate(jamSess.date)}</p>
                   <p className='jam-time'>{jamSess.time.slice(16,21)}</p>
               </div>
 
@@ -109,16 +113,10 @@ function LocationPage() {
                   <p>{jamSess.description}</p>
               </div>
           </div>
-
-            // <div key={jamSess._id}>
-            //   <img src={jamSess.image} />
-            //   <h2> <Link to={`/events/${jamSess._id}`}>{jamSess.jamSessionName}</Link></h2>
-            //   <p>{formatDate(jamSess.date)}</p>
-            //   <p>{jamSess.time}</p>
-            //   <p>{jamSess.genre}</p>
-            // </div>
             )
-      })}
+      })
+      : <p>No Jam Sessions Here</p>
+    }
 
     </div>
   )
