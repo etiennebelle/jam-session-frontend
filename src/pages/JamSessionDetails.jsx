@@ -147,7 +147,7 @@ function JamSessionDetails() {
 
                 </div>
                 <div>
-                    {maxCapacity ? <p>This event has already reached the max number of artists. If you want to join a jam session, checkout other events!</p>
+                    {maxCapacity ? <p>This event has already reached the max number of artists. If you want to join a jam session, <Link to='/events'>checkout other events!</Link></p>
                         : !isLoggedIn 
                         ? <div> 
                         <p>You need to login/signup to join the session</p> 
