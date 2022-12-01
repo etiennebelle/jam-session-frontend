@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";                      
-import { Modal } from '@mantine/core';
+import { Modal, Button } from '@mantine/core';
 import JamSessionForm from '../components/JamSessionForm';
 import {HostAuthContext} from '../contexts/host-auth.context';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function JamSession({oneJamSess, deleteJamSess, hostid, formatDate, getHostData, jamSessions, setJamSessions}) {
     const [isEditing, setIsEditing] = useState(false)
@@ -16,7 +16,6 @@ function JamSession({oneJamSess, deleteJamSess, hostid, formatDate, getHostData,
     const { host, setHost, storedToken } = useContext(HostAuthContext);   
     const [successMessage, setSuccessMessage] = useState(undefined);
 
-    
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -58,21 +57,45 @@ function JamSession({oneJamSess, deleteJamSess, hostid, formatDate, getHostData,
        
     }
 
-
-
-
   return (
 
-    <div>
-        <img src={oneJamSess.image} />
-        <h4>{oneJamSess.jamSessionName}</h4> 
-        <p>Date: {formatDate(oneJamSess.date)}</p> 
-        <p>Time: {oneJamSess.time.slice(16,21)}</p> 
-        <p>Capacity: {oneJamSess.capacity}</p> 
-        <p>Genre: {oneJamSess.genre}</p> 
-        <p>Event Description: {oneJamSess.description}</p>
-        <button onClick={()=>setIsEditing(true)}>Edit Jam Session</button>          
-        <button onClick={()=>deleteJamSess(oneJamSess._id)}>Delete Jam Session</button>          
+      <div className="jam-session-card">
+          
+            <div className='jam-top'>
+                <p className='jam-date'>{oneJamSess.date}</p>
+                <p className='jam-time'>{oneJamSess.time.slice(16,21)}</p>
+            </div>
+            
+            <Link to={`/events/${oneJamSess._id}`} >
+
+                <div className='jam-main' style={{ backgroundImage: `url(${oneJamSess.image})` }}>
+                    <div className='jam-name'><p><span className={`${oneJamSess.genre.toLowerCase()}`}></span>{oneJamSess.jamSessionName}</p></div>
+                </div>
+
+            </Link>
+            
+            <div className='jam-bottom'>
+                <p>{oneJamSess.genre}</p> 
+                <p>Capacity: {oneJamSess.capacity}</p> 
+            </div> 
+            <div className="jam-description">
+                <p>{oneJamSess.description}</p>
+            </div>
+            <div className="jam-controllers">
+                <Button
+                  color="dark"
+                  radius="xl"
+                  onClick={() => setIsEditing(true)}>
+                    Update Jam
+                </Button>
+                <Button
+                  color="dark"
+                  radius="xl"
+                  onClick={() => deleteJamSess(oneJamSess._id)}>
+                    Delete Jam
+                </Button>
+            </div>
+        
         <Modal
             opened={isEditing}
             onClose={() => setIsEditing(false)}
@@ -95,8 +118,10 @@ function JamSession({oneJamSess, deleteJamSess, hostid, formatDate, getHostData,
                     hostid={hostid}
                 />
                 <button type="submit">Update Jam Session</button>
-            </form>
-            {successMessage && <p>{successMessage}</p>}
+              </form>
+              
+              {successMessage && <p>{successMessage}</p>}
+              
         </Modal>
     </div>
   )

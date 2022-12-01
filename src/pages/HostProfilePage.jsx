@@ -77,11 +77,15 @@ function HostProfilePage() {
     }
     
   return (
-    <>
+    <div className="host-profile-main">
       <p>Hello {currentHost && currentHost.barName}!</p>
+      
       <Link to="/host/create-jam-session" >Create Jam Session</Link>
+
       <button type="button" onClick={handlePastClick}>Your Past Events</button>
+
       <h3>Your Scheduled Jam Sessions: </h3>
+
       {jamSessions && jamSessions.map(oneJamSess =>{
         return(
           <JamSession 
@@ -96,7 +100,7 @@ function HostProfilePage() {
         )
       })}
 
-    </>
+    </div>
   )
 }
 
