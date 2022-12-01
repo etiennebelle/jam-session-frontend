@@ -171,7 +171,12 @@ function JamSessionDetails() {
                                 Leave the Session!
                             </Button>
                         </div>
-                        : <button type='button' onClick={addPlayers}>Join the Session!</button> 
+                        :
+                        <div className='players-message'>
+                            <Button type='button' onClick={addPlayers} color="dark" radius="xl">
+                                Join the Session!
+                            </Button>
+                        </div>
                     }
                 </div>
             </div>    

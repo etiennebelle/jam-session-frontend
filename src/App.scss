@@ -21,7 +21,7 @@
     flex-direction: column;
     align-items: center;
     padding: 0 1.2em 1.2em 1.2em;
-    margin-top: 5.2rem;
+    margin-top: 5rem;
 }
 
 h2 {
@@ -37,25 +37,19 @@ a {
 .navbar{
     position: fixed;
     width: 100%;
-    height: 2rem;
     top: 0;
     left: 0;
     z-index: 1;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    padding: 2rem;
+    padding: 1rem;
     text-transform: uppercase;
     font-weight: 600;
     background-color: white;
 }
 
 .nav-left {
-    width: 50vw;
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
+
 }
 
 .nav-left a {
@@ -64,11 +58,7 @@ a {
 }
 
 .nav-right {
-    width: 50vw;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 5rem;
+
 }
 
 /*********************** home ***********************/
@@ -120,7 +110,7 @@ a {
     border-radius: .5rem;
 }
 
-/*********************** navbar ***********************/
+/*********************** searchbar ***********************/
 
 .searchbar-ctn{
     top: 4rem;
@@ -452,14 +442,17 @@ a {
         display: flex;
 
         .nav-left{
-            width: 75vw;
+            width: 50vw;
             display: flex;
             flex-direction: row;
             gap: 1.5rem;
         }
 
         .nav-right{
-            width: 25vw;
+            width: 50vw;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1.5rem;
         }
     }
 }
