@@ -265,7 +265,7 @@ a {
 
 /*********************** jam-details ***********************/
 
-.details-main {
+.details-infos, .details-players {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -319,6 +319,65 @@ a {
     .jam-time {
         border-left: 1px solid lightgray;
         padding-left: 1rem;
+    }
+}
+
+.jam-details-host a {
+    text-transform: uppercase;
+    font-weight: 700;
+    color: black;
+
+    &:hover {
+        color: grey;
+    }
+}
+
+.jam-details-description{
+    display: flex;
+    margin: 1rem 0;
+    padding-top: 1rem;
+    border-top: 1px solid grey;
+    color: grey;
+    font-weight: 400;
+}
+
+.users-playing{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .7rem;
+}
+
+.player-ctn{
+    width: 100%;
+    display: flex;
+    border: 1px solid lightgrey;
+    border-radius: .5rem;
+}
+
+.player-info{
+    width: 50%;
+    padding: .4rem;
+    text-align: center;
+
+    &:nth-child(2){
+        border-left: 1px solid lightgrey;
+        color: grey;
+    }
+}
+
+.players-btns{
+    margin-top: 1rem;
+}
+
+.players-message {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    Button {
+        margin-top: 1rem;
     }
 }
 

@@ -53,9 +53,6 @@ function UserSignupForm() {
 
     return (
         <div>
-            <div className='section-title'>
-                <h3>Sign Up</h3>
-            </div>
             <form onSubmit={handleSubmit} className='crud-form'>
                 <label className='create-label'>
                     <TextInput

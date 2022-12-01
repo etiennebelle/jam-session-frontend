@@ -37,8 +37,6 @@ function UserLoginComponent({handleSubmit, email, setEmail, password, setPasswor
         
     </form>
     { errorMessage && <p>{errorMessage}</p> }
-    <p>Don't have an account yet?</p>
-    <Link to={"/user/signup"}> Sign Up</Link>
     </div>
   )
 }

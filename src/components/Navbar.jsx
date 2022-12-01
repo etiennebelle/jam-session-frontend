@@ -16,7 +16,7 @@ function Navbar() {
     <div className='navbar'>
       <div className='nav-left'>
         <div className='nav-home'>
-          <Link to='/'>Home</Link>
+          <Link to='/'>JAM!</Link>
         </div>
         <div className='nav-jam-list'>
           <Link to='/events'>Jam Sessions</Link>
