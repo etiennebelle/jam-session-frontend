@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# JAM!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+JAM! it's a platform to help artists find jam sessions events near them and to let host publish jam sessions events to give them visibility and get artists play in them. 
 
-In the project directory, you can run:
+## User Stories
 
-### `npm start`
+-  **404:** As an anon/user I can see a 404 page if I try to reach a page that does not exist so that I know it's my fault
+-  **User Signup:** As an anon I can sign up to the platform so that I can signup to play at jam session
+-  **User Login:** As a user I can login to the platform so that I can see the jam sessions I signed up for and the past jam sessions I attended
+-  **User Logout:** As a user I can logout from the platform so no one else can use it
+-  **Host Signup:** As an anon I can sign up to the platform as a host so that I can create and publish jam session events 
+-  **Host Login:** As a host I can login to the platform so that I can see the jam sessions I created, both upcoming and past
+-  **Host Logout:** As a host I can logout from the platform so no one else can use it
+-  **Create Jam Session** As a host I can create a jam session so that I can give it visibility and find artists to play in it 
+-  **Jam Sessions** As an anon/user/host I want to see the published jam sessions
+-  **Jam Sessions Details** As an anon/user/host I want to see details about a jam session, including other artists that will play in it and I want to be able to join it/leave it.
+-  **Search Jam Sessions** As an anon/user/host I want to search jam sessions by name, city, host name, or text so that I know what's happening. Also, I want to be able to filter the jam sessions by date.
+-  **Location Page** As an anon/user I want to see all events, past and upcoming of a specific location
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Backlog
+- Add a filter of jam sessions based on the distance from my location
+- Allow users and hosts to update their credentials
+- Public profile for artists
+- Allow artists to choose among more instruments, and to be able to select more than one instrument
+- Google sign in
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Client
 
-### `npm test`
+## Routes
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Client / Frontend
 
-### `npm run build`
+## React Router Routes (React App)
+| Path                      | Component                      | Permissions | Behavior                                                     |
+| ------------------------- | --------------------           | ----------- | ------------------------------------------------------------ |
+| `/`                       |                                | public `<Route>`            | Home page                                        |
+| `/user/signup`            | SignupPage                     | anon only  `<IsAnonymous>`  | Signup form, link to login, navigate to profile after signup  |
+| `/user/login`             | LoginPage                      | anon only `<IsAnonymous>`   | Login form, link to signup, navigate to profile after login   |
+| `/user/profile`           | LoginPage                      | user only `<IsPrivateUser>` | List of events signed up for (future and pasts)               |
+| `/host/signup`            | SignupPage                     | anon only  `<IsAnonymous>`  | Signup form, link to login, navigate to profile after signup  |
+| `/host/login`             | LoginPage                      | anon only `<IsAnonymous>`   | Login form, link to signup, navigate to profile after login   |
+| `/host/profile`           | LoginPage                      | host only `<IsPrivateHost>` | List of events created (future and pasts), link to location   |
+| `/host/create-jam-session`| LoginPage                      | host only `<IsPrivateHost>` | Form to create a jam session                                  |
+| `/events`                 | NavBar, ElementList, FooterBar | public `<Route>`            | Shows all jam sessions and allows search                      |
+| `/events/:id`             | NavBar, ElementList, FooterBar | public `<Route>`            | Shows more details and allows artist to join                  |
+| `/location/:id`           | NavBar, ElementList, FooterBar | public `<Route>`            | Shows all jam sessions of that location (future and past)     |
+          
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Components
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- IsAnonymous
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- IsPrivateHost
 
-### `npm run eject`
+- IsPrivateUser
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Navbar
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- UserLoginForm
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- UserLoginComponent
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- UserSignupForm
 
-## Learn More
+- JamSession
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- JamSessionForm
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Event Card
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
