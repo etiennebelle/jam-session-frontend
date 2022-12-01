@@ -17,8 +17,8 @@ function JamSessionForm({ jamSessionName, setJamSessionName, date, setDate, time
     ]
 
     return (
-        <div>
-            <label>
+        <div className='labels-ctn'>
+            <label className='create-label'>
                 <TextInput
                     type="string" 
                     value={jamSessionName}
@@ -29,7 +29,7 @@ function JamSessionForm({ jamSessionName, setJamSessionName, date, setDate, time
                     required
                 />
             </label>
-            <label>
+            <label className='create-label'>
                 <DatePicker
                     type="date" 
                     name='date'
@@ -42,7 +42,7 @@ function JamSessionForm({ jamSessionName, setJamSessionName, date, setDate, time
                     minDate={dayjs(new Date()).toDate()}
                 /> 
             </label>
-            <label>
+            <label className='create-label'>
                 <TimeInput
                     type="time" 
                     name='time'
@@ -56,7 +56,7 @@ function JamSessionForm({ jamSessionName, setJamSessionName, date, setDate, time
                     required
                 /> 
             </label>
-            <label>
+            <label className='create-label'>
                 <NumberInput
                     type="number" 
                     name='capacity'
@@ -68,7 +68,7 @@ function JamSessionForm({ jamSessionName, setJamSessionName, date, setDate, time
                     required
                 />
             </label>
-            <label>
+            <label className='create-label'>
                 <Select
                     value={genre}
                     onChange={setGenre}
@@ -79,7 +79,7 @@ function JamSessionForm({ jamSessionName, setJamSessionName, date, setDate, time
                     required
                 />
             </label>
-            <label>
+            <label className='create-label'>
                 <Textarea
                     type="text" 
                     name='description'
@@ -91,6 +91,7 @@ function JamSessionForm({ jamSessionName, setJamSessionName, date, setDate, time
                 />
             </label>
             <FileInput
+                className='create-label'
                 type="file"
                 name="imageUrl"
                 accept="image/png, image/jpg"

@@ -1,3 +1,9 @@
+// ~Jet : 333533
+// ~Eerie Black : 242423
+// ~Maize Crayola : F5CB5C
+// ~Alabaster : E8EDDF
+// ~Gainsboro : CFDBD5
+
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap');
 
 * {
@@ -10,7 +16,7 @@
     font-family: 'IBM Plex Sans', sans-serif;
 }
 
-#main {
+.main {
     padding: 0 1.2em 1.2em 1.2em;
     margin-top: 5.2rem;
     /* global margin*/
@@ -65,7 +71,8 @@ a {
 
 /*********************** navbar ***********************/
 
-.upcoming-events {
+.events {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -91,6 +98,10 @@ a {
     overflow: hidden;
     font-size: .9rem;
     font-weight: 500;
+
+    &:last-child{
+        margin-bottom: 0;
+    }
 }
 
 .jam-top{
@@ -133,7 +144,7 @@ a {
         position: absolute;
         bottom: .5rem;
         left: 1rem;
-        color: white;
+        color: #E8EDDF;
         font-size: 1.5em;
         font-weight: 700;
 
@@ -176,12 +187,66 @@ a {
     gap: 1rem;
 }
 
+/*********************** jam-details ***********************/
+
+
 /*********************** host-profile ***********************/
 
 .host-profile-main{
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.greeting{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+}
+
+.host-btns{
+    display: flex;
+    margin: 3rem 0 1rem;
+    gap: 1rem;
+}
+
+.no-jams-ctn{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .no-jams-btn{
+        padding: 1rem 1rem;
+    }
+}
+
+/*********************** create-jam ***********************/
+
+.crud-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.labels-ctn{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.create-label{
+    width: 100%;
+}
+
+.crud-btn{
+    margin-top: 2rem;
 }
 
 @media (max-width: 768px) {

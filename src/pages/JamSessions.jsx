@@ -74,7 +74,7 @@ function JamSessions() {
     
 
     return jamsArr.length > 0 ? (
-        <div>
+        <div className='main'>
             <div className='searchbar-ctn'>
                 <div className='searchbar'>
 
@@ -98,7 +98,7 @@ function JamSessions() {
                 <label><input type="checkbox" onClick={handleClick}></input>Only Show Sessions With Spots Left</label>
             </div>
 
-            <section className='upcoming-events'>
+            <section className='events upcoming-events'>
                 <div className='section-title'>
                     <h2>Upcoming Jam Sessions</h2>
                 </div>
