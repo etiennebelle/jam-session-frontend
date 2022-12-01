@@ -23,10 +23,7 @@ function App() {
   
   return (
     <div className="App">
-      <div id='navbar'>
         <Navbar />
-      </div>
-      <div id='main'>
       <Routes>
         <Route path="/" element={ <Home /> } />
         <Route path="/events" element={<JamSessions /> } />
@@ -41,7 +38,6 @@ function App() {
         <Route path="/host/create-jam-session" element={<IsPrivateHost><CreateJamSession /></IsPrivateHost>} />
         <Route path='*' element={<NotFound />}/>
         </Routes>
-      </div>
     </div>
   );
 }

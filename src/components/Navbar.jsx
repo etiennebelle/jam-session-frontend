@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useContext, useState } from "react";                      
 import { HostAuthContext } from '../contexts/host-auth.context';
 import { UserAuthContext } from '../contexts/user-auth.context';
-import { Burger, Menu } from '@mantine/core';
+import { Burger, Menu, Button } from '@mantine/core';
 
 
 function Navbar() {
@@ -25,13 +25,17 @@ function Navbar() {
       <div className='nav-right'>
           {user ? 
               <div className='user-nav-ctn'>
-                <Link className='user-profile profile-link' to="/user/profile">Your Profile</Link>
-                <button className='nav-btn user-btn' onClick={logOutUser}>Logout User</button>
+                <Link className='user-profile profile-link' to="/user/profile">Profile</Link>
+                <Button className='nav-btn user-btn' type='button' onClick={logOutUser} color="dark" radius="xl">
+                    Logout
+                </Button>
               </div>
             : host ?
               <div className='host-nav-ctn'>
-                <Link className='host-profile profile-link' to="/host/profile">Your Profile</Link>
-                <button className='nav-btn host-btn' onClick={logoutHost}>Logout Host</button>
+                <Link className='host-profile profile-link' to="/host/profile">Profile</Link>
+                <Button className='nav-btn host-btn' type='button' onClick={logoutHost} color="dark" radius="xl">
+                    Logout
+                </Button>
               </div>
             : 
             <Menu shadow="md" width={200}>
