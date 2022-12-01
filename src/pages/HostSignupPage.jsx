@@ -1,12 +1,11 @@
 import { useState, useContext } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import {HostAuthContext} from '../contexts/host-auth.context';
-
+import Autocomplete from "react-google-autocomplete";
 
 function HostSignupPage() {
     const [barName, setBarName] = useState('')
     const [address, setAddress] = useState('')
-    const [town, setTown] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [errorMessage, setErrorMessage] = useState(undefined);
@@ -22,7 +21,7 @@ function HostSignupPage() {
                 headers: {
                     'Content-type': 'application/json', 
                 },
-                body: JSON.stringify({barName, address, town, email, password})
+                body: JSON.stringify({barName, address, email, password})
             })
             const parsed = await response.json()
             if (response.status === 201) {
@@ -46,20 +45,21 @@ function HostSignupPage() {
                 onChange={event => setBarName(event.target.value)} 
                 required/>
             </label>
-            <label>Address: 
-                <input 
-                type="text" 
+            <label>Address:             </label>
+
+            <Autocomplete
+                apiKey='AIzaSyDYJYkW2xCArWrPfnFeUhmQP9D0CCcGu_Q'
+                onPlaceSelected={(place) => {
+                    setAddress(place.formatted_address);
+                }}
+                options={{
+                    types: ["geocode", "establishment"],
+                  }}
                 value={address} 
                 onChange={event => setAddress(event.target.value)} 
-                required/>
-            </label>
-            <label>Town: 
-                <input 
-                type="text" 
-                value={town} 
-                onChange={event => setTown(event.target.value)} 
-                required/>
-            </label>
+                placeholder=""
+                required
+            />
             <label>Email: 
                 <input 
                 type="text" 

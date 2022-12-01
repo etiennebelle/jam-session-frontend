@@ -127,7 +127,7 @@ function JamSessionDetails() {
                 </div>
                 <div className='jam-host-ctn'>
                     <p>Created by: <Link to={`/locations/${jamSession.host._id}`}>{jamSession.host.barName}</Link></p>
-                    <p>{jamSession.host.address}, {jamSession.host.town}</p>
+                    <p>{jamSession.host.address}</p>
                 </div>
                 <div className='jam-description-ctn'>
                     <p>{jamSession.description}</p>

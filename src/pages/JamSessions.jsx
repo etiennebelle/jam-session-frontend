@@ -112,8 +112,7 @@ function JamSessions() {
                     })
                     .filter(jam => {
                         const filter = filteredJams.toLowerCase();
-                        return jam.host.town.toLowerCase().includes(filter)
-                            || jam.host.barName.toLowerCase().includes(filter)
+                        return jam.host.barName.toLowerCase().includes(filter)
                             || jam.jamSessionName.toLowerCase().includes(filter)
                     }) 
                     .map((jam) => (
@@ -135,9 +134,6 @@ function JamSessions() {
                             <div className='jam-bottom'>
                                 <div className='jam-host'>
                                     <p>By <Link to={`/locations/${jam.host._id}`}>{jam.host.barName}</Link></p>
-                                </div>
-                                <div className='jam-town'>
-                                    <p>{jam.host.town}</p>
                                 </div>
                             </div>
                         </div>
