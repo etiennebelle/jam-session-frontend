@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { format } from 'date-fns'
 
 
 function LocationPage() {
@@ -30,6 +31,9 @@ function LocationPage() {
       fetchLocationDetails()
     }
 }
+  const formatDate = (oneDate) => {
+    return format(new Date(oneDate), 'PPPP');
+  }
 
   useEffect(() => {
     fetchLocationDetails();
@@ -47,7 +51,7 @@ function LocationPage() {
               <div key={jamSess._id}>
                 <img src={jamSess.image} />
                 <h2> <Link to={`/events/${jamSess._id}`}>{jamSess.jamSessionName}</Link></h2>
-                <p>{jamSess.date}</p>
+                <p>{formatDate(jamSess.date)}</p>
                 <p>{jamSess.time}</p>
                 <p>{jamSess.genre}</p>
               </div>
