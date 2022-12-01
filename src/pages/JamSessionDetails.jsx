@@ -113,13 +113,13 @@ function JamSessionDetails() {
 
 
     return jamSession ? (
-        <div>
+        <div className='details-main'>
             <div className='cover'>
                 <div className='jam-cover' style={{ backgroundImage: `url(${jamSession.image})` }}>
                     <div className='jam-name'><p><span className={`${jamSession.genre.toLowerCase()}`}></span>{jamSession.jamSessionName}</p></div>
                 </div>
             </div>
-            <div className='details-main'>
+            <div className='details-infos left'>
                 <div className='jam-details-top'>
                     <p className='jam-date'>{jamSession.date}</p>
                     <p className='jam-time'>{jamSession.time.slice(16,21)}</p>
@@ -128,24 +128,53 @@ function JamSessionDetails() {
                     <p>By: <Link to={`/locations/${jamSession.host._id}`}>{jamSession.host.barName}</Link></p>
                     <p>{jamSession.host.address}</p>
                 </div>
+                <div className='jam-details-description'>
+                     <p>{jamSession.description}</p>
+                </div>
             </div>
+            <div className='details-players right'>
+                <div className='section-title'>
+                    <h4>Player</h4>
+                </div>
+                <div className='users-playing'>
+                    {jamSession.players.map((onePlayer)=> {
+                        return (
+                            <div className='player-ctn' key={onePlayer._id}>
+                                <div className='player-info player-name' >
+                                    <p>{onePlayer.username}</p>
+                                </div>
+                                <div className='player-info player-instrument' >
+                                    {onePlayer.instrument}
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
             
-                <div>
-                    {maxCapacity ? <p>This event has already reached the max number of artists. If you want to join a jam session, <Link to='/events'>checkout other events!</Link></p>
-                        : !isLoggedIn 
-                        ? <div> 
-                        <p>You need to login/signup to join the session</p> 
-                        <button type='button' onClick={()=> setOpened(true)}>Login/Signup </button> 
+                <div className='players-btns'>
+                    {maxCapacity ?
+                        <div className='players-message'> 
+                            <p>This event has already reached the max number of artists. If you want to join a jam session, <Link to='/events'>checkout other events!</Link></p>
+                        </div>
+                        : !isLoggedIn ? 
+                        <div className='players-message'> 
+                            <p>You need to login/signup to join the session</p> 
+                            <Button type='button' onClick={()=> setOpened(true)} color="dark" radius="xl">
+                                Login/Signup
+                            </Button>
                         </div>
                         : userAttending  
                         ? 
-                        <div>
+                        <div className='players-message'>
                             <p>You are attending this jam session</p>
-                            <button type='button' onClick={removePlayers}>Leave the Session!</button>
+                            <Button type='button' onClick={removePlayers} color="dark" radius="xl">
+                                Leave the Session!
+                            </Button>
                         </div>
                         : <button type='button' onClick={addPlayers}>Join the Session!</button> 
                     }
                 </div>
+            </div>    
         </div>
     ) : (<></>)
 }

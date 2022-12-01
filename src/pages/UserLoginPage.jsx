@@ -1,5 +1,6 @@
 import React from 'react'
-import UserLoginForm from '../components/UserLoginForm'
+import UserLoginForm from '../components/UserLoginForm';
+import { Link } from 'react-router-dom';
 
 function UserLoginPage() {
     return (
@@ -8,6 +9,9 @@ function UserLoginPage() {
                 <h3>Log In</h3>
             </div>
             <UserLoginForm />
+            <div className='form-redirect'>
+                <p>Don't have an account? <Link to="/user/signup">Signup</Link></p>
+            </div>
         </div>
     )
 }

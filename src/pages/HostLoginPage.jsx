@@ -39,7 +39,7 @@ function HostLoginPage() {
     }
 
   return (
-    <div>
+    <div className="main">
         <div className='section-title'>
             <h3>Host Log In</h3>
         </div>

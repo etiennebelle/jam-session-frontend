@@ -54,14 +54,16 @@ function UserProfilePage() {
 
     if (currentUser && currentUser.jamSessions.length < 1){
         return (
-        <div className='no-jams-ctn'>
-            <h2>You didn't sign up for any jam sessions yet!</h2>
-            <div className="no-jams-btn">
-              <Link to="/events" >
-                <Button color="dark" radius="xl">
-                  Explore Jam Sessions
-                </Button>
-              </Link>
+        <div className='user-profile-main main'>
+            <div className='no-jams-ctn'>
+                <h2>You didn't sign up for any jam sessions yet!</h2>
+                <div className="no-jams-btn">
+                <Link to="/events" >
+                    <Button color="dark" radius="xl">
+                    Explore Jam Sessions
+                    </Button>
+                </Link>
+                </div>
             </div>
         </div>
         )
@@ -72,7 +74,7 @@ function UserProfilePage() {
       }
     
     return (
-        <div className="host-profile-main main">
+        <div className="user-profile-main main">
             <div className="greeting-host greeting">
                 <h2>{currentUser && currentUser.username}!</h2>
             </div>

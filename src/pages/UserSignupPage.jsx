@@ -6,6 +6,9 @@ function UserSignupPage() {
 
     return (
         <div className='main'>
+            <div className='section-title'>
+                <h3>Sign Up</h3>
+            </div>
             <UserSignupForm />
             <div className='form-redirect'>
                 <p>Already have an account? <Link to="/user/login">Login</Link></p>
