@@ -34,7 +34,6 @@ function UserLoginForm() {
             } else {
                 setErrorMessage(parsed.message)
             }
-
         } catch (error) {
             console.log(error);
             const errorDescription = error.message;
