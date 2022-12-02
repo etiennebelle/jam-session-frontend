@@ -196,22 +196,55 @@ Jam Sessions model
   - body:
     - email
     - password
+- GET /host/verify
 - POST /jam-sessions
-- POST /auth/logout
-  - body: (empty)
-- POST /user/me/favorite
   - body:
-    - restaurantId
-- DELETE /user/me/favorite/:restaurantId
-  - body: (empty)
-- GET /restaurant
-- POST /restaurant
+    - jamSessionName, 
+    - date, 
+    - time, 
+    - capacity, 
+    - genre, 
+    - description, 
+    - host, 
+    - players
+- PUT /jam-sessions/:id
   - body:
-    - name
-    - phone
-    - address
-- GET /restaurant/:id
-
+    - formData
+- DELETE /host/:id
+    - host.data._id
+- GET /host/:id
+  - body: (empty)
+- GET /host/:id/past-jam-sessions
+  - body: (empty)
+- POST /user/signup
+  - body:
+    - username
+    - instrument
+    - email
+    - password
+- POST /user/login
+  - body:
+    - email
+    - password
+- GET /user/verify
+- GET /user/:id
+  - body: (empty)
+- GET /user/:id/past-jam-sessions
+  - body: (empty)
+- GET /events
+  - body: (empty)
+- GET /events/:id
+  - body: (empty)
+- PUT /events/:id
+  - body: user.data._id
+- DELETE /events/:id
+  - body: user.data._id
+- GET /locations
+  - body: (empty)
+- GET /locations/:id
+  - body: (empty)
+- GET /locations/:id/past-events
+  - body: (empty)
 
 ## Links
 
