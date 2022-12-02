@@ -19,7 +19,7 @@ function Navbar() {
           <Link to='/'>JAM!</Link>
         </div>
         <div className='nav-jam-list'>
-          <Link to='/events'>Jam Sessions</Link>
+          <Link to='/events'>Events</Link>
         </div>
       </div>
       <div className='nav-right'>
@@ -41,13 +41,15 @@ function Navbar() {
             <Menu shadow="md" width={200}>
               <Menu.Target>
                 <Burger
-                  size='md'
+                  size='sm'
                   opened={opened}
                   onClick={() => setOpened((o) => !o)}
                   title={title}
                 />
               </Menu.Target>
               <Menu.Dropdown>
+                <Menu.Label> Explore </Menu.Label>
+                <Menu.Item><div className='user-signup signup-link'><Link to='/events'>Jam Sessions</Link></div></Menu.Item>
                 <Menu.Label> User </Menu.Label>
                 <Menu.Item><div className='user-signup signup-link'><Link to="/user/signup">Signup</Link></div></Menu.Item>
                 <Menu.Item><div className='user-login login-link'><Link to="/user/login">Login</Link></div></Menu.Item>
