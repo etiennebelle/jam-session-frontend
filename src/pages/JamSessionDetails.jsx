@@ -198,6 +198,7 @@ function JamSessionDetails() {
                             setPassword={setPassword}
                             errorMessage={errorMessage}
                         />
+                         <p>Don't have an account? <Link to="/user/signup">Signup</Link></p>
                     </Modal>
                 </div>  
                 </div>
