@@ -46,7 +46,10 @@ function HostProfilePage() {
     } 
 
     const handlePastClick = () => {
-      setFutureEvents((prv)=> prv = !prv)
+      setFutureEvents(prv => !prv)
+    }
+
+    useEffect(() => {
       getHostData()
       if (futureEvents) {
         setPastOrFutureText("Past Jams")
@@ -55,8 +58,7 @@ function HostProfilePage() {
         setPastOrFutureText("Upcoming Jams")
         setPastOrFutureTitle('Past Jam')
       }
-    }
-
+    }, [futureEvents])
 
     useEffect(() => {
       if (host) {
