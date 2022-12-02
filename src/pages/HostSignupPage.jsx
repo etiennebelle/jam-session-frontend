@@ -2,7 +2,7 @@ import { useState, useContext } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import {HostAuthContext} from '../contexts/host-auth.context';
 import Autocomplete from "react-google-autocomplete";
-import { TextInput, PasswordInput, Textarea, Select, FileInput, NumberInput, Button } from '@mantine/core';
+import { Input, TextInput, PasswordInput, Textarea, Select, FileInput, NumberInput, Button } from '@mantine/core';
 
 
 function HostSignupPage() {
@@ -69,21 +69,22 @@ function HostSignupPage() {
                     onChange={event => setBarName(event.target.value)} 
                     required/>
                 </label>
-                <label className='create-label'> 
-            
-                <Autocomplete
-                    apiKey={`${process.env.REACT_APP_GOOGLE_API_KEY}`}
-                    onPlaceSelected={(place) => {
-                        setAddress(place.formatted_address);
-                    }}
-                    options={{
-                        types: ["geocode", "establishment"],
-                    }}
-                    value={address} 
-                    onChange={event => setAddress(event.target.value)} 
-                    placeholder=""
-                    required
-                />
+                  <label className='create-label'> 
+                      <Autocomplete
+                            style={{width: '100%', padding: '.5rem', fontSize: '.88rem', letterSpacing:'.03rem', }}
+                            className='google-address-input'
+                            apiKey={`${process.env.REACT_APP_GOOGLE_API_KEY}`}
+                            onPlaceSelected={(place) => {
+                                setAddress(place.formatted_address);
+                            }}
+                            options={{
+                                types: ["geocode", "establishment"],
+                            }}
+                            value={address} 
+                            onChange={event => setAddress(event.target.value)} 
+                            placeholder="Your address"
+                            required
+                          />
                 </label>
                 <label className='create-label'>
                     <TextInput 

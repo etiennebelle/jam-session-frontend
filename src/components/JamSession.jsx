@@ -101,7 +101,8 @@ function JamSession({oneJamSess, deleteJamSess, hostid, getHostData, jamSessions
                 </Button>
             </div>
         
-        <Modal
+          <Modal
+              className="login-modal"
             opened={isEditing}
             onClose={() => setIsEditing(false)}
             title="Edit Jam Session"
