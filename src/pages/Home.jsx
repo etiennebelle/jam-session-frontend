@@ -36,7 +36,7 @@ function Home() {
             <p>Publish upcoming jam sessions event to have more visibility and to have artists playing in them.</p>
           </div>
         </div>
-        <div className="section-title">
+        <div className="section-title ">
           <h2>Music can change the world because it can change people.</h2>
         </div>
         <Link to='/events'>
