@@ -4,6 +4,7 @@ import { Input } from '@mantine/core';
 import { DatePicker } from '@mantine/dates';
 import { format } from 'date-fns'
 import dayjs from 'dayjs';
+import Footer from '../components/Footer';
 
 
 function JamSessions() {
@@ -74,6 +75,7 @@ function JamSessions() {
     
 
     return jamsArr.length > 0 ? (
+        <>
         <div className='main'>
             <div className='searchbar-ctn jams-left'>
                 <div className='searchbar'>
@@ -140,7 +142,9 @@ function JamSessions() {
                     ))}
             </section>
             
-        </div>
+            </div>
+            <Footer />
+        </>
     ) : (<></>)
 }
 

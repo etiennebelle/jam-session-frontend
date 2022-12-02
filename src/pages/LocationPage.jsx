@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { format } from 'date-fns'
 import { Button } from '@mantine/core';
+import Footer from '../components/Footer';
 
 
 function LocationPage() {
@@ -64,6 +65,7 @@ function LocationPage() {
   }
 
   return (
+    <>
     <div className='main'>
       <div className="greeting-host greeting">
           <h3>{location.barName}</h3>
@@ -118,7 +120,9 @@ function LocationPage() {
       : <p>No Jam Sessions Here</p>
     }
 
-    </div>
+      </div>
+      <Footer />
+    </>
   )
 }
 

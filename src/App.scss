@@ -94,7 +94,7 @@ a {
 
 .how-it-works {
     background-color: #E8EDDF;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 
 }
 .intro{
@@ -142,10 +142,8 @@ a {
     color: white;
     font-size: 0.9rem;
     text-align: center;
-    position: fixed;
+    margin: 0;
     width: 100%;
-    left: 0;
-    bottom: 0;
 }
 
 .footer a {
@@ -713,7 +711,7 @@ a {
 
     .cover{
         width: 60vw;
-
+        padding-top: .2rem;
         .jam-name{
             font-size: 2rem;
         }

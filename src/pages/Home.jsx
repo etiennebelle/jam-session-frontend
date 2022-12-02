@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button } from '@mantine/core';
+import Footer from '../components/Footer';
 
 function Home() {
   return (
+    <>
     <div className="main">
       <header className="home-header left">
         <div className="hero">
@@ -42,8 +44,10 @@ function Home() {
               Explore Jam Sessions
             </Button>
           </Link>
-        </section>
-    </div> 
+      </section>
+      </div> 
+      <Footer />
+    </>
   )
 }
 

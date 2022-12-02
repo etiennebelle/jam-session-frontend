@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Modal, Button, Group } from '@mantine/core';
 import UserLoginForm from '../components/UserLoginForm';
 import UserLoginComponent from '../components/UserLoginComponent';
+import Footer from '../components/Footer';
 
 function JamSessionDetails() {
 
@@ -113,6 +114,7 @@ function JamSessionDetails() {
 
 
     return jamSession ? (
+        <>
         <div className='details-main'>
             <div className='details-ctn'>
             <div className='cover'>
@@ -200,7 +202,9 @@ function JamSessionDetails() {
                 </div>  
                 </div>
              </div>   
-        </div>
+            </div>
+            <Footer />
+        </>
     ) : (<></>)
 }
 
