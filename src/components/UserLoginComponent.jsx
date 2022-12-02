@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function UserLoginComponent({handleSubmit, email, setEmail, password, setPassword, errorMessage}) {
   return (
-    <div className='user-login-form'>
+    <div className='labels-ctn'>
     <form className='crud-form' onSubmit={handleSubmit}>
         <label className='create-label'>
             <TextInput

@@ -43,7 +43,7 @@ function HostLoginPage() {
         <div className='section-title'>
             <h3>Host Log In</h3>
         </div>
-        <div className="main labels-ctn">
+        <div className="labels-ctn">
         <form className='crud-form' onSubmit={handleSubmit}>
             <label className='create-label'>
                 <TextInput 
