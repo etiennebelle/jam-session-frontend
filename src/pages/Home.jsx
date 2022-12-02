@@ -19,8 +19,8 @@ function Home() {
           </Link>
         </div>
       </header>
-      <section className="home-main right">
-        <div className="section-title">
+      <section className="home-main how-it-works right">
+        <div className="section-title ">
           <h2>How it works</h2>
         </div>
         <div className="home-card-ctn">

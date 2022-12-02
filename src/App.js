@@ -17,7 +17,7 @@ import JamSessions from './pages/JamSessions';
 import JamSessionDetails from './pages/JamSessionDetails';
 import LocationPage from './pages/LocationPage';
 import NotFound from './pages/NotFound';
-
+import Footer from './components/Footer';
 
 function App() {
   
@@ -37,7 +37,8 @@ function App() {
         <Route path="/host/profile" element={<IsPrivateHost><HostProfilePage /></IsPrivateHost>} />
         <Route path="/host/create-jam-session" element={<IsPrivateHost><CreateJamSession /></IsPrivateHost>} />
         <Route path='*' element={<NotFound />}/>
-        </Routes>
+      </Routes>
+        <Footer/>
     </div>
   );
 }
