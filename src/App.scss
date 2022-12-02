@@ -175,7 +175,7 @@ a {
     flex-direction: column;
     padding-bottom: .7rem;
     margin-bottom: 1.2rem;
-    border: 1px solid lightdi;
+    border: 1px solid lightgrey;
     border-radius: .5rem;
     overflow: hidden;
     font-size: 1rem;
@@ -252,7 +252,7 @@ a {
     display: flex;
     margin: 0.5rem 1rem;
     padding-top: 1rem;
-    border-top: 1px solid di;
+    border-top: 1px solid lightgrey;
     color: #F5CB5C;
     font-weight: 400;
 }
@@ -346,7 +346,7 @@ a {
     display: flex;
     margin: 1rem 0;
     padding-top: 1rem;
-    border-top: 1px solid di;
+    border-top: 1px solid lightgrey;
     color: #F5CB5C;
     font-weight: 400;
 }
@@ -361,7 +361,7 @@ a {
 .player-ctn{
     width: 100%;
     display: flex;
-    border: 1px solid lightdi;
+    border: 1px solid lightgrey;
     border-radius: .5rem;
 }
 
@@ -371,7 +371,7 @@ a {
     text-align: center;
 
     &:nth-child(2){
-        border-left: 1px solid lightdi;
+        border-left: 1px solid lightgrey;
         color: #F5CB5C;
     }
 }
@@ -638,6 +638,43 @@ a {
 
     .labels-ctn {
         width: 30%;
+    }
+    
+    .jam-session-card{
+        width: 32vw;
+
+        .jam-main {
+            width: 100%;
+            height: 300px;
+        }
+
+        &:hover{
+            border: 1px solid #F5CB5C;
+        }
+    }
+
+    .details-ctn{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cover{
+        width: 60vw;
+
+        .jam-name{
+            font-size: 2rem;
+        }
+    }
+
+    .jam-cover {
+        height: 500px;
+        border-radius: 10px;
+    }
+
+    .details-infos-ctn{
+        width: 60vw;
     }
 
 } // Media - Laptop
