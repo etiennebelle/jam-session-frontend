@@ -36,16 +36,16 @@ JAM! it's a platform to help artists find jam sessions events near them and to l
 | Path                      | Component                      | Permissions | Behavior                                                     |
 | ------------------------- | --------------------           | ----------- | ------------------------------------------------------------ |
 | `/`                       |                                | public `<Route>`            | Home page                                        |
-| `/user/signup`            | SignupPage                     | anon only  `<IsAnonymous>`  | Signup form, link to login, navigate to profile after signup  |
-| `/user/login`             | LoginPage                      | anon only `<IsAnonymous>`   | Login form, link to signup, navigate to profile after login   |
-| `/user/profile`           | LoginPage                      | user only `<IsPrivateUser>` | List of events signed up for (future and pasts)               |
-| `/host/signup`            | SignupPage                     | anon only  `<IsAnonymous>`  | Signup form, link to login, navigate to profile after signup  |
-| `/host/login`             | LoginPage                      | anon only `<IsAnonymous>`   | Login form, link to signup, navigate to profile after login   |
-| `/host/profile`           | LoginPage                      | host only `<IsPrivateHost>` | List of events created (future and pasts), link to location   |
-| `/host/create-jam-session`| LoginPage                      | host only `<IsPrivateHost>` | Form to create a jam session                                  |
-| `/events`                 | NavBar, ElementList, FooterBar | public `<Route>`            | Shows all jam sessions and allows search                      |
-| `/events/:id`             | NavBar, ElementList, FooterBar | public `<Route>`            | Shows more details and allows artist to join                  |
-| `/location/:id`           | NavBar, ElementList, FooterBar | public `<Route>`            | Shows all jam sessions of that location (future and past)     |
+| `/user/signup`            | UserSignupForm                 | anon only  `<IsAnonymous>`  | Signup form, link to login, navigate to profile after signup  |
+| `/user/login`             | UserLoginFor                   | anon only `<IsAnonymous>`   | Login form, link to signup, navigate to profile after login   |
+| `/user/profile`           |                                | user only `<IsPrivateUser>` | List of events signed up for (future and pasts)               |
+| `/host/signup`            |                                | anon only  `<IsAnonymous>`  | Signup form, link to login, navigate to profile after signup  |
+| `/host/login`             |                                | anon only `<IsAnonymous>`   | Login form, link to signup, navigate to profile after login   |
+| `/host/profile`           | JamSessio                      | host only `<IsPrivateHost>` | List of events created (future and pasts), link to location   |
+| `/host/create-jam-session`| JamSessionForm                 | host only `<IsPrivateHost>` | Form to create a jam session                                  |
+| `/events`                 |                                | public `<Route>`            | Shows all jam sessions and allows search                      |
+| `/events/:id`             | UserLoginFor                   | public `<Route>`            | Shows more details and allows artist to join                  |
+| `/location/:id`           |                                | public `<Route>`            | Shows all jam sessions of that location (future and past)     |
           
 
 ## Components
