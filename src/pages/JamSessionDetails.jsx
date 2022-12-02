@@ -181,21 +181,22 @@ function JamSessionDetails() {
                         </div>
                     }
                         </div>
-                <Modal
-                    opened={opened}
-                    className="login-modal"
-                    onClose={() => setOpened(false)}
-                    title="Log in"
-                >
-                    <UserLoginComponent
-                        handleSubmit={handleSubmit}
-                        email={email}
-                        setEmail={setEmail}
-                        password={password}
-                        setPassword={setPassword}
-                        errorMessage={errorMessage}
-                    />
-                </Modal>
+                    <Modal
+                        opened={opened}
+                        className="login-modal"
+                        onClose={() => setOpened(false)}
+                        title="Log in"
+                    >
+                            <UserLoginComponent
+                                className='user-modal'
+                            handleSubmit={handleSubmit}
+                            email={email}
+                            setEmail={setEmail}
+                            password={password}
+                            setPassword={setPassword}
+                            errorMessage={errorMessage}
+                        />
+                    </Modal>
                 </div>  
                 </div>
              </div>   
