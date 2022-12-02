@@ -94,6 +94,7 @@ function JamSession({oneJamSess, deleteJamSess, hostid, getHostData, jamSessions
                     Update Jam
                 </Button>
                 <Button
+                  type="button"
                   color="dark"
                   radius="xl"
                   onClick={() => deleteJamSess(oneJamSess._id)}>

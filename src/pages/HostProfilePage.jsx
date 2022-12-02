@@ -17,6 +17,7 @@ function HostProfilePage() {
 
 
     const { storedToken, isHostLoggedIn, host, authenticateHost } = useContext(HostAuthContext);  
+   
     const getHostData = async() => {
       console.log('futureEvents from getHostData', futureEvents )
 
@@ -45,7 +46,7 @@ function HostProfilePage() {
     } 
 
     const handlePastClick = () => {
-      setFutureEvents(!futureEvents)
+      setFutureEvents((prv)=> prv = !prv)
       getHostData()
       if (futureEvents) {
         setPastOrFutureText("Past Jams")
@@ -62,6 +63,8 @@ function HostProfilePage() {
       getHostData();
       }
     }, [host])
+
+
 
     const formatDate = (oneDate) => {
       return format(new Date(oneDate), 'PPPP');
