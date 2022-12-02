@@ -563,22 +563,6 @@ a {
     .labels-ctn{
         width: 60%;
     }
-
-    .modal-ctn {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .modal-form {
-        width: 100%;
-    }
-
-    .modal-label {
-        width: 100%;
-    }
-
 } // Media - Tablet
 
 @media screen and (min-device-width: 1024px) {
@@ -669,6 +653,16 @@ a {
     .labels-ctn {
         width: 30%;
     }
+
+    .login-modal{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .labels-ctn {
+            width: 100%;
+        }
+    }
     
     .jam-session-card{
         width: 32vw;
@@ -706,20 +700,5 @@ a {
     .details-infos-ctn{
         width: 60vw;
     }
-
-        .modal-ctn {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-    
-        .modal-form {
-            width: 100%;
-        }
-    
-        .modal-label {
-            width: 100%;
-        }
 
 } // Media - Laptop
