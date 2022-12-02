@@ -72,3 +72,157 @@ JAM! it's a platform to help artists find jam sessions events near them and to l
 
 
 
+## Services
+
+- Auth Service
+  - auth.login(user)
+  - auth.signup(user)
+  - auth.logout(user)
+  - auth.login(host)
+  - auth.signup(host)
+  - auth.logout(host)
+
+
+
+# Server / Backend
+
+# Models
+
+User model
+
+```javascript
+{
+  username: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    instrument: {
+      type: [String],
+    },
+    jamSessions: [{type: Schema.Types.ObjectId, ref: 'JamSession'}]
+}
+```
+
+
+
+Host model
+
+```javascript
+ {
+   barName: {
+        type: String, 
+        trim: true, 
+        required: true,
+        unique: true
+    },
+    address: {
+        type: String, 
+        trim: true, 
+        required: true,
+        },
+    email: {
+        type: String, 
+        required: true, 
+        lowercase: true, 
+        trim: true,
+        unique: true
+    }, 
+    password: {
+        type: String, 
+        required: true
+    }, 
+    jamSessions: [{type: Schema.Types.ObjectId, ref: 'JamSession'}]
+ }
+```
+
+Jam Sessions model
+
+```javascript
+ {
+   jamSessionName: {
+        type: String, 
+        trim: true, 
+        required: true,
+    },
+    date: {
+        type: Date, 
+        required: true,
+    },
+    time: {
+        type: String, 
+        required: true,
+    },
+    capacity: {
+        type: Number, 
+        required: true, 
+    }, 
+    genre: {
+        type: String, 
+        required: true
+    },
+    description: {
+        type: String, 
+        required: true
+    }, 
+    image: {
+        type: String, 
+        required: true
+    }, 
+    host: {type: Schema.Types.ObjectId, ref: 'Host'},
+    players: [{type: Schema.Types.ObjectId, ref: 'User'}]
+ }
+```
+
+
+## API Endpoints/Backend Routes
+- POST /host/signup
+  - body:
+    - barName
+    - address
+    - email
+    - password
+- POST /host/login
+  - body:
+    - email
+    - password
+- POST /jam-sessions
+- POST /auth/logout
+  - body: (empty)
+- POST /user/me/favorite
+  - body:
+    - restaurantId
+- DELETE /user/me/favorite/:restaurantId
+  - body: (empty)
+- GET /restaurant
+- POST /restaurant
+  - body:
+    - name
+    - phone
+    - address
+- GET /restaurant/:id
+
+
+## Links
+
+### Git
+
+[Client repository Link](https://github.com/etiennebelle/jam-session-frontend)
+
+[Server repository Link](https://github.com/etiennebelle/jam-session-backend)
+
+[Deployed App Link](https://j-a-m.netlify.app/)
+
+### Slides
+
+[Slides Link](https://docs.google.com/presentation/d/1VfJ9Rv6Xe9ke6bd0W6oOOcnF2sUL_BTDsqD4MPGHezU/edit#slide=id.g1a2bc0b4a8d_0_3)
