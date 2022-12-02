@@ -114,11 +114,13 @@ function JamSessionDetails() {
 
     return jamSession ? (
         <div className='details-main'>
+            <div className='details-ctn'>
             <div className='cover'>
                 <div className='jam-cover' style={{ backgroundImage: `url(${jamSession.image})` }}>
                     <div className='jam-name'><p><span className={`${jamSession.genre.toLowerCase()}`}></span>{jamSession.jamSessionName}</p></div>
                 </div>
             </div>
+            <div className='details-infos-ctn'>
             <div className='details-infos left'>
                 <div className='jam-details-top'>
                     <p className='jam-date'>{jamSession.date}</p>
@@ -179,7 +181,9 @@ function JamSessionDetails() {
                         </div>
                     }
                 </div>
-            </div>    
+                </div>  
+                </div>
+             </div>   
         </div>
     ) : (<></>)
 }

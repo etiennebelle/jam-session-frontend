@@ -14,6 +14,7 @@
 
 .App{
     font-family: 'IBM Plex Sans', sans-serif;
+    color: #242423;
 }
 
 .main {
@@ -30,6 +31,7 @@ h2 {
 
 a {
     text-decoration: none;
+    color: #242423;
 }
 
 /*********************** navbar ***********************/
@@ -41,24 +43,35 @@ a {
     left: 0;
     z-index: 1;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding: 1rem 2rem;
     text-transform: uppercase;
     font-weight: 600;
     background-color: white;
 }
 
-.nav-left {
-
-}
+ .nav-left {
+     display: flex;
+     gap: 3rem;
+ }
 
 .nav-left a {
     text-decoration: none;
-    color: black;
 }
 
 .nav-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 
+.nav-right a{
+    text-decoration: none;
+}
+
+.user-nav-ctn Button{
+        margin-left: 1rem;
 }
 
 /*********************** home ***********************/
@@ -68,7 +81,6 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 5.2rem;
     margin-bottom: 2rem;
     padding: 0 1rem;
 }
@@ -104,10 +116,18 @@ a {
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    padding: 0.7rem 1rem;
     margin-bottom: 1.2rem;
-    border: 1px solid lightgrey;
     border-radius: .5rem;
+
+    &:nth-child(1){
+        background-color: #F5CB5C;
+    }
+    
+    &:nth-child(2){
+        background-color: #242423;
+        color: #F5CB5C;
+    }
 }
 
 /*********************** searchbar ***********************/
@@ -223,7 +243,7 @@ a {
         color: black;
 
         &:hover{
-            color: grey;
+            color: #F5CB5C;
         }
     }
 }
@@ -232,8 +252,8 @@ a {
     display: flex;
     margin: 0.5rem 1rem;
     padding-top: 1rem;
-    border-top: 1px solid grey;
-    color: grey;
+    border-top: 1px solid lightgrey;
+    color: #F5CB5C;
     font-weight: 400;
 }
 
@@ -282,7 +302,7 @@ a {
 
     &:before {
             content: '';
-            background: linear-gradient(0deg, rgba(0, 0, 0, 0.5872724089635855) 0%, rgba(0, 0, 0, 0) 70%);
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.5872724089635855) 0%, rgba(0, 0, 0, 0) 100%);
             inset: 0;
             position: absolute;
         }
@@ -318,7 +338,7 @@ a {
     color: black;
 
     &:hover {
-        color: grey;
+        color: #F5CB5C;
     }
 }
 
@@ -326,8 +346,8 @@ a {
     display: flex;
     margin: 1rem 0;
     padding-top: 1rem;
-    border-top: 1px solid grey;
-    color: grey;
+    border-top: 1px solid lightgrey;
+    color: #F5CB5C;
     font-weight: 400;
 }
 
@@ -352,7 +372,7 @@ a {
 
     &:nth-child(2){
         border-left: 1px solid lightgrey;
-        color: grey;
+        color: #F5CB5C;
     }
 }
 
@@ -438,7 +458,9 @@ a {
 }
 
 @media (max-width: 768px) {
+
     .navbar{
+        position: fixed;
         display: flex;
 
         .nav-left{
@@ -455,4 +477,204 @@ a {
             gap: 1.5rem;
         }
     }
-}
+
+} // Media - Mobile
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1023px) and (-webkit-min-device-pixel-ratio: 1) {
+    
+    .navbar {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        padding: 1rem 2rem;
+        text-transform: uppercase;
+        font-weight: 600;
+        background-color: white;
+    }
+
+    .main{
+        margin-top: 6rem;
+    }
+
+    .home-main{
+
+        .home-card-ctn{
+            display: flex;
+            gap: 1em;
+        }
+    }
+
+    .searchbar-ctn {
+        position: fixed;
+        z-index: 1;
+        padding-bottom: .7rem;
+
+        .searchbar{
+            width: 100%;
+            flex-direction: row;
+            margin-bottom: -.3rem;
+
+            .txt-input{
+                width: 65vw;
+            }
+
+            .cal-input {
+                width: 35vw;
+            }
+        }
+    }
+
+    .events{
+        margin-top: 3.3rem;
+        padding-top: .5rem;
+    }
+
+    .jam-main {
+        height: 400px;
+    }
+
+    .jam-cover {
+        height: 450px;
+    }
+
+    .main section{
+        width: 100%;
+    }
+
+    .labels-ctn{
+        width: 60%;
+    }
+
+} // Media - Tablet
+
+@media screen and (min-device-width: 1024px) {
+
+.navbar {
+        display: flex;
+        justify-content: space-between;
+        z-index: 2;
+        padding: 1rem 2rem;
+    }
+
+    .nav-left{
+        display: flex;
+        gap: 3rem;
+    }
+
+    .nav-right {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .home-header{
+        width: 80%;
+
+        .hero{
+            width: 100%;
+            font-size: 4rem;
+            line-height: 8rem;
+
+            h1{
+                font-weight: 600;
+            }
+        }
+
+        .intro{
+            width: 100%;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+    }
+
+    .home-main {
+
+        .home-card-ctn {
+            width: 60%;
+            display: flex;
+            gap: 1em;
+        }
+
+        .home-card{
+            padding: 1rem 1.5rem;
+        }
+    }
+
+    .searchbar-ctn {
+        position: fixed;
+        width: 100%;
+        z-index: 1;
+        padding-bottom: .7rem;
+        align-items: center;
+
+        .searchbar {
+            width: 100%;
+            flex-direction: row;
+            margin-bottom: -.3rem;
+
+            .txt-input {
+                width: 65vw;
+            }
+
+            .cal-input {
+                width: 35vw;
+            }
+        }
+    }
+
+    .checkbox{
+        align-self: flex-start;
+    }
+
+    .events {
+        margin-top: 4rem;
+        padding-top: .5rem;
+    }
+
+    .labels-ctn {
+        width: 30%;
+    }
+    
+    .jam-session-card{
+        width: 32vw;
+
+        .jam-main {
+            width: 100%;
+            height: 300px;
+        }
+
+        &:hover{
+            border: 1px solid #F5CB5C;
+        }
+    }
+
+    .details-ctn{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cover{
+        width: 60vw;
+
+        .jam-name{
+            font-size: 2rem;
+        }
+    }
+
+    .jam-cover {
+        height: 500px;
+        border-radius: 10px;
+    }
+
+    .details-infos-ctn{
+        width: 60vw;
+    }
+
+} // Media - Laptop

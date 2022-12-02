@@ -3,10 +3,10 @@ import { Button } from '@mantine/core';
 
 function Home() {
   return (
-    <div>
-      <header className="home-header">
+    <div className="main">
+      <header className="home-header left">
         <div className="hero">
-          <h1>"If music be the food of love, play on."</h1>
+          <h1>If music is the food of love, play on!</h1>
         </div>
         <div className="intro">
           <p>Welcome to JAM! Here you can discover all the jam sessions happening around you.</p>
@@ -19,18 +19,20 @@ function Home() {
           </Link>
         </div>
       </header>
-      <section className="home-main">
+      <section className="home-main right">
         <div className="section-title">
           <h2>How it works</h2>
         </div>
-        <div className="home-card">
-          <h3>For artists</h3>
-          <p>Explore different jam sessions happening around you and sign up to play in them together with other artists!</p>
-        </div>
-        
-        <div className="home-card">
-          <h3>For hosts</h3>
-          <p>Publish upcoming jam sessions event to have more visibility and to have artists playing in them.</p>
+        <div className="home-card-ctn">
+          <div className="home-card">
+            <h3>For artists</h3>
+            <p>Explore different jam sessions happening around you and sign up to play in them together with other artists!</p>
+          </div>
+          
+          <div className="home-card">
+            <h3>For hosts</h3>
+            <p>Publish upcoming jam sessions event to have more visibility and to have artists playing in them.</p>
+          </div>
         </div>
         <div className="section-title">
           <h2>Music can change the world because it can change people.</h2>
@@ -40,8 +42,8 @@ function Home() {
               Explore Jam Sessions
             </Button>
           </Link>
-      </section>
-    </div>
+        </section>
+    </div> 
   )
 }
 

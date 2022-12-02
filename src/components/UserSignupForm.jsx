@@ -66,7 +66,7 @@ function UserSignupForm() {
      };
 
     return (
-        <div>
+        <div className='labels-ctn'>
             <form onSubmit={handleSubmit} className='crud-form'>
                 <label className='create-label'>
                     <TextInput
