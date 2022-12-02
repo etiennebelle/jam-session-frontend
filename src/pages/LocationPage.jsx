@@ -121,7 +121,6 @@ function LocationPage() {
     }
 
       </div>
-      <Footer />
     </>
   )
 }
