@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 function UserLoginComponent({handleSubmit, email, setEmail, password, setPassword, errorMessage}) {
   return (
-    <div className='labels-ctn'>
-    <form className='crud-form' onSubmit={handleSubmit}>
-        <label className='create-label'>
+    <div className='labels-ctn modal-ctn'>
+    <form className='crud-form modal-form' onSubmit={handleSubmit}>
+        <label className='modal-label'>
             <TextInput
                 type='text'
                 placeholder="Email"
@@ -15,7 +15,7 @@ function UserLoginComponent({handleSubmit, email, setEmail, password, setPasswor
                 required
             />
         </label>
-        <label className='create-label'>
+        <label className='modal-label'>
             <PasswordInput
                 type='password'
                 radius="xs"
