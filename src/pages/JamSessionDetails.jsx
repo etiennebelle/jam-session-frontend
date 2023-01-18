@@ -204,7 +204,6 @@ function JamSessionDetails() {
                 </div>
              </div>   
             </div>
-            <Footer />
         </>
     ) : (<></>)
 }

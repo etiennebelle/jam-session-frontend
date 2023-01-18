@@ -143,7 +143,6 @@ function JamSessions() {
             </section>
             
             </div>
-            <Footer />
         </>
     ) : (<></>)
 }
