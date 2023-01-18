@@ -2,6 +2,7 @@
   "name": "jam-session-frontend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://famous-leg-warmers-pike.cyclic.app",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@mantine/core": "^5.8.4",
